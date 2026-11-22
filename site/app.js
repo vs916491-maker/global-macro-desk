@@ -141,12 +141,12 @@ function effBar(v) {
     h("span", { class: "track" }, h("i", { class: "mid" }), h("b", { class: isNum(v) && v < 0 ? "neg" : "pos", style: `left:${left}%;width:${w}%` })),
     h("em", { class: sign(v) }, isNum(v) ? `${v > 0 ? "+" : ""}${v.toFixed(2)}` : "–"));
 }
-function spark(vals, w = 120, ht = 30) {
+function spark(vals, w = 120, ht = 30, pol = 1) {
   const v = (vals || []).filter(isNum);
   if (v.length < 2) return h("span", { class: "muted" }, "");
   const lo = Math.min(...v), hi = Math.max(...v), r = hi - lo || 1;
   const pts = v.map((x, i) => `${(i / (v.length - 1)) * w},${ht - 2 - ((x - lo) / r) * (ht - 4)}`).join(" ");
-  const up = v[v.length - 1] >= v[0];
+  const up = (v[v.length - 1] - v[0]) * pol >= 0;
   return s("svg", { class: "spark", viewBox: `0 0 ${w} ${ht}`, width: w, height: ht, "aria-hidden": "true" },
     s("polyline", { points: pts, fill: "none", stroke: up ? css("--up") : css("--down"), "stroke-width": 1.5 }));
 }
@@ -355,20 +355,33 @@ const QGROUPS = [
   ["Key Drivers", ["us10y", "walcl", "usdinr", "in10y", "brent", "dxy"]],
   ["Commodities and crypto", ["gold", "silver", "copper", "wti", "btc", "eth"]],
 ];
+// Card colour = what the 1-month move means for markets: green good, red bad, grey little change.
+// pol -1: a rise is bad (yields, VIX, crude, dollar, weaker rupee). flat: move smaller than this counts as "little change".
+const POL = { us10y: -1, in10y: -1, vix: -1, ivix: -1, brent: -1, wti: -1, dxy: -1, usdinr: -1, walcl: 1 };
+const FLAT = { us10y: 0.10, in10y: 0.08, dxy: 0.5, usdinr: 0.5, walcl: 0.25, vix: 5, ivix: 5 };
+function tone(k, m1, isYield) {
+  if (!isNum(m1)) return "flat";
+  const lim = FLAT[k] ?? (isYield ? 0.10 : 1);
+  if (Math.abs(m1) < lim) return "flat";
+  return m1 * (POL[k] ?? 1) > 0 ? "good" : "bad";
+}
+const toneCls = (k, v) => sign(isNum(v) ? v * (POL[k] ?? 1) : v);
 function quoteCard(k, q) {
   const y = q.is_yield;
   const val = y ? `${fmt(q.last, 2)}%` : q.unit === "₹" ? `₹${fmt(q.last, 2)}` : px(q.last);
   const ch = (v) => (y ? (isNum(v) ? `${v > 0 ? "+" : ""}${Math.round(v * 100)} bp` : "–") : pct(v, 1));
-  return h("div", { class: "qcard" }, h("div", { class: "k" }, q.label), h("div", { class: "v" }, val),
-    h("div", { class: "d" }, h("span", { class: sign(q.d1) }, `1d ${ch(q.d1)}`), " · ", h("span", { class: sign(q.m1) }, `1m ${ch(q.m1)}`)),
-    spark(q.spark, 150, 28), q.source ? h("div", { class: "src" }, `${q.source}, ${q.asof}`) : null);
+  const t = tone(k, q.m1, y);
+  return h("div", { class: `qcard ${t}`, title: t === "good" ? "1-month move is good for markets" : t === "bad" ? "1-month move is bad for markets" : "Little change in a month" },
+    h("div", { class: "k" }, q.label), h("div", { class: "v" }, val),
+    h("div", { class: "d" }, h("span", { class: toneCls(k, q.d1) }, `1d ${ch(q.d1)}`), " · ", h("span", { class: toneCls(k, q.m1) }, `1m ${ch(q.m1)}`)),
+    spark(q.spark, 150, 28, POL[k] ?? 1), q.source ? h("div", { class: "src" }, `${q.source}, ${q.asof}`) : null);
 }
 function walclCard(w) {
   if (!w || !(w.spark || []).length) return null;
   const sp = w.spark, last = sp[sp.length - 1];
   const chg = (n) => (sp.length > n ? ((last / sp[sp.length - 1 - n] - 1) * 100) : null);
   const m1 = chg(4), m3 = chg(13);
-  return h("div", { class: "qcard" }, h("div", { class: "k" }, "Fed balance sheet (QE / QT)"),
+  return h("div", { class: `qcard ${tone("walcl", m1)}` }, h("div", { class: "k" }, "Fed balance sheet (QE / QT)"),
     h("div", { class: "v" }, `$${(last / 1e6).toFixed(2)} tn`),
     h("div", { class: "d" }, h("span", { class: sign(m1) }, `1m ${pct(m1, 2)}`), " · ", h("span", { class: sign(m3) }, `3m ${pct(m3, 2)}`)),
     spark(sp, 150, 28), h("div", { class: "src" }, `weekly, as of ${w.date} · rising = money added`));
@@ -408,7 +421,7 @@ async function viewMacro(app) {
     euphoriaSection(eu),
     fold("means", "What it means", "Plain-words rules on what moved in the last month and how it usually affects each asset class",
       panel(h("ul", { class: "interp" }, (d.interpret || []).map((x) => h("li", { class: x.tone > 0 ? "pos" : x.tone < 0 ? "neg" : "" }, x.text))))),
-    QGROUPS.map(([g, keys]) => fold(`q-${g}`, g, g === "Key Drivers" ? "What moves money between asset classes" : null,
+    QGROUPS.map(([g, keys]) => fold(`q-${g}`, g, g === "Key Drivers" ? "What moves money between asset classes" : g === "United States" ? "Card colour = 1-month move: green good for markets, red bad, grey little change" : null,
       h("div", { class: "qgrid" }, keys.map((k) => (k === "walcl" ? walclCard(f.WALCL) : q[k] ? quoteCard(k, q[k]) : null)).filter(Boolean)))),
     fold("fed", "Fed, rates and inflation", "From FRED (St. Louis Fed); daily series lag one day, monthly ones a few weeks",
       h("div", { class: "grid2" },
@@ -681,6 +694,7 @@ function viewReadme(app) {
     blk("Global macro tab: asset-class cards and history",
       li("Cards for US equity, Indian equity, US bonds, gold, silver and crypto show the Money flow score rescaled to −100 (bearish) … +100 (bullish): (score − 50) × 2. Bullish = Overweight (score 62+), Bearish = Underweight (below 45)."),
       li("Key Drivers: US 10Y yield, Fed balance sheet (weekly; rising = QE / money added, falling = QT), USD/INR, India 10Y G-Sec yield (TradingView TVC:IN10Y, delayed; backup = official monthly figure from FRED/OECD), Brent crude, dollar index."),
+      li("Card colours (United States, India, Key Drivers, Commodities and crypto) show what the last month's move means for markets: green = good, red = bad, grey = little change. Rising is bad for yields, VIX, crude, the dollar and USD-INR (a weaker rupee); rising is good for indices, metals, crypto and the Fed balance sheet. Little change = under 10 bp for yields, 0.5% for DXY and USD-INR, 0.25% for the Fed balance sheet, 5% for VIX, 1% otherwise."),
       li("Score history: one line per asset class, daily (last run of the day). Days before 22 Nov 2026 were rebuilt from past prices and Fed data with the same rules, without news and FII flows. Tap a name to hide or show its line.")),
     blk("Global and India risk appetite (−100 risk-off … +100 risk-on)",
       li("Global: US VIX 20 (below 14 = +1, 14–18 = +0.5, 18–22 = 0, 22–28 = −0.5, above = −1, ±0.25 for falling/rising vs its 20-day average), high-yield credit spread 15, S&P 500 trend 15, dollar index 1-month move 15 (−2.5% = +1), US 10Y 1-month move 10 (−40 bp = +1), yield curve 5, copper/gold 1-month 10, news tone 10."),

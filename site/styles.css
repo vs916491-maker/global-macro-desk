@@ -551,3 +551,10 @@ details.fold.plain > summary:hover h2 { text-decoration: underline; text-decorat
 @media (max-width: 700px) { details.fold.plain > summary p { margin-left: 0; text-align: left; flex-basis: 100%; } }
 .euchip .lv { white-space: nowrap; }
 .qcard .src { font-size: 11px; color: var(--muted); margin-top: 3px; }
+/* card tint: what the 1-month move means for markets */
+.qcard.good { background: rgba(27, 175, 122, 0.10); border-color: rgba(27, 175, 122, 0.40); }
+.qcard.bad { background: rgba(214, 64, 64, 0.09); border-color: rgba(214, 64, 64, 0.38); }
+.qcard.flat { background: rgba(122, 133, 144, 0.10); border-color: rgba(122, 133, 144, 0.35); }
+[data-theme="dark"] .qcard.good { background: rgba(27, 175, 122, 0.16); }
+[data-theme="dark"] .qcard.bad { background: rgba(214, 64, 64, 0.16); }
+[data-theme="dark"] .qcard.flat { background: rgba(160, 170, 180, 0.10); }
