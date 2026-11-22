@@ -37,5 +37,6 @@ Supabase pg_cron → `dispatch_repo_workflow('global-macro-desk', …)`: `gm-hou
 - Push to branch `selftest` → live-data dry run, results on branch `selftest-out` (`run.log` + JSON docs).
 
 ## Known limits
+- FRED's public CSV times out from GitHub runners (seen 22 Nov 2026). With repo secret `FRED_API_KEY` the FRED API is used; without it, Yahoo stand-ins: 10Y (^TNX), 2Y (2YY=F), curve = 10Y − 2Y, credit = HYG/IEF 1-month, "2Y minus 3-month bill" instead of 2Y minus Fed funds; CPI/PCE/Fed funds/balance sheet missing.
 - Free endpoints (Yahoo, CoinGecko, NSE, RSS) can block or change; each run lists problems on the site and in the Actions summary.
 - Keyword news tone is crude. No earnings calendar for US ideas. Yahoo crypto symbols for some coins need `config.YAHOO_COIN` entries.
