@@ -106,9 +106,27 @@ def main():
             bands.append({"level": name, "days": len(idx), "avg90": round(r.mean(), 1) if len(r) else None,
                           "neg90": round((r < 0).mean() * 100) if len(r) else None, "avg_dd90": round(dd.mean(), 1) if len(dd) else None})
             print(f"  {name:9s} days {len(idx):5d} | avg next-90d return {bands[-1]['avg90']}% | negative {bands[-1]['neg90']}% of the time | avg worst drop in 90d {bands[-1]['avg_dd90']}%")
+        # "first crack": meter was Hot (>= 60) in the last 60 days, then the close drops below the 50-day average
+        ma50 = c.rolling(50).mean()
+        below = c < ma50
+        cross = below & ~below.shift(1, fill_value=False)
+        hot60 = h.score.rolling(60, min_periods=1).max()
+        res = {}
+        for name, mask in [("after Hot", cross & (hot60 >= 60)), ("no Hot before", cross & (hot60 < 40))]:
+            ds = [d for d in c.index[mask] if d + pd.Timedelta(days=90) <= c.index[-1]]
+            fs = [fwd_stats(c, d, 90) for d in ds]
+            fs = [f for f in fs if f]
+            if fs:
+                res[name] = {"n": len(fs), "avg_ret": round(np.mean([f["ret"] for f in fs]), 1),
+                             "neg": round(100 * np.mean([f["ret"] < 0 for f in fs])),
+                             "avg_dd": round(np.mean([f["max_dd"] for f in fs]), 1),
+                             "big_dd": round(100 * np.mean([f["max_dd"] <= -DROP[key] for f in fs]))}
+                print(f"  CRACK below 50-day {name:14s}: {res[name]['n']:3d} times | next 90d avg {res[name]['avg_ret']:+.1f}% | negative {res[name]['neg']}% | avg worst drop {res[name]['avg_dd']}% | drop of {DROP[key]}%+ in {res[name]['big_dd']}%")
+        cr_dates = [d.strftime("%Y-%m-%d") for d in c.index[cross & (hot60 >= 60)]][-8:]
+        print("     recent cracks after Hot:", ", ".join(cr_dates))
         last = h.iloc[-1]
         print(f"  NOW {h.index[-1].date()}: meter {last.score} ({E.level(last.score)}) stretch {last.stretch} mood {last['mood']} crowd {last.crowd}")
-        report[key] = {"label": label, "key_dates": rows, "episodes": ep, "bands": bands,
+        report[key] = {"label": label, "crack": res, "key_dates": rows, "episodes": ep, "bands": bands,
                        "now": {"date": h.index[-1].strftime("%Y-%m-%d"), "score": last.score},
                        "series": [{"d": d.strftime("%Y-%m-%d"), "s": float(v), "c": float(c.loc[d])} for d, v in s.iloc[::5].items()]}
     Path("out").mkdir(exist_ok=True)
