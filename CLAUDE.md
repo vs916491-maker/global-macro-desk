@@ -30,6 +30,11 @@ Built 22 Nov 2026. Sister sites: F&O Desk (`fno-desk`), Sector Strength, NSE Fun
 - Track record: fill at next candle open; stop/target on highs/lows; both in one candle = "unclear" (excluded); gaps exit at the open; time exit at the last close before the limit.
 - Central bank dates in `config.FOMC` / `config.RBI_MPC` (2027 FOMC revised 12 Nov 2026: last meeting Nov 16–17, Oct 26–27 strategy only). Add new years when published.
 
+## Global macro tab layout (his request, 22 Nov 2026)
+- Top: separate cards for US equity, Indian equity, US bonds, gold, silver, crypto = Money flow score rescaled (score − 50) × 2 (his choice; Global/India/Overall cards replaced — their parts tables stay lower down, titled with the score). Gold and silver separate.
+- Score history right below: one line per asset class, tap legend buttons to hide/show, 3m/6m/1y. 12 months rebuilt by `gmd/backfill.py` (workflow `backfill.yml`, one-off, never overwrites live days; no news/FII for past days).
+- Euphoria meter folds away (closed by default, remembers open/closed); alert banners still show above it.
+
 ## Euphoria meter (`gmd/euphoria.py`, added 22 Nov 2026 at his request: "don't get carried away by created euphoria", his Jan 2025 crypto example)
 - His choices: **warning only** (never changes scores, ideas or the mix); Euphoria meter only (no Panic meter); CFTC positioning yes; backtest first.
 - 0-100 = price stretch 40 (gap above 200-day and 30-day gain as 5-year percentiles, weekly RSI 60-80) + crowd mood 20 (crypto F&G 7-day avg; VIX / India VIX low) + large speculators 20 (CFTC legacy non-commercial net % OI, 3-year percentile; gold 088691, silver 084691, copper 085692, S&P 13874A; **not BTC**: CME BTC speculators are basis trades) + breadth 10 (live) + news flood 10 (live, after 20 days of `gm_hist.days[*].news`). Calm <40, Warm 40-60, Hot 60-80, Euphoric 80+.
