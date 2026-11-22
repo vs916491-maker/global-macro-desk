@@ -6,7 +6,7 @@ from __future__ import annotations
 import json
 import math
 import os
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import requests
@@ -28,7 +28,12 @@ def _jsonable(v):
 
 class Supabase:
     def __init__(self, url: str, key: str):
+        url = url.strip().rstrip("/")
+        for tail in ("/rest/v1", "/rest/v1/"):      # the dashboard's Data API page shows the URL with this ending
+            if url.endswith(tail.rstrip("/")):
+                url = url[: -len(tail.rstrip("/"))]
         self.base = url.rstrip("/") + "/rest/v1"
+        key = key.strip()
         # Legacy service_role keys are JWTs and also go in the Authorization header;
         # the newer "sb_secret_..." keys must be sent in the apikey header only.
         self.h = {"apikey": key, "Content-Type": "application/json"}
@@ -81,7 +86,7 @@ class Supabase:
         self._req("DELETE", table, params=params, prefer="return=minimal")
 
     def put_doc(self, key: str, data):
-        self.upsert("docs", [{"key": key, "data": data, "updated_at": datetime.utcnow().isoformat() + "Z"}], "key")
+        self.upsert("docs", [{"key": key, "data": data, "updated_at": datetime.now(timezone.utc).isoformat()}], "key")
 
 
 class Local:
