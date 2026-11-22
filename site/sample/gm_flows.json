@@ -1,12 +1,256 @@
 {
- "updated": "2026-11-22T16:23:25+00:00",
+ "updated": "2026-11-22T16:42:08+00:00",
  "assets": [
+  {
+   "key": "in_eq",
+   "label": "Indian equity",
+   "symbol": "^NSEI",
+   "mom": 79,
+   "fit": 78,
+   "r1m": 6.71,
+   "r3m": 25.3,
+   "r6m": 88.89,
+   "r1y": 246.89,
+   "vol": 32.0,
+   "trend": "up",
+   "cmf": -0.224,
+   "obv": -0.19,
+   "fit_parts": [
+    {
+     "factor": "India risk appetite",
+     "effect": 0.4,
+     "weight": 0.4,
+     "inverse": false
+    },
+    {
+     "factor": "Weaker dollar",
+     "effect": 1.0,
+     "weight": 0.15,
+     "inverse": false
+    },
+    {
+     "factor": "Cheaper crude",
+     "effect": 1.0,
+     "weight": 0.15,
+     "inverse": false
+    },
+    {
+     "factor": "Stronger rupee",
+     "effect": 1.0,
+     "weight": 0.15,
+     "inverse": false
+    },
+    {
+     "factor": "India news",
+     "effect": -0.38,
+     "weight": 0.15,
+     "inverse": false
+    }
+   ],
+   "flow_symbol": "NIFTYBEES.NS",
+   "flow": "out",
+   "score": 79,
+   "stance": "Overweight",
+   "base": 35,
+   "tilt": 40.3,
+   "chg7": -5,
+   "euphoria": {
+    "score": 0.0,
+    "level": "Calm",
+    "alert": null,
+    "policy": "info",
+    "note": "Backtest: here a high reading has meant a strong trend, not a top - information only."
+   }
+  },
+  {
+   "key": "silver",
+   "label": "Silver",
+   "symbol": "SI=F",
+   "mom": 67,
+   "fit": 68,
+   "r1m": -16.72,
+   "r3m": 14.99,
+   "r6m": 45.71,
+   "r1y": 101.35,
+   "vol": 35.9,
+   "trend": "mixed",
+   "cmf": 0.043,
+   "obv": 0.15,
+   "fit_parts": [
+    {
+     "factor": "Falling real yields",
+     "effect": -0.15,
+     "weight": 0.2,
+     "inverse": false
+    },
+    {
+     "factor": "Weaker dollar",
+     "effect": 1.0,
+     "weight": 0.2,
+     "inverse": false
+    },
+    {
+     "factor": "Growth (copper/gold)",
+     "effect": 0.82,
+     "weight": 0.2,
+     "inverse": false
+    },
+    {
+     "factor": "Silver news",
+     "effect": 0.13,
+     "weight": 0.2,
+     "inverse": false
+    },
+    {
+     "factor": "Global risk appetite",
+     "effect": -0.03,
+     "weight": 0.2,
+     "inverse": false
+    }
+   ],
+   "flow_symbol": "SLV",
+   "flow": "flat",
+   "score": 67,
+   "stance": "Overweight",
+   "base": 5,
+   "tilt": 5.2,
+   "chg7": -13,
+   "euphoria": {
+    "score": null,
+    "level": "No data",
+    "alert": null,
+    "policy": "euphoric",
+    "note": "Backtest 2000-2026: at 80+ silver was lower 90 days later 56% of the time; 10 of 12 such episodes saw a 15%+ drop from the next peak."
+   }
+  },
+  {
+   "key": "crypto",
+   "label": "Crypto",
+   "symbol": "BTC-USD",
+   "mom": 68,
+   "fit": 48,
+   "r1m": -17.52,
+   "r3m": 18.49,
+   "r6m": 54.55,
+   "r1y": 211.36,
+   "vol": 48.3,
+   "trend": "mixed",
+   "cmf": 0.063,
+   "obv": -0.01,
+   "fit_parts": [
+    {
+     "factor": "Global risk appetite",
+     "effect": -0.03,
+     "weight": 0.3,
+     "inverse": false
+    },
+    {
+     "factor": "Fed liquidity",
+     "effect": -0.21,
+     "weight": 0.2,
+     "inverse": false
+    },
+    {
+     "factor": "Weaker dollar",
+     "effect": 1.0,
+     "weight": 0.2,
+     "inverse": false
+    },
+    {
+     "factor": "Falling US yields",
+     "effect": 0.03,
+     "weight": 0.1,
+     "inverse": false
+    },
+    {
+     "factor": "Crypto news",
+     "effect": -1.0,
+     "weight": 0.2,
+     "inverse": false
+    }
+   ],
+   "flow_symbol": "BTC-USD",
+   "flow": "flat",
+   "score": 59,
+   "stance": "Neutral",
+   "base": 8,
+   "tilt": 7.8,
+   "chg7": -7,
+   "euphoria": {
+    "score": 0.0,
+    "level": "Calm",
+    "alert": null,
+    "policy": "crack",
+    "note": "Backtest 2014-2026: when the meter had been 60+ and Bitcoin then closed below its 50-day average, it was lower 90 days later 70% of the time and fell 25%+ in 41% of cases (e.g. 27 Dec 2024, 7 Jan 2025)."
+   }
+  },
+  {
+   "key": "gold",
+   "label": "Gold",
+   "symbol": "GC=F",
+   "mom": 42,
+   "fit": 75,
+   "r1m": -24.06,
+   "r3m": -5.85,
+   "r6m": -16.19,
+   "r1y": 2.09,
+   "vol": 41.9,
+   "trend": "mixed",
+   "cmf": 0.082,
+   "obv": 0.05,
+   "fit_parts": [
+    {
+     "factor": "Falling real yields",
+     "effect": -0.15,
+     "weight": 0.3,
+     "inverse": false
+    },
+    {
+     "factor": "Weaker dollar",
+     "effect": 1.0,
+     "weight": 0.25,
+     "inverse": false
+    },
+    {
+     "factor": "Global risk appetite",
+     "effect": 0.03,
+     "weight": 0.15,
+     "inverse": true
+    },
+    {
+     "factor": "Gold news",
+     "effect": 1.0,
+     "weight": 0.15,
+     "inverse": false
+    },
+    {
+     "factor": "Rising inflation",
+     "effect": 1.0,
+     "weight": 0.15,
+     "inverse": false
+    }
+   ],
+   "flow_symbol": "GLD",
+   "flow": "in",
+   "score": 57,
+   "stance": "Neutral",
+   "base": 12,
+   "tilt": 11.4,
+   "chg7": 10,
+   "euphoria": {
+    "score": null,
+    "level": "No data",
+    "alert": null,
+    "policy": "info",
+    "note": "Backtest: here a high reading has meant a strong trend, not a top - shown for information only."
+   }
+  },
   {
    "key": "fd",
    "label": "Bank fixed deposits",
    "symbol": null,
    "mom": 62,
-   "fit": 52,
+   "fit": 43,
    "r1m": 0.54,
    "r3m": 1.62,
    "r6m": 3.25,
@@ -23,109 +267,96 @@
     },
     {
      "factor": "Risk-off (safety demand)",
-     "effect": 0.04,
+     "effect": -0.18,
      "weight": 0.5,
      "inverse": true
     }
    ],
    "note": "FD at 6.5% vs India CPI 4.0% (edit in gmd/config.py)",
-   "score": 58,
+   "score": 53,
    "stance": "Neutral",
    "base": 20,
-   "tilt": 23.3,
-   "chg7": null
+   "tilt": 18.4,
+   "chg7": 3
   },
   {
-   "key": "gold",
-   "label": "Gold",
-   "symbol": "GC=F",
-   "mom": 47,
-   "fit": 55,
-   "r1m": 19.18,
-   "r3m": -27.72,
-   "r6m": 0.29,
-   "r1y": 84.46,
-   "vol": 46.9,
+   "key": "us_bond",
+   "label": "US bonds",
+   "symbol": "TLT",
+   "mom": 58,
+   "fit": 36,
+   "r1m": -24.3,
+   "r3m": -16.29,
+   "r6m": 63.25,
+   "r1y": 225.59,
+   "vol": 43.4,
    "trend": "mixed",
-   "cmf": 0.022,
-   "obv": 0.24,
+   "cmf": 0.052,
+   "obv": -0.1,
    "fit_parts": [
     {
-     "factor": "Falling real yields",
-     "effect": 0.05,
-     "weight": 0.3,
-     "inverse": false
-    },
-    {
-     "factor": "Weaker dollar",
-     "effect": 0.38,
-     "weight": 0.25,
+     "factor": "Falling US yields",
+     "effect": 0.03,
+     "weight": 0.45,
      "inverse": false
     },
     {
      "factor": "Global risk appetite",
-     "effect": -0.02,
-     "weight": 0.15,
+     "effect": 0.03,
+     "weight": 0.25,
      "inverse": true
-    },
-    {
-     "factor": "Gold news",
-     "effect": 1.0,
-     "weight": 0.15,
-     "inverse": false
     },
     {
      "factor": "Rising inflation",
      "effect": -1.0,
      "weight": 0.15,
-     "inverse": false
+     "inverse": true
+    },
+    {
+     "factor": "Stronger rupee",
+     "effect": -1.0,
+     "weight": 0.15,
+     "inverse": true
     }
    ],
-   "flow_symbol": "GLD",
+   "flow_symbol": "TLT",
    "flow": "flat",
-   "score": 51,
+   "score": 48,
    "stance": "Neutral",
-   "base": 12,
-   "tilt": 13.1,
-   "chg7": null,
-   "euphoria": {
-    "score": null,
-    "level": "No data",
-    "alert": null,
-    "policy": "info",
-    "note": "Backtest: here a high reading has meant a strong trend, not a top - shown for information only."
-   }
+   "base": 5,
+   "tilt": 4.4,
+   "chg7": -15
   },
   {
    "key": "us_eq",
    "label": "US equity",
    "symbol": "SPY",
-   "mom": 33,
-   "fit": 66,
-   "r1m": 17.79,
-   "r3m": -36.27,
-   "r6m": -53.65,
-   "r1y": -79.14,
-   "vol": 42.1,
+   "mom": 39,
+   "fit": 50,
+   "r1m": -22.21,
+   "r3m": 4.64,
+   "r6m": -1.4,
+   "r1y": 18.94,
+   "vol": 44.3,
    "trend": "mixed",
-   "cmf": 0.041,
-   "obv": -0.04,
+   "cmf": -0.095,
+   "obv": 0.15,
    "fit_parts": [
     {
      "factor": "Global risk appetite",
-     "effect": 0.02,
+     "effect": -0.03,
      "weight": 0.35,
      "inverse": false
     },
     {
      "factor": "Falling US yields",
-     "effect": 0.02,
+     "effect": 0.03,
      "weight": 0.2,
      "inverse": false
     },
     {
      "factor": "Fed liquidity",
-     "effect": 0.48,
+     "effect": -0.21,
      "weight": 0.15,
      "inverse": false
     },
@@ -137,269 +368,38 @@
     },
     {
      "factor": "Stronger rupee",
-     "effect": 1.0,
+     "effect": -1.0,
      "weight": 0.1,
      "inverse": true
     }
    ],
    "flow_symbol": "SPY",
-   "flow": "flat",
-   "score": 48,
-   "stance": "Neutral",
+   "flow": "out",
+   "score": 44,
+   "stance": "Underweight",
    "base": 15,
-   "tilt": 15.9,
-   "chg7": null,
+   "tilt": 12.6,
+   "chg7": -3,
    "euphoria": {
-    "score": 100.0,
-    "level": "Euphoric",
+    "score": 0.0,
+    "level": "Calm",
     "alert": null,
     "policy": "info",
     "note": "Backtest: here a high reading has meant a strong trend, not a top (2022 and 2025 tops were macro-driven) - information only."
    }
-  },
-  {
-   "key": "silver",
-   "label": "Silver",
-   "symbol": "SI=F",
-   "mom": 28,
-   "fit": 51,
-   "r1m": 5.06,
-   "r3m": -21.71,
-   "r6m": -45.87,
-   "r1y": -61.77,
-   "vol": 41.1,
-   "trend": "down",
-   "cmf": 0.316,
-   "obv": 0.33,
-   "fit_parts": [
-    {
-     "factor": "Falling real yields",
-     "effect": 0.05,
-     "weight": 0.2,
-     "inverse": false
-    },
-    {
-     "factor": "Weaker dollar",
-     "effect": 0.38,
-     "weight": 0.2,
-     "inverse": false
-    },
-    {
-     "factor": "Growth (copper/gold)",
-     "effect": -0.45,
-     "weight": 0.2,
-     "inverse": false
-    },
-    {
-     "factor": "Silver news",
-     "effect": 0.13,
-     "weight": 0.2,
-     "inverse": false
-    },
-    {
-     "factor": "Global risk appetite",
-     "effect": 0.02,
-     "weight": 0.2,
-     "inverse": false
-    }
-   ],
-   "flow_symbol": "SLV",
-   "flow": "in",
-   "score": 38,
-   "stance": "Underweight",
-   "base": 5,
-   "tilt": 4.8,
-   "chg7": null,
-   "euphoria": {
-    "score": null,
-    "level": "No data",
-    "alert": null,
-    "policy": "euphoric",
-    "note": "Backtest 2000-2026: at 80+ silver was lower 90 days later 56% of the time; 10 of 12 such episodes saw a 15%+ drop from the next peak."
-   }
-  },
-  {
-   "key": "us_bond",
-   "label": "US bonds",
-   "symbol": "TLT",
-   "mom": 12,
-   "fit": 65,
-   "r1m": 1.57,
-   "r3m": -50.95,
-   "r6m": -61.07,
-   "r1y": -82.66,
-   "vol": 42.0,
-   "trend": "down",
-   "cmf": -0.011,
-   "obv": 0.12,
-   "fit_parts": [
-    {
-     "factor": "Falling US yields",
-     "effect": 0.02,
-     "weight": 0.45,
-     "inverse": false
-    },
-    {
-     "factor": "Global risk appetite",
-     "effect": -0.02,
-     "weight": 0.25,
-     "inverse": true
-    },
-    {
-     "factor": "Rising inflation",
-     "effect": 1.0,
-     "weight": 0.15,
-     "inverse": true
-    },
-    {
-     "factor": "Stronger rupee",
-     "effect": 1.0,
-     "weight": 0.15,
-     "inverse": true
-    }
-   ],
-   "flow_symbol": "TLT",
-   "flow": "flat",
-   "score": 36,
-   "stance": "Underweight",
-   "base": 5,
-   "tilt": 4.6,
-   "chg7": null
-  },
-  {
-   "key": "in_eq",
-   "label": "Indian equity",
-   "symbol": "^NSEI",
-   "mom": 27,
-   "fit": 42,
-   "r1m": -1.78,
-   "r3m": -8.17,
-   "r6m": -26.95,
-   "r1y": -1.75,
-   "vol": 28.8,
-   "trend": "mixed",
-   "cmf": -0.137,
-   "obv": -0.19,
-   "fit_parts": [
-    {
-     "factor": "India risk appetite",
-     "effect": -0.1,
-     "weight": 0.4,
-     "inverse": false
-    },
-    {
-     "factor": "Weaker dollar",
-     "effect": 0.38,
-     "weight": 0.15,
-     "inverse": false
-    },
-    {
-     "factor": "Cheaper crude",
-     "effect": 0.24,
-     "weight": 0.15,
-     "inverse": false
-    },
-    {
-     "factor": "Stronger rupee",
-     "effect": -1.0,
-     "weight": 0.15,
-     "inverse": false
-    },
-    {
-     "factor": "India news",
-     "effect": -0.38,
-     "weight": 0.15,
-     "inverse": false
-    }
-   ],
-   "flow_symbol": "NIFTYBEES.NS",
-   "flow": "out",
-   "score": 34,
-   "stance": "Underweight",
-   "base": 35,
-   "tilt": 31.8,
-   "chg7": null,
-   "euphoria": {
-    "score": 100.0,
-    "level": "Euphoric",
-    "alert": null,
-    "policy": "info",
-    "note": "Backtest: here a high reading has meant a strong trend, not a top - information only."
-   }
-  },
-  {
-   "key": "crypto",
-   "label": "Crypto",
-   "symbol": "BTC-USD",
-   "mom": 5,
-   "fit": 49,
-   "r1m": -1.65,
-   "r3m": -44.73,
-   "r6m": -64.32,
-   "r1y": -84.04,
-   "vol": 55.6,
-   "trend": "down",
-   "cmf": -0.288,
-   "obv": -0.13,
-   "fit_parts": [
-    {
-     "factor": "Global risk appetite",
-     "effect": 0.02,
-     "weight": 0.3,
-     "inverse": false
-    },
-    {
-     "factor": "Fed liquidity",
-     "effect": 0.48,
-     "weight": 0.2,
-     "inverse": false
-    },
-    {
-     "factor": "Weaker dollar",
-     "effect": 0.38,
-     "weight": 0.2,
-     "inverse": false
-    },
-    {
-     "factor": "Falling US yields",
-     "effect": 0.02,
-     "weight": 0.1,
-     "inverse": false
-    },
-    {
-     "factor": "Crypto news",
-     "effect": -1.0,
-     "weight": 0.2,
-     "inverse": false
-    }
-   ],
-   "flow_symbol": "BTC-USD",
-   "flow": "out",
-   "score": 25,
-   "stance": "Underweight",
-   "base": 8,
-   "tilt": 6.5,
-   "chg7": null,
-   "euphoria": {
-    "score": 33.3,
-    "level": "Calm",
-    "alert": null,
-    "policy": "crack",
-    "note": "Backtest 2014-2026: when the meter had been 60+ and Bitcoin then closed below its 50-day average, it was lower 90 days later 70% of the time and fell 25%+ in 41% of cases (e.g. 27 Dec 2024, 7 Jan 2025)."
-   }
   }
  ],
  "factors": {
-  "Global risk appetite": 0.02,
-  "India risk appetite": -0.1,
-  "Weaker dollar": 0.38,
-  "Falling US yields": 0.02,
-  "Falling real yields": 0.05,
-  "Fed liquidity": 0.48,
-  "Cheaper crude": 0.24,
-  "Stronger rupee": -1.0,
-  "Rising inflation": -1.0,
-  "Growth (copper/gold)": -0.45,
+  "Global risk appetite": -0.03,
+  "India risk appetite": 0.4,
+  "Weaker dollar": 1.0,
+  "Falling US yields": 0.03,
+  "Falling real yields": -0.15,
+  "Fed liquidity": -0.21,
+  "Cheaper crude": 1.0,
+  "Stronger rupee": 1.0,
+  "Rising inflation": 1.0,
+  "Growth (copper/gold)": 0.82,
   "US equity news": 0.66,
   "India news": -0.38,
   "Gold news": 1.0,
@@ -408,15 +408,1086 @@
  },
  "regime": {
   "global": "Neutral",
-  "india": "Neutral",
+  "india": "Risk-on",
   "overall": "Neutral"
  },
  "scores": {
-  "global": 2,
-  "india": -10,
-  "overall": -4
+  "global": -3,
+  "india": 40,
+  "overall": 18
  },
- "history": [],
+ "history": [
+  {
+   "date": "2026-06-25",
+   "in_eq": 85,
+   "crypto": 82,
+   "silver": 80,
+   "us_bond": 78,
+   "fd": 52,
+   "us_eq": 40,
+   "gold": 37
+  },
+  {
+   "date": "2026-06-26",
+   "in_eq": 88,
+   "silver": 83,
+   "crypto": 82,
+   "us_bond": 74,
+   "fd": 50,
+   "us_eq": 41,
+   "gold": 38
+  },
+  {
+   "date": "2026-06-29",
+   "in_eq": 91,
+   "crypto": 83,
+   "silver": 82,
+   "us_bond": 70,
+   "fd": 48,
+   "us_eq": 45,
+   "gold": 40
+  },
+  {
+   "date": "2026-06-30",
+   "crypto": 82,
+   "in_eq": 80,
+   "silver": 79,
+   "us_bond": 77,
+   "fd": 54,
+   "us_eq": 52,
+   "gold": 41
+  },
+  {
+   "date": "2026-07-01",
+   "in_eq": 93,
+   "crypto": 81,
+   "silver": 79,
+   "us_bond": 65,
+   "fd": 50,
+   "us_eq": 42,
+   "gold": 42
+  },
+  {
+   "date": "2026-07-02",
+   "in_eq": 92,
+   "crypto": 79,
+   "silver": 76,
+   "us_bond": 62,
+   "fd": 51,
+   "us_eq": 44,
+   "gold": 41
+  },
+  {
+   "date": "2026-07-03",
+   "in_eq": 90,
+   "crypto": 84,
+   "silver": 79,
+   "us_bond": 64,
+   "fd": 50,
+   "gold": 41,
+   "us_eq": 36
+  },
+  {
+   "date": "2026-07-06",
+   "in_eq": 87,
+   "silver": 87,
+   "crypto": 87,
+   "us_bond": 59,
+   "fd": 47,
+   "us_eq": 36,
+   "gold": 34
+  },
+  {
+   "date": "2026-07-07",
+   "in_eq": 86,
+   "crypto": 83,
+   "silver": 75,
+   "us_bond": 60,
+   "fd": 50,
+   "gold": 39,
+   "us_eq": 33
+  },
+  {
+   "date": "2026-07-08",
+   "in_eq": 88,
+   "crypto": 85,
+   "silver": 76,
+   "us_bond": 62,
+   "fd": 48,
+   "us_eq": 38,
+   "gold": 38
+  },
+  {
+   "date": "2026-07-09",
+   "in_eq": 89,
+   "crypto": 85,
+   "silver": 77,
+   "us_bond": 64,
+   "fd": 48,
+   "gold": 40,
+   "us_eq": 36
+  },
+  {
+   "date": "2026-07-10",
+   "in_eq": 91,
+   "crypto": 84,
+   "silver": 68,
+   "us_bond": 64,
+   "fd": 50,
+   "gold": 41,
+   "us_eq": 36
+  },
+  {
+   "date": "2026-07-13",
+   "in_eq": 94,
+   "crypto": 83,
+   "silver": 75,
+   "us_bond": 68,
+   "fd": 49,
+   "us_eq": 42,
+   "gold": 42
+  },
+  {
+   "date": "2026-07-14",
+   "in_eq": 95,
+   "crypto": 83,
+   "silver": 72,
+   "us_bond": 69,
+   "fd": 48,
+   "gold": 42,
+   "us_eq": 39
+  },
+  {
+   "date": "2026-07-15",
+   "in_eq": 94,
+   "crypto": 82,
+   "silver": 72,
+   "us_bond": 69,
+   "fd": 49,
+   "gold": 44,
+   "us_eq": 38
+  },
+  {
+   "date": "2026-07-16",
+   "in_eq": 88,
+   "crypto": 83,
+   "us_bond": 74,
+   "silver": 69,
+   "fd": 50,
+   "gold": 46,
+   "us_eq": 39
+  },
+  {
+   "date": "2026-07-17",
+   "crypto": 82,
+   "in_eq": 81,
+   "us_bond": 78,
+   "silver": 70,
+   "fd": 53,
+   "gold": 46,
+   "us_eq": 43
+  },
+  {
+   "date": "2026-07-20",
+   "crypto": 84,
+   "in_eq": 80,
+   "us_bond": 77,
+   "silver": 75,
+   "us_eq": 53,
+   "fd": 52,
+   "gold": 45
+  },
+  {
+   "date": "2026-07-21",
+   "in_eq": 84,
+   "crypto": 83,
+   "us_bond": 77,
+   "silver": 77,
+   "us_eq": 55,
+   "fd": 51,
+   "gold": 43
+  },
+  {
+   "date": "2026-07-22",
+   "in_eq": 83,
+   "crypto": 79,
+   "us_bond": 76,
+   "silver": 69,
+   "us_eq": 52,
+   "fd": 51,
+   "gold": 38
+  },
+  {
+   "date": "2026-07-23",
+   "in_eq": 91,
+   "us_bond": 72,
+   "crypto": 70,
+   "silver": 61,
+   "fd": 48,
+   "us_eq": 41,
+   "gold": 37
+  },
+  {
+   "date": "2026-07-24",
+   "in_eq": 91,
+   "crypto": 77,
+   "us_bond": 73,
+   "silver": 64,
+   "us_eq": 54,
+   "fd": 48,
+   "gold": 39
+  },
+  {
+   "date": "2026-07-27",
+   "in_eq": 93,
+   "crypto": 71,
+   "us_bond": 70,
+   "silver": 68,
+   "us_eq": 52,
+   "fd": 47,
+   "gold": 44
+  },
+  {
+   "date": "2026-07-28",
+   "in_eq": 88,
+   "us_bond": 73,
+   "crypto": 72,
+   "silver": 68,
+   "us_eq": 59,
+   "fd": 49,
+   "gold": 42
+  },
+  {
+   "date": "2026-07-29",
+   "in_eq": 78,
+   "us_bond": 76,
+   "silver": 60,
+   "us_eq": 59,
+   "crypto": 59,
+   "fd": 52,
+   "gold": 29
+  },
+  {
+   "date": "2026-07-30",
+   "in_eq": 96,
+   "silver": 78,
+   "crypto": 73,
+   "us_bond": 69,
+   "us_eq": 59,
+   "fd": 46,
+   "gold": 41
+  },
+  {
+   "date": "2026-07-31",
+   "in_eq": 95,
+   "crypto": 73,
+   "silver": 72,
+   "us_bond": 70,
+   "us_eq": 62,
+   "fd": 47,
+   "gold": 43
+  },
+  {
+   "date": "2026-08-03",
+   "in_eq": 86,
+   "us_bond": 74,
+   "silver": 72,
+   "crypto": 70,
+   "us_eq": 66,
+   "fd": 48,
+   "gold": 41
+  },
+  {
+   "date": "2026-08-04",
+   "in_eq": 81,
+   "us_bond": 75,
+   "silver": 73,
+   "crypto": 72,
+   "us_eq": 68,
+   "fd": 50,
+   "gold": 43
+  },
+  {
+   "date": "2026-08-05",
+   "in_eq": 82,
+   "us_bond": 74,
+   "silver": 74,
+   "crypto": 70,
+   "us_eq": 66,
+   "fd": 51,
+   "gold": 42
+  },
+  {
+   "date": "2026-08-06",
+   "in_eq": 80,
+   "silver": 74,
+   "us_bond": 73,
+   "crypto": 71,
+   "us_eq": 63,
+   "fd": 52,
+   "gold": 42
+  },
+  {
+   "date": "2026-08-07",
+   "in_eq": 82,
+   "silver": 74,
+   "us_bond": 70,
+   "crypto": 67,
+   "us_eq": 59,
+   "gold": 52,
+   "fd": 50
+  },
+  {
+   "date": "2026-08-10",
+   "silver": 79,
+   "us_bond": 75,
+   "in_eq": 73,
+   "crypto": 68,
+   "us_eq": 63,
+   "fd": 50,
+   "gold": 44
+  },
+  {
+   "date": "2026-08-11",
+   "silver": 78,
+   "us_bond": 74,
+   "in_eq": 71,
+   "crypto": 67,
+   "us_eq": 63,
+   "gold": 54,
+   "fd": 50
+  },
+  {
+   "date": "2026-08-12",
+   "silver": 78,
+   "crypto": 78,
+   "in_eq": 75,
+   "us_bond": 75,
+   "us_eq": 62,
+   "gold": 51,
+   "fd": 50
+  },
+  {
+   "date": "2026-08-13",
+   "silver": 77,
+   "crypto": 77,
+   "us_bond": 76,
+   "in_eq": 74,
+   "us_eq": 64,
+   "gold": 54,
+   "fd": 50
+  },
+  {
+   "date": "2026-08-14",
+   "in_eq": 75,
+   "silver": 75,
+   "us_bond": 74,
+   "crypto": 68,
+   "us_eq": 63,
+   "fd": 50,
+   "gold": 43
+  },
+  {
+   "date": "2026-08-17",
+   "in_eq": 84,
+   "crypto": 80,
+   "us_bond": 73,
+   "silver": 69,
+   "gold": 53,
+   "us_eq": 51,
+   "fd": 49
+  },
+  {
+   "date": "2026-08-18",
+   "in_eq": 83,
+   "crypto": 80,
+   "us_bond": 73,
+   "silver": 73,
+   "us_eq": 50,
+   "fd": 48,
+   "gold": 44
+  },
+  {
+   "date": "2026-08-19",
+   "in_eq": 84,
+   "crypto": 80,
+   "silver": 76,
+   "us_bond": 73,
+   "fd": 48,
+   "gold": 45,
+   "us_eq": 40
+  },
+  {
+   "date": "2026-08-20",
+   "us_bond": 81,
+   "crypto": 79,
+   "in_eq": 75,
+   "silver": 73,
+   "gold": 57,
+   "fd": 55,
+   "us_eq": 54
+  },
+  {
+   "date": "2026-08-21",
+   "us_bond": 81,
+   "crypto": 81,
+   "silver": 76,
+   "in_eq": 75,
+   "gold": 58,
+   "us_eq": 56,
+   "fd": 55
+  },
+  {
+   "date": "2026-08-24",
+   "us_bond": 81,
+   "crypto": 80,
+   "silver": 78,
+   "in_eq": 76,
+   "gold": 57,
+   "fd": 54,
+   "us_eq": 50
+  },
+  {
+   "date": "2026-08-25",
+   "us_bond": 81,
+   "silver": 78,
+   "crypto": 78,
+   "in_eq": 75,
+   "gold": 57,
+   "fd": 54,
+   "us_eq": 49
+  },
+  {
+   "date": "2026-08-26",
+   "us_bond": 80,
+   "crypto": 80,
+   "silver": 79,
+   "in_eq": 77,
+   "gold": 56,
+   "fd": 52,
+   "us_eq": 42
+  },
+  {
+   "date": "2026-08-27",
+   "crypto": 83,
+   "us_bond": 81,
+   "silver": 79,
+   "in_eq": 77,
+   "gold": 53,
+   "fd": 52,
+   "us_eq": 42
+  },
+  {
+   "date": "2026-08-28",
+   "us_bond": 79,
+   "silver": 78,
+   "in_eq": 76,
+   "crypto": 74,
+   "fd": 52,
+   "gold": 42,
+   "us_eq": 41
+  },
+  {
+   "date": "2026-08-31",
+   "crypto": 83,
+   "us_bond": 79,
+   "in_eq": 77,
+   "silver": 77,
+   "us_eq": 54,
+   "fd": 52,
+   "gold": 42
+  },
+  {
+   "date": "2026-09-01",
+   "silver": 85,
+   "us_bond": 83,
+   "crypto": 83,
+   "in_eq": 74,
+   "us_eq": 54,
+   "fd": 52,
+   "gold": 38
+  },
+  {
+   "date": "2026-09-02",
+   "silver": 84,
+   "us_bond": 83,
+   "crypto": 82,
+   "in_eq": 72,
+   "fd": 52,
+   "us_eq": 51,
+   "gold": 36
+  },
+  {
+   "date": "2026-09-03",
+   "silver": 84,
+   "us_bond": 82,
+   "crypto": 82,
+   "in_eq": 74,
+   "fd": 53,
+   "us_eq": 40,
+   "gold": 36
+  },
+  {
+   "date": "2026-09-04",
+   "us_bond": 83,
+   "crypto": 83,
+   "silver": 80,
+   "in_eq": 76,
+   "fd": 53,
+   "gold": 47,
+   "us_eq": 41
+  },
+  {
+   "date": "2026-09-07",
+   "crypto": 82,
+   "us_bond": 81,
+   "in_eq": 73,
+   "silver": 63,
+   "fd": 53,
+   "us_eq": 48,
+   "gold": 35
+  },
+  {
+   "date": "2026-09-08",
+   "crypto": 81,
+   "us_bond": 79,
+   "in_eq": 74,
+   "silver": 60,
+   "fd": 53,
+   "us_eq": 47,
+   "gold": 44
+  },
+  {
+   "date": "2026-09-09",
+   "in_eq": 85,
+   "us_bond": 73,
+   "crypto": 71,
+   "silver": 55,
+   "fd": 49,
+   "us_eq": 38,
+   "gold": 33
+  },
+  {
+   "date": "2026-09-10",
+   "in_eq": 85,
+   "us_bond": 72,
+   "crypto": 65,
+   "silver": 56,
+   "fd": 49,
+   "us_eq": 40,
+   "gold": 33
+  },
+  {
+   "date": "2026-09-11",
+   "in_eq": 85,
+   "us_bond": 71,
+   "crypto": 67,
+   "silver": 58,
+   "fd": 49,
+   "us_eq": 41,
+   "gold": 29
+  },
+  {
+   "date": "2026-09-14",
+   "in_eq": 79,
+   "us_bond": 78,
+   "crypto": 64,
+   "silver": 57,
+   "fd": 51,
+   "us_eq": 44,
+   "gold": 31
+  },
+  {
+   "date": "2026-09-15",
+   "in_eq": 85,
+   "us_bond": 72,
+   "crypto": 64,
+   "silver": 57,
+   "fd": 49,
+   "us_eq": 41,
+   "gold": 31
+  },
+  {
+   "date": "2026-09-16",
+   "in_eq": 83,
+   "us_bond": 73,
+   "crypto": 60,
+   "silver": 58,
+   "fd": 50,
+   "us_eq": 38,
+   "gold": 33
+  },
+  {
+   "date": "2026-09-17",
+   "us_bond": 80,
+   "in_eq": 74,
+   "crypto": 67,
+   "silver": 59,
+   "us_eq": 53,
+   "fd": 53,
+   "gold": 42
+  },
+  {
+   "date": "2026-09-18",
+   "us_bond": 77,
+   "in_eq": 75,
+   "silver": 72,
+   "crypto": 69,
+   "us_eq": 59,
+   "fd": 53,
+   "gold": 44
+  },
+  {
+   "date": "2026-09-21",
+   "us_bond": 79,
+   "silver": 76,
+   "in_eq": 74,
+   "crypto": 73,
+   "us_eq": 58,
+   "fd": 53,
+   "gold": 52
+  },
+  {
+   "date": "2026-09-22",
+   "silver": 76,
+   "in_eq": 74,
+   "us_bond": 74,
+   "crypto": 73,
+   "us_eq": 55,
+   "fd": 54,
+   "gold": 53
+  },
+  {
+   "date": "2026-09-23",
+   "us_bond": 77,
+   "crypto": 76,
+   "silver": 75,
+   "in_eq": 72,
+   "us_eq": 54,
+   "fd": 54,
+   "gold": 54
+  },
+  {
+   "date": "2026-09-24",
+   "silver": 77,
+   "crypto": 76,
+   "us_bond": 75,
+   "in_eq": 72,
+   "us_eq": 56,
+   "fd": 54,
+   "gold": 52
+  },
+  {
+   "date": "2026-09-25",
+   "silver": 77,
+   "us_bond": 76,
+   "crypto": 76,
+   "in_eq": 72,
+   "us_eq": 55,
+   "fd": 54,
+   "gold": 52
+  },
+  {
+   "date": "2026-09-28",
+   "us_bond": 77,
+   "crypto": 73,
+   "in_eq": 72,
+   "silver": 72,
+   "gold": 62,
+   "fd": 56,
+   "us_eq": 54
+  },
+  {
+   "date": "2026-09-29",
+   "us_bond": 75,
+   "in_eq": 74,
+   "silver": 74,
+   "crypto": 74,
+   "gold": 61,
+   "fd": 57,
+   "us_eq": 53
+  },
+  {
+   "date": "2026-09-30",
+   "crypto": 77,
+   "us_bond": 76,
+   "in_eq": 74,
+   "silver": 74,
+   "gold": 65,
+   "fd": 57,
+   "us_eq": 56
+  },
+  {
+   "date": "2026-10-01",
+   "crypto": 79,
+   "us_bond": 75,
+   "in_eq": 74,
+   "silver": 73,
+   "gold": 66,
+   "us_eq": 58,
+   "fd": 56
+  },
+  {
+   "date": "2026-10-02",
+   "crypto": 79,
+   "in_eq": 76,
+   "us_bond": 75,
+   "silver": 72,
+   "gold": 60,
+   "us_eq": 57,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-05",
+   "crypto": 80,
+   "in_eq": 77,
+   "us_bond": 76,
+   "silver": 75,
+   "gold": 61,
+   "us_eq": 59,
+   "fd": 56
+  },
+  {
+   "date": "2026-10-06",
+   "crypto": 82,
+   "in_eq": 79,
+   "us_bond": 77,
+   "silver": 76,
+   "us_eq": 62,
+   "gold": 62,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-07",
+   "in_eq": 81,
+   "crypto": 81,
+   "us_bond": 76,
+   "silver": 75,
+   "us_eq": 60,
+   "gold": 60,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-08",
+   "in_eq": 82,
+   "crypto": 82,
+   "silver": 77,
+   "us_bond": 76,
+   "us_eq": 70,
+   "gold": 60,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-09",
+   "in_eq": 78,
+   "us_bond": 76,
+   "crypto": 76,
+   "us_eq": 70,
+   "silver": 67,
+   "fd": 56,
+   "gold": 55
+  },
+  {
+   "date": "2026-10-12",
+   "crypto": 81,
+   "in_eq": 80,
+   "us_bond": 80,
+   "us_eq": 76,
+   "silver": 71,
+   "gold": 60,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-13",
+   "crypto": 81,
+   "in_eq": 80,
+   "us_bond": 78,
+   "us_eq": 77,
+   "silver": 74,
+   "gold": 60,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-14",
+   "crypto": 81,
+   "in_eq": 80,
+   "us_bond": 78,
+   "us_eq": 77,
+   "silver": 74,
+   "gold": 58,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-15",
+   "crypto": 82,
+   "in_eq": 81,
+   "us_bond": 78,
+   "us_eq": 76,
+   "silver": 75,
+   "gold": 58,
+   "fd": 54
+  },
+  {
+   "date": "2026-10-16",
+   "in_eq": 81,
+   "us_bond": 81,
+   "crypto": 81,
+   "us_eq": 76,
+   "silver": 73,
+   "gold": 57,
+   "fd": 54
+  },
+  {
+   "date": "2026-10-19",
+   "crypto": 82,
+   "us_bond": 81,
+   "in_eq": 79,
+   "silver": 75,
+   "us_eq": 72,
+   "gold": 59,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-20",
+   "crypto": 82,
+   "us_bond": 80,
+   "in_eq": 79,
+   "silver": 73,
+   "us_eq": 71,
+   "gold": 60,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-21",
+   "crypto": 82,
+   "in_eq": 80,
+   "us_bond": 80,
+   "silver": 74,
+   "us_eq": 70,
+   "gold": 60,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-22",
+   "crypto": 82,
+   "in_eq": 80,
+   "us_bond": 79,
+   "silver": 74,
+   "gold": 69,
+   "us_eq": 67,
+   "fd": 56
+  },
+  {
+   "date": "2026-10-23",
+   "in_eq": 81,
+   "crypto": 81,
+   "us_bond": 80,
+   "silver": 75,
+   "gold": 67,
+   "us_eq": 66,
+   "fd": 55
+  },
+  {
+   "date": "2026-10-26",
+   "crypto": 79,
+   "silver": 77,
+   "us_bond": 76,
+   "gold": 69,
+   "us_eq": 68,
+   "in_eq": 67,
+   "fd": 58
+  },
+  {
+   "date": "2026-10-27",
+   "silver": 78,
+   "us_bond": 77,
+   "crypto": 76,
+   "gold": 69,
+   "us_eq": 68,
+   "in_eq": 66,
+   "fd": 57
+  },
+  {
+   "date": "2026-10-28",
+   "us_bond": 78,
+   "crypto": 77,
+   "silver": 75,
+   "us_eq": 67,
+   "gold": 67,
+   "in_eq": 66,
+   "fd": 57
+  },
+  {
+   "date": "2026-10-29",
+   "silver": 78,
+   "us_bond": 77,
+   "crypto": 77,
+   "us_eq": 68,
+   "in_eq": 66,
+   "gold": 65,
+   "fd": 57
+  },
+  {
+   "date": "2026-10-30",
+   "crypto": 79,
+   "silver": 78,
+   "us_bond": 75,
+   "in_eq": 67,
+   "us_eq": 66,
+   "gold": 64,
+   "fd": 56
+  },
+  {
+   "date": "2026-11-02",
+   "crypto": 80,
+   "silver": 78,
+   "in_eq": 67,
+   "us_bond": 65,
+   "gold": 65,
+   "us_eq": 64,
+   "fd": 57
+  },
+  {
+   "date": "2026-11-03",
+   "silver": 84,
+   "crypto": 77,
+   "us_bond": 74,
+   "in_eq": 67,
+   "us_eq": 67,
+   "gold": 64,
+   "fd": 56
+  },
+  {
+   "date": "2026-11-04",
+   "silver": 83,
+   "in_eq": 79,
+   "crypto": 76,
+   "us_eq": 66,
+   "us_bond": 65,
+   "gold": 62,
+   "fd": 53
+  },
+  {
+   "date": "2026-11-05",
+   "silver": 82,
+   "crypto": 79,
+   "in_eq": 76,
+   "us_eq": 65,
+   "us_bond": 65,
+   "fd": 53,
+   "gold": 51
+  },
+  {
+   "date": "2026-11-06",
+   "crypto": 78,
+   "silver": 73,
+   "in_eq": 71,
+   "us_bond": 64,
+   "us_eq": 57,
+   "fd": 54,
+   "gold": 47
+  },
+  {
+   "date": "2026-11-09",
+   "in_eq": 84,
+   "silver": 81,
+   "crypto": 78,
+   "us_bond": 61,
+   "fd": 50,
+   "us_eq": 48,
+   "gold": 48
+  },
+  {
+   "date": "2026-11-10",
+   "in_eq": 85,
+   "silver": 83,
+   "crypto": 69,
+   "us_bond": 61,
+   "fd": 50,
+   "gold": 47,
+   "us_eq": 46
+  },
+  {
+   "date": "2026-11-11",
+   "in_eq": 83,
+   "silver": 76,
+   "us_bond": 65,
+   "crypto": 62,
+   "fd": 51,
+   "us_eq": 47,
+   "gold": 41
+  },
+  {
+   "date": "2026-11-12",
+   "in_eq": 84,
+   "silver": 80,
+   "crypto": 66,
+   "us_bond": 63,
+   "fd": 50,
+   "us_eq": 47,
+   "gold": 47
+  },
+  {
+   "date": "2026-11-13",
+   "in_eq": 84,
+   "silver": 72,
+   "crypto": 66,
+   "us_bond": 62,
+   "fd": 50,
+   "gold": 50,
+   "us_eq": 46
+  },
+  {
+   "date": "2026-11-16",
+   "in_eq": 84,
+   "crypto": 73,
+   "silver": 71,
+   "us_bond": 63,
+   "fd": 52,
+   "gold": 49,
+   "us_eq": 45
+  },
+  {
+   "date": "2026-11-17",
+   "in_eq": 84,
+   "crypto": 73,
+   "silver": 70,
+   "us_bond": 64,
+   "fd": 52,
+   "gold": 52,
+   "us_eq": 43
+  },
+  {
+   "date": "2026-11-18",
+   "in_eq": 84,
+   "crypto": 74,
+   "silver": 72,
+   "us_bond": 60,
+   "gold": 52,
+   "fd": 51,
+   "us_eq": 46
+  },
+  {
+   "date": "2026-11-19",
+   "in_eq": 85,
+   "crypto": 76,
+   "silver": 74,
+   "us_bond": 57,
+   "gold": 51,
+   "fd": 50,
+   "us_eq": 47
+  },
+  {
+   "date": "2026-11-20",
+   "in_eq": 85,
+   "silver": 72,
+   "crypto": 71,
+   "us_bond": 56,
+   "gold": 52,
+   "fd": 50,
+   "us_eq": 46
+  }
+ ],
  "fd_rate": 6.5,
  "india_cpi": 4.0
 }

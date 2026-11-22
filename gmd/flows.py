@@ -148,7 +148,7 @@ def analyse(candles: dict[str, pd.DataFrame], macro: dict, hist: dict) -> dict:
         a["chg7"] = None if prev is None else a["score"] - prev
     assets.sort(key=lambda a: a["score"], reverse=True)
     hist_rows = [{"date": k, **{kk: vv for kk, vv in ((hist["days"][k].get("assets") or {}).items())}}
-                 for k in days[-120:]] if hist else []
+                 for k in days[-370:]] if hist else []
     return {"updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "assets": assets, "factors": {FACTOR_NAME.get(k, k): round(v, 2) for k, v in f.items()},
             "regime": {k: macro.get(k, {}).get("regime") for k in ("global", "india", "overall")},

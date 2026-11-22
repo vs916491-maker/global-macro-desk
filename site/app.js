@@ -9,7 +9,8 @@ const sb = LIVE ? window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnon
   auth: { flowType: "pkce", detectSessionInUrl: true, persistSession: true, autoRefreshToken: true },
 }) : null;
 
-const state = { view: "swing", newsTag: "all", recTab: "all", recView: "all", sort: {} };
+const state = { view: "swing", newsTag: "all", recTab: "all", recView: "all", sort: {}, histRange: "1y", histHidden: new Set() };
+try { const hh = localStorage.getItem("gm-hist-hidden"); if (hh) state.histHidden = new Set(hh.split(",").filter(Boolean)); } catch (e) { /* off */ }
 let refreshTimer = null;
 try { const v = localStorage.getItem("gm-view"); if (v === "swing" || v === "positional") state.view = v; } catch (e) { /* off */ }
 
@@ -134,10 +135,10 @@ function spark(vals, w = 120, ht = 30) {
 function lineChart(series, labels, { height = 180, min = null, max = null, zero = false } = {}) {
   const W = 640, H = height, L = 34, R = 8, T = 10, B = 22;
   const all = series.flatMap((x) => x.values.filter(isNum));
-  if (all.length < 2) return h("p", { class: "empty" }, "History builds up from the first days of running.");
+  if (!all.length) return h("p", { class: "empty" }, "History builds up from the first days of running.");
   const lo = min ?? Math.min(...all), hi = max ?? Math.max(...all), r = hi - lo || 1;
   const n = labels.length;
-  const X = (i) => L + (n > 1 ? (i / (n - 1)) * (W - L - R) : 0);
+  const X = (i) => L + (n > 1 ? (i / (n - 1)) * (W - L - R) : (W - L - R) / 2);
   const Y = (v) => T + (1 - (v - lo) / r) * (H - T - B);
   const g = s("svg", { viewBox: `0 0 ${W} ${H}`, class: "lchart", role: "img" });
   [lo, (lo + hi) / 2, hi].forEach((t) => {
@@ -148,7 +149,11 @@ function lineChart(series, labels, { height = 180, min = null, max = null, zero 
   [0, Math.floor((n - 1) / 2), n - 1].forEach((i) => labels[i] && g.append(s("text", { x: X(i), y: H - 6, "text-anchor": i === 0 ? "start" : i === n - 1 ? "end" : "middle", class: "axis-text" }, labels[i].slice(5))));
   series.forEach((sr, k) => {
     const pts = sr.values.map((v, i) => (isNum(v) ? `${X(i)},${Y(v)}` : null)).filter(Boolean).join(" ");
-    g.append(s("polyline", { points: pts, fill: "none", stroke: sr.color || css(`--s${(k % 3) + 1}`), "stroke-width": 2 }));
+    const col = sr.color || css(`--s${(k % 3) + 1}`);
+    if (sr.values.filter(isNum).length === 1) {
+      const i = sr.values.findIndex(isNum);
+      g.append(s("circle", { cx: X(i), cy: Y(sr.values[i]), r: 4, fill: col }));
+    } else g.append(s("polyline", { points: pts, fill: "none", stroke: col, "stroke-width": 2 }));
   });
   return h("div", null, g, h("div", { class: "legend" }, series.map((sr, k) => h("span", null, h("i", { class: "line", style: `background:${sr.color || css(`--s${(k % 3) + 1}`)}` }), sr.name))));
 }
@@ -258,7 +263,14 @@ function euphoriaSection(eu) {
   if (!eu || !eu.assets) return null;
   const order = ["crypto", "gold", "silver", "copper", "us_eq", "in_eq"];
   const P = { stretch: "Price stretch", mood: "Crowd mood", crowd: "Speculators (CFTC)", breadth: "Breadth", news: "News flood" };
-  return section("Euphoria meter", "Is a move crowded and over-loved? Warning only: it never changes scores or ideas. 0-40 Calm, 40-60 Warm, 60-80 Hot, 80+ Euphoric.",
+  let open = false;
+  try { open = localStorage.getItem("gm-eu-open") === "1"; } catch (e) { /* off */ }
+  const alerts = order.filter((k) => eu.assets[k] && eu.assets[k].alert).length;
+  const det = h("details", { class: "fold", open: open || null },
+    h("summary", null, h("span", { class: "fold-title" }, "Euphoria meter"),
+      h("span", { class: "fold-chips" }, order.filter((k) => eu.assets[k]).map((k) => h("span", { class: "chip" }, `${eu.assets[k].label.split(" (")[0]} `, euTag(eu.assets[k])))),
+      alerts ? h("span", { class: "tag neg" }, `${alerts} alert${alerts > 1 ? "s" : ""}`) : null),
+    h("p", { class: "note" }, "Is a move crowded and over-loved? Warning only: it never changes scores or ideas. 0-40 Calm, 40-60 Warm, 60-80 Hot, 80+ Euphoric."),
     h("div", { class: "ideas" }, order.filter((k) => eu.assets[k]).map((k) => {
       const e = eu.assets[k];
       return h("div", { class: `idea eu ${e.alert ? "alert-" + e.alert.level : ""}` },
@@ -269,6 +281,44 @@ function euphoriaSection(eu) {
         e.alert ? null : h("p", { class: "note" }, e.note),
         spark((e.history || []).map((x) => x.score), 300, 36));
     })));
+  det.addEventListener("toggle", () => store("gm-eu-open", det.open ? "1" : "0"));
+  return h("section", null, order.some((k) => eu.assets[k] && eu.assets[k].alert) ? order.filter((k) => eu.assets[k] && eu.assets[k].alert).map((k) => euBanner(eu.assets[k], eu.assets[k].label)) : null, det);
+}
+
+// ------------------------------------------------------------------ asset-class cards and history (Global macro tab)
+const AC = [["us_eq", "US equity", "#2a78d6"], ["in_eq", "Indian equity", "#eb6834"], ["us_bond", "US bonds", "#7a8590"],
+  ["gold", "Gold", "#eda100"], ["silver", "Silver", "#8a63d2"], ["crypto", "Crypto", "#1baf7a"]];
+const to100 = (v) => (isNum(v) ? Math.round((v - 50) * 2) : null);
+function assetCards(fl, eu) {
+  const by = Object.fromEntries((fl.assets || []).map((a) => [a.key, a]));
+  return h("div", { class: "grid3" }, AC.map(([k, name]) => {
+    const a = by[k];
+    if (!a) return h("div", { class: "panel regime" }, h("div", { class: "k" }, name), h("p", { class: "empty" }, "No data yet"));
+    const v = to100(a.score);
+    const lab = a.stance === "Overweight" ? "Bullish" : a.stance === "Underweight" ? "Bearish" : "Neutral";
+    const ch = isNum(a.chg7) ? a.chg7 * 2 : null;
+    const e = ((eu || {}).assets || {})[k];
+    return h("div", { class: "panel regime" }, h("div", { class: "k" }, name, e ? h("span", { style: "float:right" }, euTag(e)) : null),
+      h("div", { class: "zone" }, `${lab} `, h("span", { class: sign(v) }, `(${v > 0 ? "+" : ""}${v})`),
+        isNum(ch) ? h("small", { class: sign(ch), style: "font-size:13px;margin-left:8px" }, `${ch > 0 ? "▲" : ch < 0 ? "▼" : "•"} ${Math.abs(ch)} in 7 days`) : null),
+      gscale(v, ["Bearish", "Neutral", "Bullish"]),
+      h("p", { class: "note" }, `Momentum ${a.mom} · macro fit ${a.fit} · `, a.flow === "in" ? h("span", { class: "pos" }, "money in") : a.flow === "out" ? h("span", { class: "neg" }, "money out") : "flow balanced",
+        ` · 1m ${pct(a.r1m)} · 3m ${pct(a.r3m)} (₹)`));
+  }));
+}
+function assetHistory(fl) {
+  const days = { "3m": 92, "6m": 183, "1y": 366 }[state.histRange] || 366;
+  const cut = new Date(Date.now() - days * 864e5).toISOString().slice(0, 10);
+  const hs = (fl.history || []).filter((x) => x.date >= cut);
+  const hidden = state.histHidden;
+  const shown = AC.filter(([k]) => !hidden.has(k));
+  return h("div", null,
+    h("div", { class: "filters" }, seg("histRange", state.histRange, [["3m", "3 months"], ["6m", "6 months"], ["1y", "1 year"]]),
+      h("div", { class: "seg", role: "group", "aria-label": "Show or hide lines" }, AC.map(([k, name, col]) => h("button", {
+        type: "button", "aria-pressed": String(!hidden.has(k)), onclick: () => { if (hidden.has(k)) hidden.delete(k); else hidden.add(k); store("gm-hist-hidden", [...hidden].join(",")); route(); },
+      }, h("i", { class: "line", style: `background:${col};display:inline-block;width:12px;height:3px;margin-right:6px;vertical-align:middle` }), name)))),
+    shown.length ? lineChart(shown.map(([k, name, col]) => ({ name, color: col, values: hs.map((x) => to100(x[k])) })), hs.map((x) => x.date), { min: -100, max: 100, zero: true, height: 230 })
+      : h("p", { class: "empty" }, "Pick at least one asset class above."));
 }
 
 // ------------------------------------------------------------------ tab: global macro
@@ -297,10 +347,8 @@ async function viewMacro(app) {
   if (!d) return missing(app, "macro data");
   const nw = (await doc("gm_news")) || { items: [] };
   const eu = await doc("gm_euphoria").catch(() => null);
+  const fl = (await doc("gm_flows").catch(() => null)) || { assets: [], history: [] };
   const q = d.quotes || {}, f = d.fred || {}, dv = d.derived || {};
-  const scoreCard = (name, x, sub) => h("div", { class: "panel regime" }, h("div", { class: "k" }, name),
-    h("div", { class: "zone" }, `${x.regime} `, h("span", { class: sign(x.score) }, isNum(x.score) ? `(${x.score > 0 ? "+" : ""}${x.score})` : "")),
-    gscale(x.score), h("p", { class: "note" }, sub));
   const fredRows = ["DGS10", "DGS2", "T10Y2Y", "DFII10", "T10YIE", "DFEDTARU", "DFF", "BAMLH0A0HYM2", "UNRATE"].filter((k) => f[k]).map((k) => ({ k, ...f[k] }));
   const extra = [
     dv.cpi_yoy != null && ["US CPI inflation (a year)", `${dv.cpi_yoy}%`, `${dv.cpi_yoy_3m_ago}% three months ago`],
@@ -313,14 +361,12 @@ async function viewMacro(app) {
   const items = (nw.items || []).filter((it) => state.newsTag === "all" || (it.tags || []).includes(state.newsTag));
   const tone = (v) => h("span", { class: `tone ${v > 0.15 ? "pos" : v < -0.15 ? "neg" : "muted"}` }, v > 0.15 ? "positive" : v < -0.15 ? "negative" : "neutral");
   const sent = d.news_sentiment || {};
-  const hist = d.history || [];
   render(app,
-    pageHead("Global macro", "Risk appetite from global and Indian market data, the Fed and the news. Scores run from −100 (risk-off) to +100 (risk-on).", d.updated),
+    pageHead("Global macro", "Where each asset class stands: score −100 (bearish) … +100 (bullish) from momentum, money flow and macro fit (the Money flow score), plus the Fed, rates and news behind it.", d.updated),
     await problemsBanner("hourly"),
-    h("div", { class: "grid3" },
-      scoreCard("Global risk appetite", d.global, "VIX, credit spreads, S&P 500 trend, dollar, US yields, yield curve, copper/gold, news"),
-      scoreCard("India risk appetite", d.india, "Nifty trend, India VIX, rupee, crude, FII flows, India news"),
-      scoreCard("Overall", d.overall, "Average of the two")),
+    assetCards(fl, eu),
+    section("Score history", "Daily asset-class score (−100 bearish … +100 bullish); days before 22 Nov 2026 rebuilt from past prices and Fed data, without news",
+      panel(assetHistory(fl))),
     euphoriaSection(eu),
     section("What it means", "Plain-words rules on what moved in the last month and how it usually affects each asset class",
       panel(h("ul", { class: "interp" }, (d.interpret || []).map((x) => h("li", { class: x.tone > 0 ? "pos" : x.tone < 0 ? "neg" : "" }, x.text))))),
@@ -333,11 +379,8 @@ async function viewMacro(app) {
         panel(h("table", { class: "kv" }, h("tbody", null, extra.map(([a, b, c]) => h("tr", { style: "cursor:default" }, h("td", { class: "l name" }, a), h("td", null, b), h("td", { class: "l muted" }, c))))),
           h("h3", { class: "mini" }, "Next central bank decisions"),
           h("table", { class: "kv" }, h("tbody", null, (d.calendar || []).map((c) => h("tr", { style: "cursor:default" }, h("td", { class: "l name" }, c.event), h("td", null, c.date), h("td", { class: "l muted" }, `in ${c.days} days`)))))))),
-    section("Global score parts", null, panel(partsTable(d.global.parts || []))),
-    section("India score parts", d.fii && d.fii.last_date ? `FII cash net on ${d.fii.last_date}: ₹${fmt0((d.fii.last || {}).fii)} Cr, DII ₹${fmt0((d.fii.last || {}).dii)} Cr` : null, panel(partsTable(d.india.parts || []))),
-    section("Score history", "Daily value (last run of each day)", panel(lineChart([
-      { name: "Global", values: hist.map((x) => x.global) }, { name: "India", values: hist.map((x) => x.india) }, { name: "Overall", values: hist.map((x) => x.overall) }],
-      hist.map((x) => x.date), { min: -100, max: 100, zero: true }))),
+    section(`Global risk appetite: ${d.global.regime}${isNum(d.global.score) ? ` (${d.global.score > 0 ? "+" : ""}${d.global.score})` : ""}`, "Feeds the macro fit of US equity, bonds, gold, silver and crypto", panel(partsTable(d.global.parts || []))),
+    section(`India risk appetite: ${d.india.regime}${isNum(d.india.score) ? ` (${d.india.score > 0 ? "+" : ""}${d.india.score})` : ""}`, d.fii && d.fii.last_date ? `FII cash net on ${d.fii.last_date}: ₹${fmt0((d.fii.last || {}).fii)} Cr, DII ₹${fmt0((d.fii.last || {}).dii)} Cr` : null, panel(partsTable(d.india.parts || []))),
     section("News", `${nw.count || 0} headlines from ${nw.feeds || 0} free feeds, last 4 days. Tone = keyword rules, so read the headline yourself.`,
       h("div", { class: "filters" }, seg("newsTag", state.newsTag, [["all", "All"], ...Object.entries(tags).map(([k, v]) => [k, `${v}${sent[k] && isNum(sent[k].score) ? ` ${sent[k].score > 0 ? "+" : ""}${Math.round(sent[k].score)}` : ""}`])])),
       panel(h("ul", { class: "news" }, items.slice(0, 80).map((it) => h("li", null,
@@ -596,7 +639,10 @@ function viewReadme(app) {
       li("US scan once a day after the US close (about 3:10 am IST, Tuesday–Saturday): S&P 500 + Nasdaq 100, sectors, Top 10 ideas, Track record for US ideas."),
       li("Sources are free and unofficial (Yahoo Finance, FRED, CoinGecko, alternative.me, NSE, RSS feeds). When one fails the run carries on and lists the problem at the top of the tab."),
       li("Only completed candles are used for ideas: the last 4-hour or daily candle still forming is ignored.")),
-    blk("Global macro scores (−100 risk-off … +100 risk-on)",
+    blk("Global macro tab: asset-class cards and history",
+      li("Cards for US equity, Indian equity, US bonds, gold, silver and crypto show the Money flow score rescaled to −100 (bearish) … +100 (bullish): (score − 50) × 2. Bullish = Overweight (score 62+), Bearish = Underweight (below 45)."),
+      li("Score history: one line per asset class, daily (last run of the day). Days before 22 Nov 2026 were rebuilt from past prices and Fed data with the same rules, without news and FII flows. Tap a name to hide or show its line.")),
+    blk("Global and India risk appetite (−100 risk-off … +100 risk-on)",
       li("Global: US VIX 20 (below 14 = +1, 14–18 = +0.5, 18–22 = 0, 22–28 = −0.5, above = −1, ±0.25 for falling/rising vs its 20-day average), high-yield credit spread 15, S&P 500 trend 15, dollar index 1-month move 15 (−2.5% = +1), US 10Y 1-month move 10 (−40 bp = +1), yield curve 5, copper/gold 1-month 10, news tone 10."),
       li("India: Nifty trend 25, India VIX 15, rupee 1-month move 15, Brent 1-month move 15, FII cash flows over 5 sessions 15 (±₹15,000 Cr = ±1), India news tone 15."),
       li("Zones: below −60 strong risk-off, −60 to −20 risk-off, −20 to +20 neutral, +20 to +60 risk-on, above +60 strong risk-on. Parts with no data are left out and the rest re-weighted."),

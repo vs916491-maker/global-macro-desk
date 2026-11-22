@@ -38,7 +38,7 @@ def fake(symbol, interval="1d", rng_s="2y"):
     return df
 
 
-def fake_fred(sid):
+def fake_fred(sid, days=800):
     idx = pd.date_range(end=pd.Timestamp.now().normalize(), periods=600, freq="D")
     base = {"DGS10": 4.1, "DGS2": 3.6, "T10Y2Y": 0.5, "DFII10": 1.8, "DFEDTARU": 4.0, "DFF": 3.9,
             "BAMLH0A0HYM2": 3.0, "CPIAUCSL": 320, "PCEPILFE": 125, "UNRATE": 4.3, "WALCL": 6.6e6, "T10YIE": 2.3}[sid]

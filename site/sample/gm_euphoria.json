@@ -1,23 +1,23 @@
 {
- "updated": "2026-11-22T16:23:40+00:00",
+ "updated": "2026-11-22T16:42:23+00:00",
  "assets": {
   "crypto": {
    "label": "Crypto (Bitcoin)",
-   "score": 33.3,
+   "score": 0.0,
    "level": "Calm",
    "parts": {
     "stretch": null,
     "mood": 0,
     "crowd": null,
-    "breadth": 100,
+    "breadth": 0,
     "news": null
    },
    "why": [
-    "-34.1% vs 200-day average (stretch 0/100)",
-    "-11.5% in 30 days",
-    "weekly RSI 23",
-    "92% of top coins beat BTC over 90 days",
-    "31% of top coins above their 200-day",
+    "+9.6% vs 200-day average (stretch 0/100)",
+    "+1.3% in 30 days",
+    "weekly RSI 57",
+    "25% of top coins beat BTC over 90 days",
+    "54% of top coins above their 200-day",
     "news check starts after 20 days of stored headlines",
     "Fear & Greed 40 (7-day avg 50)"
    ],
@@ -26,7 +26,7 @@
    "policy": "crack",
    "note": "Backtest 2014-2026: when the meter had been 60+ and Bitcoin then closed below its 50-day average, it was lower 90 days later 70% of the time and fell 25%+ in 41% of cases (e.g. 27 Dec 2024, 7 Jan 2025).",
    "hot60": 19.6,
-   "below50": true,
+   "below50": false,
    "history": [
     {
      "date": "2025-11-23",
@@ -530,9 +530,9 @@
     "news": null
    },
    "why": [
-    "+2.6% vs 200-day average (stretch 0/100)",
-    "+7.3% in 30 days",
-    "weekly RSI 54",
+    "-13.4% vs 200-day average (stretch 0/100)",
+    "-6.7% in 30 days",
+    "weekly RSI 30",
     "news check starts after 20 days of stored headlines"
    ],
    "cot": null,
@@ -540,7 +540,7 @@
    "policy": "info",
    "note": "Backtest: here a high reading has meant a strong trend, not a top - shown for information only.",
    "hot60": null,
-   "below50": false,
+   "below50": true,
    "history": []
   },
   "silver": {
@@ -555,9 +555,9 @@
     "news": null
    },
    "why": [
-    "-12.1% vs 200-day average (stretch 0/100)",
-    "-5.4% in 30 days",
-    "weekly RSI 44",
+    "+5.8% vs 200-day average (stretch 0/100)",
+    "+2.3% in 30 days",
+    "weekly RSI 58",
     "news check starts after 20 days of stored headlines"
    ],
    "cot": null,
@@ -565,7 +565,7 @@
    "policy": "euphoric",
    "note": "Backtest 2000-2026: at 80+ silver was lower 90 days later 56% of the time; 10 of 12 such episodes saw a 15%+ drop from the next peak.",
    "hot60": null,
-   "below50": true,
+   "below50": false,
    "history": []
   },
   "copper": {
@@ -580,9 +580,9 @@
     "news": null
    },
    "why": [
-    "-7.1% vs 200-day average (stretch 0/100)",
-    "+3.5% in 30 days",
-    "weekly RSI 47",
+    "-17.6% vs 200-day average (stretch 0/100)",
+    "-0.6% in 30 days",
+    "weekly RSI 34",
     "news check starts after 20 days of stored headlines"
    ],
    "cot": null,
@@ -590,1036 +590,1036 @@
    "policy": "euphoric",
    "note": "Backtest 2000-2026: the May 2021 and May 2024 copper tops came with readings of 89 and 100.",
    "hot60": null,
-   "below50": false,
+   "below50": true,
    "history": []
   },
   "us_eq": {
    "label": "US equity (S&P 500)",
-   "score": 100.0,
-   "level": "Euphoric",
+   "score": 0.0,
+   "level": "Calm",
    "parts": {
     "stretch": null,
-    "mood": 100,
+    "mood": 0,
     "crowd": null,
     "breadth": null,
     "news": null
    },
    "why": [
-    "-20.8% vs 200-day average (stretch 0/100)",
-    "+6.0% in 30 days",
-    "weekly RSI 29",
+    "-5.7% vs 200-day average (stretch 0/100)",
+    "-4.5% in 30 days",
+    "weekly RSI 42",
     "news check starts after 20 days of stored headlines",
-    "US VIX 5.1"
+    "US VIX 33.8"
    ],
    "cot": null,
    "alert": null,
    "policy": "info",
    "note": "Backtest: here a high reading has meant a strong trend, not a top (2022 and 2025 tops were macro-driven) - information only.",
-   "hot60": 100.0,
-   "below50": false,
+   "hot60": 0.0,
+   "below50": true,
    "history": [
     {
      "date": "2025-11-23",
-     "score": 100.0
+     "score": 42.7
     },
     {
      "date": "2025-11-26",
-     "score": 100.0
+     "score": 45.3
     },
     {
      "date": "2025-11-29",
-     "score": 100.0
+     "score": 44.8
     },
     {
      "date": "2025-12-02",
-     "score": 100.0
+     "score": 42.8
     },
     {
      "date": "2025-12-05",
-     "score": 100.0
+     "score": 43.1
     },
     {
      "date": "2025-12-08",
-     "score": 100.0
+     "score": 45.8
     },
     {
      "date": "2025-12-11",
-     "score": 100.0
+     "score": 41.9
     },
     {
      "date": "2025-12-14",
-     "score": 100.0
+     "score": 36.0
     },
     {
      "date": "2025-12-17",
-     "score": 100.0
+     "score": 30.7
     },
     {
      "date": "2025-12-20",
-     "score": 100.0
+     "score": 30.0
     },
     {
      "date": "2025-12-23",
-     "score": 100.0
+     "score": 30.7
     },
     {
      "date": "2025-12-26",
-     "score": 100.0
+     "score": 33.6
     },
     {
      "date": "2025-12-29",
-     "score": 100.0
+     "score": 37.8
     },
     {
      "date": "2026-01-01",
-     "score": 100.0
+     "score": 42.7
     },
     {
      "date": "2026-01-04",
-     "score": 100.0
+     "score": 45.8
     },
     {
      "date": "2026-01-07",
-     "score": 100.0
+     "score": 49.4
     },
     {
      "date": "2026-01-10",
-     "score": 100.0
+     "score": 54.4
     },
     {
      "date": "2026-01-13",
-     "score": 100.0
+     "score": 60.2
     },
     {
      "date": "2026-01-16",
-     "score": 100.0
+     "score": 61.2
     },
     {
      "date": "2026-01-19",
-     "score": 100.0
+     "score": 59.1
     },
     {
      "date": "2026-01-22",
-     "score": 100.0
+     "score": 51.4
     },
     {
      "date": "2026-01-25",
-     "score": 100.0
+     "score": 46.4
     },
     {
      "date": "2026-01-28",
-     "score": 100.0
+     "score": 45.8
     },
     {
      "date": "2026-01-31",
-     "score": 100.0
+     "score": 36.2
     },
     {
      "date": "2026-02-03",
-     "score": 100.0
+     "score": 28.8
     },
     {
      "date": "2026-02-06",
-     "score": 100.0
+     "score": 32.8
     },
     {
      "date": "2026-02-09",
-     "score": 100.0
+     "score": 35.1
     },
     {
      "date": "2026-02-12",
-     "score": 100.0
+     "score": 36.5
     },
     {
      "date": "2026-02-15",
-     "score": 100.0
+     "score": 40.4
     },
     {
      "date": "2026-02-18",
-     "score": 100.0
+     "score": 42.0
     },
     {
      "date": "2026-02-21",
-     "score": 100.0
+     "score": 40.2
     },
     {
      "date": "2026-02-24",
-     "score": 100.0
+     "score": 38.4
     },
     {
      "date": "2026-02-27",
-     "score": 100.0
+     "score": 38.7
     },
     {
      "date": "2026-03-02",
-     "score": 100.0
+     "score": 40.3
     },
     {
      "date": "2026-03-05",
-     "score": 100.0
+     "score": 35.4
     },
     {
      "date": "2026-03-08",
-     "score": 100.0
+     "score": 31.2
     },
     {
      "date": "2026-03-11",
-     "score": 100.0
+     "score": 32.7
     },
     {
      "date": "2026-03-14",
-     "score": 100.0
+     "score": 31.9
     },
     {
      "date": "2026-03-17",
-     "score": 100.0
+     "score": 37.0
     },
     {
      "date": "2026-03-20",
-     "score": 100.0
+     "score": 39.0
     },
     {
      "date": "2026-03-23",
-     "score": 100.0
+     "score": 36.9
     },
     {
      "date": "2026-03-26",
-     "score": 100.0
+     "score": 38.0
     },
     {
      "date": "2026-03-29",
-     "score": 100.0
+     "score": 35.6
     },
     {
      "date": "2026-04-01",
-     "score": 100.0
+     "score": 35.3
     },
     {
      "date": "2026-04-04",
-     "score": 100.0
+     "score": 35.8
     },
     {
      "date": "2026-04-07",
-     "score": 100.0
+     "score": 29.0
     },
     {
      "date": "2026-04-10",
-     "score": 100.0
+     "score": 18.2
     },
     {
      "date": "2026-04-13",
-     "score": 100.0
+     "score": 7.8
     },
     {
      "date": "2026-04-16",
-     "score": 100.0
+     "score": 7.7
     },
     {
      "date": "2026-04-19",
-     "score": 100.0
+     "score": 14.8
     },
     {
      "date": "2026-04-22",
-     "score": 100.0
+     "score": 15.4
     },
     {
      "date": "2026-04-25",
-     "score": 100.0
+     "score": 23.6
     },
     {
      "date": "2026-04-28",
-     "score": 100.0
+     "score": 29.7
     },
     {
      "date": "2026-05-01",
-     "score": 100.0
+     "score": 25.1
     },
     {
      "date": "2026-05-04",
-     "score": 100.0
+     "score": 24.1
     },
     {
      "date": "2026-05-07",
-     "score": 100.0
+     "score": 23.0
     },
     {
      "date": "2026-05-10",
-     "score": 100.0
+     "score": 19.8
     },
     {
      "date": "2026-05-13",
-     "score": 100.0
+     "score": 16.6
     },
     {
      "date": "2026-05-16",
-     "score": 100.0
+     "score": 18.9
     },
     {
      "date": "2026-05-19",
-     "score": 100.0
+     "score": 23.2
     },
     {
      "date": "2026-05-22",
-     "score": 100.0
+     "score": 21.5
     },
     {
      "date": "2026-05-25",
-     "score": 100.0
+     "score": 9.9
     },
     {
      "date": "2026-05-28",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-31",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-03",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-06",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-09",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-12",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-15",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-18",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-21",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-24",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-27",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-30",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-03",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-06",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-09",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-12",
-     "score": 100.0
+     "score": 6.2
     },
     {
      "date": "2026-07-15",
-     "score": 100.0
+     "score": 10.7
     },
     {
      "date": "2026-07-18",
-     "score": 100.0
+     "score": 10.2
     },
     {
      "date": "2026-07-21",
-     "score": 100.0
+     "score": 6.0
     },
     {
      "date": "2026-07-24",
-     "score": 100.0
+     "score": 2.4
     },
     {
      "date": "2026-07-27",
-     "score": 100.0
+     "score": 7.7
     },
     {
      "date": "2026-07-30",
-     "score": 100.0
+     "score": 5.5
     },
     {
      "date": "2026-08-02",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-05",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-08",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-11",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-14",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-17",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-20",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-23",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-26",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-29",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-01",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-04",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-07",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-10",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-13",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-16",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-19",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-22",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-25",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-28",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-01",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-04",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-07",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-10",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-13",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-16",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-19",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-22",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-25",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-28",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-31",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-03",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-06",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-09",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-12",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-15",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-18",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-21",
-     "score": 100.0
+     "score": 0.0
     }
    ]
   },
   "in_eq": {
    "label": "Indian equity (Nifty)",
-   "score": 100.0,
-   "level": "Euphoric",
+   "score": 0.0,
+   "level": "Calm",
    "parts": {
     "stretch": null,
-    "mood": 100,
+    "mood": 0,
     "crowd": null,
     "breadth": null,
     "news": null
    },
    "why": [
-    "-12.9% vs 200-day average (stretch 0/100)",
-    "-1.8% in 30 days",
-    "weekly RSI 42",
+    "+28.9% vs 200-day average (stretch 0/100)",
+    "+6.7% in 30 days",
+    "weekly RSI 72",
     "news check starts after 20 days of stored headlines",
-    "India VIX 4.4"
+    "India VIX 19.2"
    ],
    "cot": null,
    "alert": null,
    "policy": "info",
    "note": "Backtest: here a high reading has meant a strong trend, not a top - information only.",
-   "hot60": 100.0,
+   "hot60": 0.0,
    "below50": false,
    "history": [
     {
      "date": "2025-11-23",
-     "score": 100.0
+     "score": 21.3
     },
     {
      "date": "2025-11-26",
-     "score": 100.0
+     "score": 13.2
     },
     {
      "date": "2025-11-29",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2025-12-02",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2025-12-05",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2025-12-08",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2025-12-11",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2025-12-14",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2025-12-17",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2025-12-20",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2025-12-23",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2025-12-26",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2025-12-29",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-01",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-04",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-07",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-10",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-13",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-16",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-19",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-22",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-25",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-28",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-01-31",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-02-03",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-02-06",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-02-09",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-02-12",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-02-15",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-02-18",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-02-21",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-02-24",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-02-27",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-03-02",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-03-05",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-03-08",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-03-11",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-03-14",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-03-17",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-03-20",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-03-23",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-03-26",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-03-29",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-04-01",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-04-04",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-04-07",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-04-10",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-04-13",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-04-16",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-04-19",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-04-22",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-04-25",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-04-28",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-01",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-04",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-07",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-10",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-13",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-16",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-19",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-22",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-25",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-28",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-05-31",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-03",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-06",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-09",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-12",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-15",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-18",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-21",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-24",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-27",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-06-30",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-03",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-06",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-09",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-12",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-15",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-18",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-21",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-24",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-27",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-07-30",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-02",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-05",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-08",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-11",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-14",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-17",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-20",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-23",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-26",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-08-29",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-01",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-04",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-07",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-10",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-13",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-16",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-19",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-22",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-25",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-09-28",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-01",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-04",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-07",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-10",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-13",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-16",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-19",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-22",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-25",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-28",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-10-31",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-03",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-06",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-09",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-12",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-15",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-18",
-     "score": 100.0
+     "score": 0.0
     },
     {
      "date": "2026-11-21",
-     "score": 100.0
+     "score": 0.0
     }
    ]
   }
