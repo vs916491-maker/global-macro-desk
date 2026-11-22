@@ -51,12 +51,18 @@ def yahoo(symbol: str, interval: str = "1d", rng: str = "2y") -> pd.DataFrame:
     """OHLCV candles indexed by UTC start time (naive). Empty frame on failure.
     attrs: price (latest), prev_close, name."""
     url = f"https://query1.finance.yahoo.com/v8/finance/chart/{requests.utils.quote(symbol)}"
+    # range=max gives monthly candles; ask for daily history by date instead
+    prm = {"interval": interval, "includePrePost": "false"}
+    if rng == "max":
+        prm.update({"period1": 0, "period2": int(time.time())})
+    else:
+        prm["range"] = rng
     try:
-        r = _get(url, {"interval": interval, "range": rng, "includePrePost": "false"}, timeout=20)
+        r = _get(url, prm, timeout=30)
         res = r.json()["chart"]["result"][0]
     except Exception:  # noqa: BLE001
         try:   # second host
-            r = _get(url.replace("query1", "query2"), {"interval": interval, "range": rng}, timeout=20, tries=1)
+            r = _get(url.replace("query1", "query2"), prm, timeout=30, tries=1)
             res = r.json()["chart"]["result"][0]
         except Exception:  # noqa: BLE001
             return pd.DataFrame()

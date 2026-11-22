@@ -107,7 +107,7 @@ def main():
                           "neg90": round((r < 0).mean() * 100) if len(r) else None, "avg_dd90": round(dd.mean(), 1) if len(dd) else None})
             print(f"  {name:9s} days {len(idx):5d} | avg next-90d return {bands[-1]['avg90']}% | negative {bands[-1]['neg90']}% of the time | avg worst drop in 90d {bands[-1]['avg_dd90']}%")
         last = h.iloc[-1]
-        print(f"  NOW {h.index[-1].date()}: meter {last.score} ({E.level(last.score)}) stretch {round(last.stretch * 100)} mood {last['mood']} crowd {last.crowd}")
+        print(f"  NOW {h.index[-1].date()}: meter {last.score} ({E.level(last.score)}) stretch {last.stretch} mood {last['mood']} crowd {last.crowd}")
         report[key] = {"label": label, "key_dates": rows, "episodes": ep, "bands": bands,
                        "now": {"date": h.index[-1].strftime("%Y-%m-%d"), "score": last.score},
                        "series": [{"d": d.strftime("%Y-%m-%d"), "s": float(v), "c": float(c.loc[d])} for d, v in s.iloc[::5].items()]}
