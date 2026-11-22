@@ -1,0 +1,32 @@
+name: Euphoria meter backtest (read-only)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Backtest
+        run: python tests/euphoria_backtest.py 2>&1 | tee backtest.log
+      - name: Save results to branch euphoria-test-out
+        run: |
+          mkdir -p /tmp/res && cp out/* backtest.log /tmp/res/ || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan euphoria-test-out
+          git rm -rf . > /dev/null
+          cp -r /tmp/res/* .
+          git add -A
+          git commit -m "Euphoria backtest $(date -u +%FT%TZ)"
+          git push -f origin euphoria-test-out
