@@ -268,7 +268,16 @@ function euphoriaSection(eu) {
   const alerts = order.filter((k) => eu.assets[k] && eu.assets[k].alert).length;
   const det = h("details", { class: "fold", open: open || null },
     h("summary", null, h("span", { class: "fold-title" }, "Euphoria meter"),
-      h("span", { class: "fold-chips" }, order.filter((k) => eu.assets[k]).map((k) => h("span", { class: "chip" }, `${eu.assets[k].label.split(" (")[0]} `, euTag(eu.assets[k])))),
+      h("span", { class: "fold-chips" }, order.filter((k) => eu.assets[k]).map((k) => {
+        const e = eu.assets[k];
+        const lv = (e.level || "none").toLowerCase().replace(/\s+/g, "");
+        const w = isNum(e.score) ? Math.max(3, Math.min(100, e.score)) : 0;
+        return h("span", { class: `euchip lv-${lv}`, title: `${e.label}: ${isNum(e.score) ? Math.round(e.score) : "–"} (${e.level})` },
+          h("span", { class: "nm" }, e.label.split(" (")[0]),
+          h("span", { class: "sc" }, isNum(e.score) ? Math.round(e.score) : "–"),
+          h("span", { class: "lv" }, e.level || "–"),
+          h("span", { class: "mini" }, h("b", { style: `width:${w}%` })));
+      })),
       alerts ? h("span", { class: "tag neg" }, `${alerts} alert${alerts > 1 ? "s" : ""}`) : null),
     h("p", { class: "note" }, "Is a move crowded and over-loved? Warning only: it never changes scores or ideas. 0-40 Calm, 40-60 Warm, 60-80 Hot, 80+ Euphoric."),
     h("div", { class: "ideas" }, order.filter((k) => eu.assets[k]).map((k) => {

@@ -507,3 +507,33 @@ details.fold .fold-title { font-size: 18px; font-weight: 600; }
 details.fold .fold-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 details.fold .chip { font-size: 12.5px; color: var(--ink-2); }
 details.fold[open] { padding-bottom: 16px; }
+/* Euphoria summary chips: colour by level (same colours as the meter bar) */
+details.fold .fold-chips { gap: 8px; }
+.euchip { display: inline-grid; grid-template-columns: auto auto; grid-template-rows: auto auto auto; column-gap: 10px; align-items: baseline;
+  min-width: 118px; padding: 7px 12px 8px; border-radius: 10px; border: 1px solid var(--hair); background: var(--surface-2); }
+.euchip .nm { grid-column: 1 / 3; font-size: 12.5px; color: var(--ink-2); font-weight: 500; }
+.euchip .sc { font-size: 22px; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.euchip .lv { font-size: 13px; font-weight: 600; }
+.euchip .mini { grid-column: 1 / 3; height: 4px; margin-top: 5px; border-radius: 2px; background: var(--grid); overflow: hidden; }
+.euchip .mini b { display: block; height: 100%; border-radius: 2px; background: var(--axis); }
+.euchip.lv-calm { border-color: #9fc9b4; background: rgba(27, 175, 122, 0.08); }
+.euchip.lv-calm .sc, .euchip.lv-calm .lv { color: #16805a; } .euchip.lv-calm .mini b { background: #1baf7a; }
+.euchip.lv-warm { border-color: #e9c46a; background: rgba(233, 196, 106, 0.16); }
+.euchip.lv-warm .sc, .euchip.lv-warm .lv { color: #9a6a00; } .euchip.lv-warm .mini b { background: #e0a800; }
+.euchip.lv-hot { border-color: #eb6834; background: rgba(235, 104, 52, 0.12); }
+.euchip.lv-hot .sc, .euchip.lv-hot .lv { color: #c2410c; } .euchip.lv-hot .mini b { background: #eb6834; }
+.euchip.lv-euphoric { border-color: #b42323; background: rgba(180, 35, 35, 0.12); }
+.euchip.lv-euphoric .sc, .euchip.lv-euphoric .lv { color: #b42323; } .euchip.lv-euphoric .mini b { background: #b42323; }
+.euchip.lv-nodata .sc, .euchip.lv-nodata .lv { color: var(--muted); }
+[data-theme="dark"] .euchip.lv-calm .sc, [data-theme="dark"] .euchip.lv-calm .lv { color: #4fd1a1; }
+[data-theme="dark"] .euchip.lv-warm .sc, [data-theme="dark"] .euchip.lv-warm .lv { color: #f2c94c; }
+[data-theme="dark"] .euchip.lv-hot .sc, [data-theme="dark"] .euchip.lv-hot .lv { color: #ff8a5c; }
+[data-theme="dark"] .euchip.lv-euphoric .sc, [data-theme="dark"] .euchip.lv-euphoric .lv { color: #ff6b6b; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .euchip.lv-calm .sc, :root:not([data-theme="light"]) .euchip.lv-calm .lv { color: #4fd1a1; }
+  :root:not([data-theme="light"]) .euchip.lv-warm .sc, :root:not([data-theme="light"]) .euchip.lv-warm .lv { color: #f2c94c; }
+  :root:not([data-theme="light"]) .euchip.lv-hot .sc, :root:not([data-theme="light"]) .euchip.lv-hot .lv { color: #ff8a5c; }
+  :root:not([data-theme="light"]) .euchip.lv-euphoric .sc, :root:not([data-theme="light"]) .euchip.lv-euphoric .lv { color: #ff6b6b; }
+}
+@media (max-width: 600px) { .euchip { min-width: calc(50% - 6px); } }
+details.fold .fold-chips { flex: 1 1 100%; } .euchip { flex: 1 1 130px; }
