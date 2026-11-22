@@ -63,7 +63,13 @@ def hourly(db, force=False):
     nw = step("news", news.collect, st) or {"items": [], "sentiment": {}}
     fii = step("FII flows", lambda: macro.fii_summary(hist.get("fii", {}), sources.nse_fii()), st) or {"sum5": None}
     hist["fii"] = fii.get("days", hist.get("fii", {}))
-    mac = step("macro", lambda: macro.build(candles, fred, nw, fii), st) or {}
+    tv = step("TradingView", lambda: sources.tradingview([C.IN10Y_TV]), st) or {}
+    in_tv = tv.get(C.IN10Y_TV)
+    today_ist = datetime.now(IST).strftime("%Y-%m-%d")
+    if in_tv and in_tv.get("close") is not None:
+        hist.setdefault("in10y", {})[today_ist] = round(float(in_tv["close"]), 3)
+    hist["in10y"] = {k: v for k, v in sorted(hist.get("in10y", {}).items())[-400:]}
+    mac = step("macro", lambda: macro.build(candles, fred, nw, fii, {"tv": in_tv, "daily": hist.get("in10y")}), st) or {}
     mac["_news"] = nw.get("sentiment", {})
     fl = step("money flow", lambda: flows.analyse(candles, mac, hist), st) or {"assets": []}
     fit = {a["key"]: a["fit"] for a in fl.get("assets", [])}

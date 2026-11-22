@@ -43,7 +43,11 @@ FRED = {
     "DFF": "Fed funds effective", "BAMLH0A0HYM2": "US high-yield credit spread",
     "CPIAUCSL": "US CPI", "PCEPILFE": "US core PCE", "UNRATE": "US unemployment",
     "WALCL": "Fed balance sheet", "T10YIE": "10Y breakeven inflation",
+    "INDIRLTLT01STM": "India 10Y yield (monthly, OECD)",
 }
+
+# India 10Y government bond yield: TradingView (daily, his choice 22 Nov 2026), FRED monthly as the backup
+IN10Y_TV = "TVC:IN10Y"
 
 # Central bank calendar (decision on the last day). Update each year.
 FOMC = ["2026-12-09", "2027-01-27", "2027-03-17", "2027-04-28", "2027-06-09",

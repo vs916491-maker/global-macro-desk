@@ -138,6 +138,36 @@ def fred_many(ids, days: int = 800) -> dict[str, pd.Series]:
     return out
 
 
+# ====================================================================== TradingView (unofficial scanner, delayed quotes)
+TV_COLS = ["close", "change_abs", "change", "Perf.1M", "Perf.3M", "Perf.Y", "description"]
+
+
+def tradingview(tickers: list[str]) -> dict[str, dict]:
+    """Latest values for TradingView symbols such as TVC:IN10Y (India 10Y yield). Empty dict on failure."""
+    body = {"symbols": {"tickers": tickers, "query": {"types": []}}, "columns": TV_COLS}
+    hdr = {"User-Agent": UA, "Origin": "https://in.tradingview.com", "Referer": "https://in.tradingview.com/",
+           "Content-Type": "application/json"}
+    last = None
+    for market in ("global", "bond", "cfd"):
+        try:
+            r = requests.post(f"https://scanner.tradingview.com/{market}/scan", json=body, headers=hdr, timeout=20)
+            if r.status_code != 200:
+                last = f"{market}: HTTP {r.status_code}"
+                continue
+            out = {}
+            for row in r.json().get("data", []):
+                d = dict(zip(TV_COLS, row.get("d", [])))
+                if d.get("close") is not None:
+                    out[row["s"]] = d
+            if out:
+                return out
+            last = f"{market}: no data"
+        except Exception as e:  # noqa: BLE001
+            last = f"{market}: {str(e)[:80]}"
+    problem(f"TradingView {', '.join(tickers)}: {last}")
+    return {}
+
+
 # ====================================================================== crypto
 CG = "https://api.coingecko.com/api/v3"
 

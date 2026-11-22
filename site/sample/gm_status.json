@@ -1,19 +1,19 @@
 {
  "hourly": {
-  "at": "2026-11-22T16:42:08+00:00",
+  "at": "2026-11-22T17:13:25+00:00",
   "record_crypto": {
    "open": 0,
    "closed_now": 0,
    "filled_now": 0,
-   "logged_now": 3,
-   "at": "2026-11-22T16:42:23+00:00"
+   "logged_now": 4,
+   "at": "2026-11-22T17:13:41+00:00"
   },
   "record_commod": {
    "open": 0,
    "closed_now": 0,
    "filled_now": 0,
-   "logged_now": 0,
-   "at": "2026-11-22T16:42:23+00:00"
+   "logged_now": 1,
+   "at": "2026-11-22T17:13:41+00:00"
   },
   "problems": [
    "CFTC 088691: HTTPSConnectionPool(host='publicreporting.cftc.gov', port=443): Max retries exceeded with url: /resource/6dca-aqww.json?",
@@ -21,39 +21,39 @@
    "CFTC 085692: HTTPSConnectionPool(host='publicreporting.cftc.gov', port=443): Max retries exceeded with url: /resource/6dca-aqww.json?",
    "CFTC 13874A: HTTPSConnectionPool(host='publicreporting.cftc.gov', port=443): Max retries exceeded with url: /resource/6dca-aqww.json?"
   ],
-  "finished": "2026-11-22T16:42:23+00:00",
+  "finished": "2026-11-22T17:13:41+00:00",
   "counts": {
-   "quotes": 25,
+   "quotes": 26,
    "news": 136,
    "coins": 13,
    "ideas_crypto": {
     "swing": 2,
-    "positional": 2
+    "positional": 3
    },
    "ideas_commod": {
-    "swing": 0,
+    "swing": 1,
     "positional": 0
    }
   }
  },
  "us": {
-  "at": "2026-11-22T16:42:23+00:00",
+  "at": "2026-11-22T17:13:41+00:00",
   "record_us": {
    "open": 0,
    "closed_now": 0,
    "filled_now": 0,
    "logged_now": 19,
-   "at": "2026-11-22T16:42:37+00:00"
+   "at": "2026-11-22T17:13:54+00:00"
   },
   "counts": {
    "universe": 320,
-   "scanned": 318,
+   "scanned": 319,
    "ideas": {
-    "swing": 27,
-    "positional": 33
+    "swing": 26,
+    "positional": 30
    }
   },
   "problems": [],
-  "finished": "2026-11-22T16:42:37+00:00"
+  "finished": "2026-11-22T17:13:54+00:00"
  }
 }

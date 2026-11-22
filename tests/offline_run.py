@@ -41,9 +41,9 @@ def fake(symbol, interval="1d", rng_s="2y"):
 def fake_fred(sid, days=800):
     idx = pd.date_range(end=pd.Timestamp.now().normalize(), periods=600, freq="D")
     base = {"DGS10": 4.1, "DGS2": 3.6, "T10Y2Y": 0.5, "DFII10": 1.8, "DFEDTARU": 4.0, "DFF": 3.9,
-            "BAMLH0A0HYM2": 3.0, "CPIAUCSL": 320, "PCEPILFE": 125, "UNRATE": 4.3, "WALCL": 6.6e6, "T10YIE": 2.3}[sid]
+            "BAMLH0A0HYM2": 3.0, "CPIAUCSL": 320, "PCEPILFE": 125, "UNRATE": 4.3, "WALCL": 6.6e6, "T10YIE": 2.3, "INDIRLTLT01STM": 6.5}[sid]
     s = pd.Series(base + np.cumsum(rng.normal(0, base * 0.002, 600)), index=idx)
-    if sid in ("CPIAUCSL", "PCEPILFE", "UNRATE"):
+    if sid in ("CPIAUCSL", "PCEPILFE", "UNRATE", "INDIRLTLT01STM"):
         s = s.resample("MS").last()
     return s
 
@@ -80,6 +80,7 @@ sources.coingecko = fake_cg
 sources.fear_greed = lambda days=60: [{"date": (datetime.now() - timedelta(days=i)).strftime("%Y-%m-%d"), "value": int(40 + 20 * np.sin(i / 5)),
                                        "label": "Neutral"} for i in range(days)]
 sources.rss = fake_rss
+sources.tradingview = lambda t: {"TVC:IN10Y": {"close": 6.52, "change_abs": -0.02, "change": -0.3, "Perf.1M": -1.2, "Perf.3M": 2.0}}
 sources.nse_fii = lambda: [{"cat": "FII", "date": "21-Nov-2026", "net": -2310.5}, {"cat": "DII", "date": "21-Nov-2026", "net": 3120.2}]
 sources.us_universe = lambda: [{"symbol": s, "name": s + " Inc", "sector": ["Information Technology", "Financials", "Energy", "Health Care"][i % 4],
                                 "index": "S&P 500"} for i, s in enumerate([f"T{i:03d}" for i in range(320)])]

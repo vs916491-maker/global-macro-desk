@@ -43,6 +43,31 @@ def quote_row(df: pd.DataFrame, label: str, unit: str, scale_yield=False) -> dic
     return row
 
 
+def in10y_row(tv: dict, monthly: pd.Series, daily: dict) -> dict | None:
+    """India 10Y G-Sec yield card: TradingView value now, history = stored daily values (+ FRED monthly before)."""
+    s = monthly.copy() if monthly is not None else pd.Series(dtype=float)
+    if daily:
+        d = pd.Series({pd.Timestamp(k): v for k, v in daily.items() if v is not None}, dtype=float)
+        s = pd.concat([s[s.index < d.index.min()] if not d.empty else s, d]).sort_index()
+    s = s[~s.index.duplicated(keep="last")].dropna()
+    if tv and tv.get("close") is not None:
+        last = float(tv["close"])
+        p1 = tv.get("Perf.1M")
+        m1 = round(last - last / (1 + p1 / 100), 3) if p1 not in (None, -100) else _num(ta.chg(s, 30), 3)
+        p3 = tv.get("Perf.3M")
+        m3 = round(last - last / (1 + p3 / 100), 3) if p3 not in (None, -100) else _num(ta.chg(s, 91), 3)
+        src, d1 = "TradingView TVC:IN10Y", _num(tv.get("change_abs"), 3)
+        asof = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    elif not s.empty:
+        last, d1, m1, m3 = float(s.iloc[-1]), None, _num(ta.chg(s, 31), 3), _num(ta.chg(s, 92), 3)
+        src, asof = "FRED / OECD monthly (TradingView not answering)", s.index[-1].strftime("%Y-%m-%d")
+    else:
+        return None
+    return {"label": "India 10Y G-Sec yield", "unit": "%", "last": round(last, 3), "d1": d1, "w1": None, "m1": m1, "m3": m3,
+            "y1": _num(ta.chg(s, 365), 3) if not s.empty else None, "spark": [round(float(x), 3) for x in s.tail(90)],
+            "is_yield": True, "asof": asof, "source": src}
+
+
 def fred_row(s: pd.Series, label: str) -> dict | None:
     if s.empty:
         return None
@@ -89,12 +114,17 @@ def fmt_pct(v, d=1):
     return "–" if v is None else f"{v:+.{d}f}%"
 
 
-def build(candles: dict[str, pd.DataFrame], fred: dict[str, pd.Series], news: dict, fii: dict) -> dict:
+def build(candles: dict[str, pd.DataFrame], fred: dict[str, pd.Series], news: dict, fii: dict,
+          in10y: dict | None = None) -> dict:
     q = {}
     for k, (sym, label, unit) in C.MACRO.items():
         df = candles.get(sym)
         if df is not None and len(df) > 5:
             q[k] = quote_row(df, label, unit, scale_yield=unit == "%")
+    if in10y is not None:
+        r = in10y_row(in10y.get("tv"), fred.get("INDIRLTLT01STM"), in10y.get("daily"))
+        if r:
+            q["in10y"] = r
     fr = {k: fred_row(fred.get(k, pd.Series(dtype=float)), lbl) for k, lbl in C.FRED.items()}
     fr = {k: v for k, v in fr.items() if v}
     # stand-ins from Yahoo when FRED is not answering

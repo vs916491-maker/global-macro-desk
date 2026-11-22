@@ -351,9 +351,9 @@ function assetHistory(fl) {
 // ------------------------------------------------------------------ tab: global macro
 const QGROUPS = [
   ["United States", ["spx", "ndx", "dji", "rut", "vix"]],
-  ["India", ["nifty", "bnf", "ivix", "usdinr"]],
-  ["Rates and dollar", ["us10y", "us2y", "us5y", "us30y", "us3m", "dxy", "tlt", "hyg", "ief"]],
-  ["Commodities and crypto", ["gold", "silver", "copper", "brent", "wti", "btc", "eth"]],
+  ["India", ["nifty", "bnf", "ivix"]],
+  ["Key Drivers", ["us10y", "walcl", "usdinr", "in10y", "brent", "dxy"]],
+  ["Commodities and crypto", ["gold", "silver", "copper", "wti", "btc", "eth"]],
 ];
 function quoteCard(k, q) {
   const y = q.is_yield;
@@ -361,7 +361,17 @@ function quoteCard(k, q) {
   const ch = (v) => (y ? (isNum(v) ? `${v > 0 ? "+" : ""}${Math.round(v * 100)} bp` : "–") : pct(v, 1));
   return h("div", { class: "qcard" }, h("div", { class: "k" }, q.label), h("div", { class: "v" }, val),
     h("div", { class: "d" }, h("span", { class: sign(q.d1) }, `1d ${ch(q.d1)}`), " · ", h("span", { class: sign(q.m1) }, `1m ${ch(q.m1)}`)),
-    spark(q.spark, 150, 28));
+    spark(q.spark, 150, 28), q.source ? h("div", { class: "src" }, `${q.source}, ${q.asof}`) : null);
+}
+function walclCard(w) {
+  if (!w || !(w.spark || []).length) return null;
+  const sp = w.spark, last = sp[sp.length - 1];
+  const chg = (n) => (sp.length > n ? ((last / sp[sp.length - 1 - n] - 1) * 100) : null);
+  const m1 = chg(4), m3 = chg(13);
+  return h("div", { class: "qcard" }, h("div", { class: "k" }, "Fed balance sheet (QE / QT)"),
+    h("div", { class: "v" }, `$${(last / 1e6).toFixed(2)} tn`),
+    h("div", { class: "d" }, h("span", { class: sign(m1) }, `1m ${pct(m1, 2)}`), " · ", h("span", { class: sign(m3) }, `3m ${pct(m3, 2)}`)),
+    spark(sp, 150, 28), h("div", { class: "src" }, `weekly, as of ${w.date} · rising = money added`));
 }
 function partsTable(parts) {
   return scroll(h("table", { class: "factors" },
@@ -398,7 +408,8 @@ async function viewMacro(app) {
     euphoriaSection(eu),
     fold("means", "What it means", "Plain-words rules on what moved in the last month and how it usually affects each asset class",
       panel(h("ul", { class: "interp" }, (d.interpret || []).map((x) => h("li", { class: x.tone > 0 ? "pos" : x.tone < 0 ? "neg" : "" }, x.text))))),
-    QGROUPS.map(([g, keys]) => fold(`q-${g}`, g, null, h("div", { class: "qgrid" }, keys.filter((k) => q[k]).map((k) => quoteCard(k, q[k]))))),
+    QGROUPS.map(([g, keys]) => fold(`q-${g}`, g, g === "Key Drivers" ? "What moves money between asset classes" : null,
+      h("div", { class: "qgrid" }, keys.map((k) => (k === "walcl" ? walclCard(f.WALCL) : q[k] ? quoteCard(k, q[k]) : null)).filter(Boolean)))),
     fold("fed", "Fed, rates and inflation", "From FRED (St. Louis Fed); daily series lag one day, monthly ones a few weeks",
       h("div", { class: "grid2" },
         panel(scroll(h("table", null, h("thead", null, h("tr", null, ["Series", "Now", "1m", "3m", "1y", "As of"].map((c, i) => h("th", { class: i === 0 ? "l" : null }, c)))),
