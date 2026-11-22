@@ -242,7 +242,7 @@ function ideasBlock(v, interval, emptyText) {
 const QGROUPS = [
   ["United States", ["spx", "ndx", "dji", "rut", "vix"]],
   ["India", ["nifty", "bnf", "ivix", "usdinr"]],
-  ["Rates and dollar", ["us10y", "us5y", "us30y", "us3m", "dxy", "tlt"]],
+  ["Rates and dollar", ["us10y", "us2y", "us5y", "us30y", "us3m", "dxy", "tlt", "hyg", "ief"]],
   ["Commodities and crypto", ["gold", "silver", "copper", "brent", "wti", "btc", "eth"]],
 ];
 function quoteCard(k, q) {
@@ -271,7 +271,7 @@ async function viewMacro(app) {
   const extra = [
     dv.cpi_yoy != null && ["US CPI inflation (a year)", `${dv.cpi_yoy}%`, `${dv.cpi_yoy_3m_ago}% three months ago`],
     dv.core_pce_yoy != null && ["US core PCE (Fed's gauge)", `${dv.core_pce_yoy}%`, `${dv.core_pce_3m_ago}% three months ago`],
-    dv.two_minus_ff != null && ["2Y yield minus Fed funds", `${dv.two_minus_ff > 0 ? "+" : ""}${dv.two_minus_ff} pp`, dv.two_minus_ff < -0.25 ? "market expects cuts" : dv.two_minus_ff > 0.25 ? "market expects hikes" : "no big change priced"],
+    dv.two_minus_ff != null && [dv.two_minus_ff_proxy ? "2Y yield minus 3-month bill" : "2Y yield minus Fed funds", `${dv.two_minus_ff > 0 ? "+" : ""}${dv.two_minus_ff} pp`, dv.two_minus_ff < -0.25 ? "market expects cuts" : dv.two_minus_ff > 0.25 ? "market expects hikes" : "no big change priced"],
     dv.walcl_tn != null && ["Fed balance sheet", `$${dv.walcl_tn} tn`, `${dv.walcl_3m_pct > 0 ? "+" : ""}${dv.walcl_3m_pct}% in 3 months`],
     dv.au_ag != null && ["Gold / silver ratio", fmt(dv.au_ag, 1), "ounces of silver per ounce of gold"],
   ].filter(Boolean);

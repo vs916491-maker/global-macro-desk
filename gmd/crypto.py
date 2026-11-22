@@ -12,13 +12,13 @@ from . import setups, sources, ta
 
 
 def universe() -> tuple[list[dict], dict, list[str]]:
-    mk = sources.coingecko("/coins/markets", {"vs_currency": "usd", "order": "market_cap_desc", "per_page": 120,
+    mk = sources.coingecko("/coins/markets", {"vs_currency": "usd", "order": "market_cap_desc", "per_page": 150,
                                              "page": 1, "price_change_percentage": "24h,7d,30d"}) or []
     coins = []
     for c in mk:
         sym = str(c.get("symbol", "")).lower()
         name = str(c.get("name", ""))
-        if sym in C.STABLES or any(w in name.lower() for w in C.SKIP_COIN_WORDS):
+        if sym in C.STABLES or sym in C.SKIP_COINS or any(w in name.lower() for w in C.SKIP_COIN_WORDS):
             continue
         if (c.get("current_price") or 0) and 0.97 < c["current_price"] < 1.03 and abs(c.get("price_change_percentage_30d_in_currency") or 0) < 2:
             continue                                   # an unlisted stablecoin
@@ -58,6 +58,8 @@ def analyse(fit: float, hist: dict) -> tuple[dict, dict]:
         if dd is None or len(dd) < 60:
             continue
         dd = ta.complete_daily(dd, "crypto")
+        if dd.Close.pct_change().tail(60).std() * 100 < C.MIN_COIN_VOL:
+            continue                                   # stable-like (tokenized fund, gold token)
         h4 = ta.resample(hourly[c["yahoo"]], "4h") if c["yahoo"] in hourly else pd.DataFrame()
         prep[c["sym"]] = (dd, h4)
         r90[c["sym"]] = ta.ret(dd.Close, 90)

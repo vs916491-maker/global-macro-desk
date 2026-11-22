@@ -99,9 +99,20 @@ def yahoo_many(symbols: list[str], interval="1d", rng="2y", workers=8, gap=0.05)
 
 # ====================================================================== FRED (St. Louis Fed)
 def fred(series: str) -> pd.Series:
+    """FRED series. Uses the free FRED API when the FRED_API_KEY secret is set, else the public CSV."""
+    import os
+    key = os.environ.get("FRED_API_KEY")
     try:
-        r = _get("https://fred.stlouisfed.org/graph/fredgraph.csv", {"id": series}, timeout=30)
-        df = pd.read_csv(io.StringIO(r.text))
+        if key:
+            j = _get("https://api.stlouisfed.org/fred/series/observations",
+                     {"series_id": series, "api_key": key, "file_type": "json",
+                      "observation_start": (pd.Timestamp.now() - pd.Timedelta(days=800)).strftime("%Y-%m-%d")}, timeout=40).json()
+            df = pd.DataFrame([(o["date"], o["value"]) for o in j.get("observations", [])], columns=["date", "v"])
+        else:
+            start = (pd.Timestamp.now() - pd.Timedelta(days=800)).strftime("%Y-%m-%d")
+            r = _get("https://fred.stlouisfed.org/graph/fredgraph.csv", {"id": series, "cosd": start}, timeout=45,
+                     headers={"Accept": "text/csv,*/*", "User-Agent": "Mozilla/5.0 (compatible; macro-desk/1.0)"})
+            df = pd.read_csv(io.StringIO(r.text))
         df.columns = ["date", "v"]
         df["v"] = pd.to_numeric(df["v"], errors="coerce")
         s = df.dropna().set_index(pd.to_datetime(df.dropna()["date"]))["v"]
@@ -112,8 +123,13 @@ def fred(series: str) -> pd.Series:
 
 
 def fred_many(ids) -> dict[str, pd.Series]:
-    with ThreadPoolExecutor(6) as ex:
-        return dict(zip(ids, ex.map(fred, ids)))
+    out = {}
+    for i, sid in enumerate(ids):
+        out[sid] = fred(sid)
+        if i == 1 and out[ids[0]].empty and out[sid].empty:
+            problem("FRED not answering: skipped the rest (Yahoo stand-ins used for yields and credit)")
+            break
+    return out
 
 
 # ====================================================================== crypto

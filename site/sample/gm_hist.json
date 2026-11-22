@@ -1,17 +1,17 @@
 {
  "days": {
   "2026-11-22": {
-   "global": -23,
-   "india": 47,
+   "global": 34,
+   "india": -10,
    "overall": 12,
    "assets": {
-    "in_eq": 79,
-    "us_eq": 54,
     "fd": 54,
-    "gold": 48,
-    "silver": 40,
-    "crypto": 39,
-    "us_bond": 18
+    "us_eq": 44,
+    "silver": 42,
+    "gold": 41,
+    "in_eq": 36,
+    "crypto": 29,
+    "us_bond": 21
    },
    "btc_dom": 58.2,
    "fng": 40

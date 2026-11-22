@@ -1,54 +1,54 @@
 {
  "hourly": {
-  "at": "2026-11-22T10:34:01+00:00",
+  "at": "2026-11-22T10:41:05+00:00",
   "record_crypto": {
    "open": 0,
    "closed_now": 0,
    "filled_now": 0,
-   "logged_now": 0,
-   "at": "2026-11-22T10:34:02+00:00"
+   "logged_now": 1,
+   "at": "2026-11-22T10:41:06+00:00"
   },
   "record_commod": {
    "open": 0,
    "closed_now": 0,
    "filled_now": 0,
-   "logged_now": 0,
-   "at": "2026-11-22T10:34:02+00:00"
+   "logged_now": 1,
+   "at": "2026-11-22T10:41:06+00:00"
   },
   "problems": [],
-  "finished": "2026-11-22T10:34:02+00:00",
+  "finished": "2026-11-22T10:41:06+00:00",
   "counts": {
-   "quotes": 22,
-   "news": 144,
+   "quotes": 25,
+   "news": 136,
    "coins": 13,
    "ideas_crypto": {
     "swing": 0,
-    "positional": 0
+    "positional": 2
    },
    "ideas_commod": {
     "swing": 0,
-    "positional": 0
+    "positional": 1
    }
   }
  },
  "us": {
-  "at": "2026-11-22T10:34:02+00:00",
+  "at": "2026-11-22T10:41:06+00:00",
   "record_us": {
    "open": 0,
    "closed_now": 0,
    "filled_now": 0,
-   "logged_now": 20,
-   "at": "2026-11-22T10:34:14+00:00"
+   "logged_now": 19,
+   "at": "2026-11-22T10:41:20+00:00"
   },
   "counts": {
    "universe": 320,
-   "scanned": 309,
+   "scanned": 315,
    "ideas": {
-    "swing": 24,
-    "positional": 25
+    "swing": 19,
+    "positional": 16
    }
   },
   "problems": [],
-  "finished": "2026-11-22T10:34:14+00:00"
+  "finished": "2026-11-22T10:41:20+00:00"
  }
 }

@@ -21,7 +21,6 @@ FEEDS = [
     ("CNBC Finance", "https://www.cnbc.com/id/10000664/device/rss/rss.html"),
     ("MarketWatch", "https://feeds.content.dowjones.io/public/rss/mw_topstories"),
     ("MarketWatch Pulse", "https://feeds.content.dowjones.io/public/rss/mw_marketpulse"),
-    ("Yahoo Finance", "https://finance.yahoo.com/news/rssindex"),
     ("Federal Reserve", "https://www.federalreserve.gov/feeds/press_all.xml"),
     ("Economic Times", "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms"),
     ("Livemint", "https://www.livemint.com/rss/markets"),

@@ -97,6 +97,20 @@ def build(candles: dict[str, pd.DataFrame], fred: dict[str, pd.Series], news: di
             q[k] = quote_row(df, label, unit, scale_yield=unit == "%")
     fr = {k: fred_row(fred.get(k, pd.Series(dtype=float)), lbl) for k, lbl in C.FRED.items()}
     fr = {k: v for k, v in fr.items() if v}
+    # stand-ins from Yahoo when FRED is not answering
+    if "DGS10" not in fr and "us10y" in q:
+        fr["DGS10"] = {"label": "US 10Y yield (Yahoo)", "last": q["us10y"]["last"], "date": q["us10y"]["asof"],
+                       "m1": q["us10y"]["m1"], "m3": q["us10y"]["m3"], "y1": q["us10y"]["y1"], "spark": q["us10y"]["spark"], "proxy": True}
+    if "DGS2" not in fr and "us2y" in q:
+        fr["DGS2"] = {"label": "US 2Y yield (Yahoo futures)", "last": q["us2y"]["last"], "date": q["us2y"]["asof"],
+                      "m1": q["us2y"]["m1"], "m3": q["us2y"]["m3"], "y1": q["us2y"]["y1"], "spark": q["us2y"]["spark"], "proxy": True}
+    if "T10Y2Y" not in fr and "DGS10" in fr and "DGS2" in fr:
+        c10, c2 = fr["DGS10"]["spark"], fr["DGS2"]["spark"]
+        n = min(len(c10), len(c2))
+        sp = [round(a - b, 3) for a, b in zip(c10[-n:], c2[-n:])]
+        fr["T10Y2Y"] = {"label": "10Y minus 2Y (Yahoo)", "last": round(fr["DGS10"]["last"] - fr["DGS2"]["last"], 3),
+                        "date": fr["DGS10"]["date"], "m1": None, "m3": round(sp[-1] - sp[-64], 3) if n > 64 else None,
+                        "y1": None, "spark": sp, "proxy": True}
 
     # ---------------- derived macro facts
     d = {}
@@ -114,8 +128,13 @@ def build(candles: dict[str, pd.DataFrame], fred: dict[str, pd.Series], news: di
         d["cpi_yoy"], d["cpi_yoy_3m_ago"] = yoy(fred["CPIAUCSL"])
     if fred.get("PCEPILFE") is not None:
         d["core_pce_yoy"], d["core_pce_3m_ago"] = yoy(fred["PCEPILFE"])
+    if d.get("us2y") is None and q.get("us2y"):
+        d["us2y"] = q["us2y"]["last"]
     if d.get("us2y") is not None and d.get("fed_eff") is not None:
         d["two_minus_ff"] = round(d["us2y"] - d["fed_eff"], 2)
+    elif d.get("us2y") is not None and q.get("us3m"):
+        d["two_minus_ff"] = round(d["us2y"] - q["us3m"]["last"], 2)      # 3-month bill as the stand-in for Fed funds
+        d["two_minus_ff_proxy"] = True
     w = fred.get("WALCL", pd.Series(dtype=float))
     if len(w) > 14:
         d["walcl_3m_pct"] = round((w.iloc[-1] / w.iloc[-14] - 1) * 100, 2)
@@ -145,6 +164,12 @@ def build(candles: dict[str, pd.DataFrame], fred: dict[str, pd.Series], news: di
         sc = ta.clamp(sc - (0.5 if hy["last"] > 5 else 0) + (0.2 if hy["last"] < 3.2 else 0))
         gp.append(part("credit", "US high-yield credit spread", f"{hy['last']:.2f}% ({(hy['m1'] or 0):+.2f} in 1m)", sc,
                        "Narrowing spreads = lenders relaxed (risk-on); widening = credit stress"))
+    elif C.MACRO["hyg"][0] in candles and C.MACRO["ief"][0] in candles:
+        ratio = (candles[C.MACRO["hyg"][0]].Close / candles[C.MACRO["ief"][0]].Close).dropna()
+        m1 = ta.ret(ratio, 30)
+        d["hyg_ief_m1"] = _num(m1)
+        gp.append(part("credit", "Credit (junk bonds vs Treasuries, HYG/IEF)", f"{fmt_pct(m1)} in 1m (FRED spread not available)",
+                       ta.lin(m1, C.CREDIT_PROXY_FULL_PCT), "Junk bonds lagging Treasuries = credit stress (stand-in for the spread)"))
     else:
         gp.append(part("credit", "US high-yield credit spread", "–", None, "no data"))
     spx = q.get("spx")
@@ -259,12 +284,13 @@ def interpret(q, fr, d, fii) -> list[dict]:
             add(0, f"Yield curve steepening ({cv['last']:+.2f} pp, {cv['m3']:+.2f} in 3 months): watch whether it is growth (good) or long-end inflation fear (bad).", ["us_bond"])
     if d.get("two_minus_ff") is not None:
         t = d["two_minus_ff"]
+        ref = "the 3-month bill" if d.get("two_minus_ff_proxy") else "Fed funds"
         if t <= -0.4:
-            add(1, f"US 2Y yield is {abs(t):.2f} pp below Fed funds: the market is pricing rate cuts ahead.", ["us_eq", "gold", "crypto"])
+            add(1, f"US 2Y yield is {abs(t):.2f} pp below {ref}: the market is pricing rate cuts ahead.", ["us_eq", "gold", "crypto"])
         elif t >= 0.25:
-            add(-1, f"US 2Y yield is {t:.2f} pp above Fed funds: the market is pricing rate hikes.", ["us_eq", "gold", "crypto"])
+            add(-1, f"US 2Y yield is {t:.2f} pp above {ref}: the market is pricing rate hikes.", ["us_eq", "gold", "crypto"])
         else:
-            add(0, f"US 2Y yield is close to Fed funds ({t:+.2f} pp): no big rate change priced soon.", ["us_bond"])
+            add(0, f"US 2Y yield is close to {ref} ({t:+.2f} pp): no big rate change priced soon.", ["us_bond"])
     if d.get("cpi_yoy") is not None:
         rising = d["cpi_yoy"] > (d.get("cpi_yoy_3m_ago") or d["cpi_yoy"]) + 0.2
         falling = d["cpi_yoy"] < (d.get("cpi_yoy_3m_ago") or d["cpi_yoy"]) - 0.2

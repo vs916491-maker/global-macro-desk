@@ -23,6 +23,9 @@ MACRO = {
     "us5y":   ("^FVX", "US 5Y yield", "%"),
     "us30y":  ("^TYX", "US 30Y yield", "%"),
     "us3m":   ("^IRX", "US 3M bill", "%"),
+    "us2y":   ("2YY=F", "US 2Y yield (futures)", "%"),
+    "hyg":    ("HYG", "High-yield bond ETF (HYG)", "$"),
+    "ief":    ("IEF", "7-10Y Treasury ETF (IEF)", "$"),
     "brent":  ("BZ=F", "Brent crude", "$"),
     "wti":    ("CL=F", "WTI crude", "$"),
     "gold":   ("GC=F", "Gold (COMEX)", "$/oz"),
@@ -56,6 +59,7 @@ IVIX_ZONES = [(12, 1.0), (15, 0.5), (18, 0.0), (22, -0.5), (999, -1.0)]
 DXY_FULL_PCT = 2.5          # 1-month DXY move that scores the full -1/+1
 YIELD_FULL_BP = 40          # 1-month 10Y move (bp)
 CREDIT_FULL_PP = 0.5        # 1-month HY spread move (percentage points)
+CREDIT_PROXY_FULL_PCT = 3.0 # stand-in when FRED is down: 1-month HYG/IEF move
 INR_FULL_PCT = 1.5          # 1-month USD-INR move
 CRUDE_FULL_PCT = 12         # 1-month Brent move
 CU_AU_FULL_PCT = 8          # 1-month copper/gold ratio move
@@ -83,7 +87,10 @@ FLOW_MOM_W = 0.55           # asset score = 55% momentum/flow + 45% macro fit
 CRYPTO_TOP = 50
 STABLES = {"usdt", "usdc", "dai", "fdusd", "tusd", "usde", "usds", "pyusd", "usdd", "busd", "frax", "usd1",
            "rlusd", "susde", "usdtb", "bfusd", "usdf", "gho", "lusd", "eurc", "usdg", "usd0", "buidl", "usyc"}
-SKIP_COIN_WORDS = ("wrapped", "staked", "bridged", "liquid staking", " restaked", "wbtc", "steth", "tokenized")
+SKIP_COIN_WORDS = ("wrapped", "staked", "bridged", "liquid staking", " restaked", "wbtc", "steth", "tokenized",
+                   "heloc", "treasur", "gold", "euro", " fund", "yield", "usd")
+SKIP_COINS = {"xaut", "paxg", "usdy", "ousg", "figr_heloc", "eursafo", "syrupusdc", "buidl", "usyc"}
+MIN_COIN_VOL = 1.0          # coins whose daily moves average under 1% (stable-like assets) are left out
 YAHOO_COIN = {"sui": "SUI20947-USD", "uni": "UNI7083-USD", "ton": "TON11419-USD", "apt": "APT21794-USD",
               "pepe": "PEPE24478-USD", "hype": "HYPE32196-USD", "tao": "TAO22974-USD", "arb": "ARB11841-USD",
               "op": "OP-USD", "near": "NEAR-USD", "icp": "ICP-USD", "ena": "ENA-USD", "wld": "WLD-USD",
