@@ -680,6 +680,7 @@ function viewReadme(app) {
       li("Only completed candles are used for ideas: the last 4-hour or daily candle still forming is ignored.")),
     blk("Global macro tab: asset-class cards and history",
       li("Cards for US equity, Indian equity, US bonds, gold, silver and crypto show the Money flow score rescaled to −100 (bearish) … +100 (bullish): (score − 50) × 2. Bullish = Overweight (score 62+), Bearish = Underweight (below 45)."),
+      li("Key Drivers: US 10Y yield, Fed balance sheet (weekly; rising = QE / money added, falling = QT), USD/INR, India 10Y G-Sec yield (TradingView TVC:IN10Y, delayed; backup = official monthly figure from FRED/OECD), Brent crude, dollar index."),
       li("Score history: one line per asset class, daily (last run of the day). Days before 22 Nov 2026 were rebuilt from past prices and Fed data with the same rules, without news and FII flows. Tap a name to hide or show its line.")),
     blk("Global and India risk appetite (−100 risk-off … +100 risk-on)",
       li("Global: US VIX 20 (below 14 = +1, 14–18 = +0.5, 18–22 = 0, 22–28 = −0.5, above = −1, ±0.25 for falling/rising vs its 20-day average), high-yield credit spread 15, S&P 500 trend 15, dollar index 1-month move 15 (−2.5% = +1), US 10Y 1-month move 10 (−40 bp = +1), yield curve 5, copper/gold 1-month 10, news tone 10."),

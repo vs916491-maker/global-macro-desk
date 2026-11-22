@@ -33,6 +33,8 @@ Built 22 Nov 2026. Sister sites: F&O Desk (`fno-desk`), Sector Strength, NSE Fun
 ## Global macro tab layout (his request, 22 Nov 2026)
 - Top: separate cards for US equity, Indian equity, US bonds, gold, silver, crypto = Money flow score rescaled (score − 50) × 2 (his choice; Global/India/Overall cards replaced — their parts tables stay lower down, titled with the score). Gold and silver separate.
 - Score history right below: one line per asset class, tap legend buttons to hide/show, 3m/6m/1y. 12 months rebuilt by `gmd/backfill.py` (workflow `backfill.yml`, one-off, never overwrites live days; no news/FII for past days).
+- **Key Drivers** section (his request; replaced "Rates and dollar"): US 10Y, Fed balance sheet (QE/QT, FRED WALCL weekly), USD/INR, India 10Y G-Sec (TradingView scanner `TVC:IN10Y`, his choice; daily values stored in `gm_hist.in10y`, FRED `INDIRLTLT01STM` monthly as backup and older history), Brent, DXY. Brent and USD/INR shown only here. Other rate cards (2Y/5Y/30Y/3M/TLT/HYG/IEF) removed from display but still used in scores.
+- Every section below the cards folds (remembered per section) + Collapse all / Expand all.
 - Euphoria meter folds away (closed by default, remembers open/closed); alert banners still show above it.
 
 ## Euphoria meter (`gmd/euphoria.py`, added 22 Nov 2026 at his request: "don't get carried away by created euphoria", his Jan 2025 crypto example)
