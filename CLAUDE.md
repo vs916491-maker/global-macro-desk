@@ -20,6 +20,7 @@ Built 22 Nov 2026. Sister sites: F&O Desk (`fno-desk`), Sector Strength, NSE Fun
 | Commodities | `gm_commod` | hourly |
 | US equity | `gm_us` (+ `gm_us_universe` cached stock list) | daily after US close |
 | Track record | table `gm_ideas` | both |
+| Euphoria meter (on Global macro; tags on Money flow, Crypto, Commodities) | `gm_euphoria` | hourly |
 | (status) | `gm_status` (per job: time, problems, counts), `gm_hist` (daily scores, FII days, BTC dominance; 400 days) | |
 
 ## Rules in brief (all numbers in `gmd/config.py`; site Readme tab has the full text — **update `viewReadme` in site/app.js when a rule changes**)
@@ -28,6 +29,12 @@ Built 22 Nov 2026. Sister sites: F&O Desk (`fno-desk`), Sector Strength, NSE Fun
 - Setups (`gmd/setups.py`): base breakout, trend pullback, momentum leader (positional); shorts = mirrors (commodities only). Score: trend 25, momentum 20, setup 25, volume 10, macro 20; −5 against the higher timeframe. Swing: 4h (crypto, commodities) / daily (US), 1:2, 14 days. Positional: daily, 1:3, 90 days. Ideas ≥ 50 logged.
 - Track record: fill at next candle open; stop/target on highs/lows; both in one candle = "unclear" (excluded); gaps exit at the open; time exit at the last close before the limit.
 - Central bank dates in `config.FOMC` / `config.RBI_MPC` (2027 FOMC revised 12 Nov 2026: last meeting Nov 16–17, Oct 26–27 strategy only). Add new years when published.
+
+## Euphoria meter (`gmd/euphoria.py`, added 22 Nov 2026 at his request: "don't get carried away by created euphoria", his Jan 2025 crypto example)
+- His choices: **warning only** (never changes scores, ideas or the mix); Euphoria meter only (no Panic meter); CFTC positioning yes; backtest first.
+- 0-100 = price stretch 40 (gap above 200-day and 30-day gain as 5-year percentiles, weekly RSI 60-80) + crowd mood 20 (crypto F&G 7-day avg; VIX / India VIX low) + large speculators 20 (CFTC legacy non-commercial net % OI, 3-year percentile; gold 088691, silver 084691, copper 085692, S&P 13874A; **not BTC**: CME BTC speculators are basis trades) + breadth 10 (live) + news flood 10 (live, after 20 days of `gm_hist.days[*].news`). Calm <40, Warm 40-60, Hot 60-80, Euphoric 80+.
+- Backtest (`tests/euphoria_backtest.py`, workflow `euphoria-test.yml`, results branch `euphoria-test-out`): euphoria alone is momentum (prices often rose 10-40% more). Worked: crypto Hot then close below the 50-day (lower 90 days later 70%, 25%+ drop 41%; e.g. 27 Dec 2024, 7 Jan 2025); silver at 80+ (lower 90 days later 56%). Not useful: gold, US equity, Nifty (high = strong trend). BTC tops: Nov 2021 58, Mar 2024 67, Dec 2024 62, Jan 2025 57, Oct 2025 35 (missed).
+- Live policy (`POLICY`): crypto = amber "don't chase" at 60+, red "first crack" when 60+ in the last 60 days and close < 50-day; silver/copper = red at 80+; gold/US/India = info only. Alerts add a warning line to crypto and long commodity ideas.
 
 ## Scheduling
 Supabase pg_cron → `dispatch_repo_workflow('global-macro-desk', …)`: `gm-hourly` at :07 every hour, `gm-us-equity` 21:40 UTC Mon–Fri. GitHub cron is a backup; jobs skip if they ran recently (hourly 40 min, US 5 h). The Vault token must include this repo.

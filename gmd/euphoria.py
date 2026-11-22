@@ -211,7 +211,7 @@ def live(hist_doc: dict, news_sent: dict, crypto_doc: dict | None, us_doc: dict 
         if pd.notna(last.wrsi):
             why.append(f"weekly RSI {last.wrsi:.0f}")
         if cot_now:
-            why.append(f"large speculators net {cot_now['net_pct']:+.1f}% of open interest ({cot_now['pctile']}th percentile, 3 years)")
+            why.append(f"large speculators net {cot_now['net_pct']:+.1f}% of open interest (percentile {cot_now['pctile']}/100 over 3 years)")
         why += br[1] + nw[1]
         if mk == "fng" and fng is not None:
             why.append(f"Fear & Greed {int(fng.iloc[-1])} (7-day avg {fng.tail(7).mean():.0f})")
