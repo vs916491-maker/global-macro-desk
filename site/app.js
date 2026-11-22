@@ -238,6 +238,39 @@ function ideasBlock(v, interval, emptyText) {
   return h("div", { class: "ideas" }, ideas.map((x, i) => ideaCard(x, i + 1, interval)));
 }
 
+// ------------------------------------------------------------------ euphoria meter (warning only)
+const EU_CLS = { Calm: "muted", Warm: "", Hot: "neg", Euphoric: "neg" };
+function euTag(e) {
+  if (!e || !isNum(e.score)) return h("span", { class: "muted" }, "–");
+  return h("span", { class: `tag ${EU_CLS[e.level] || ""}`, title: "Euphoria meter 0-100" }, `${Math.round(e.score)} ${e.level}`);
+}
+function euBanner(e, label) {
+  if (!e || !e.alert) return null;
+  return h("div", { class: `eu-banner ${e.alert.level}` }, h("b", null, `${label ? label + ": " : ""}${e.alert.title}`), h("p", null, e.alert.text),
+    e.note ? h("p", { class: "note" }, e.note) : null);
+}
+function euBar(v) {
+  const w = isNum(v) ? Math.max(0, Math.min(100, v)) : 0;
+  return h("div", { class: "eubar" }, h("div", { class: "track" }, h("i"), h("i"), h("i"), h("i")), isNum(v) ? h("div", { class: "marker", style: `left:${w}%` }) : null,
+    h("div", { class: "ends" }, h("span", null, "Calm"), h("span", null, "Warm 40"), h("span", null, "Hot 60"), h("span", null, "Euphoric 80")));
+}
+function euphoriaSection(eu) {
+  if (!eu || !eu.assets) return null;
+  const order = ["crypto", "gold", "silver", "copper", "us_eq", "in_eq"];
+  const P = { stretch: "Price stretch", mood: "Crowd mood", crowd: "Speculators (CFTC)", breadth: "Breadth", news: "News flood" };
+  return section("Euphoria meter", "Is a move crowded and over-loved? Warning only: it never changes scores or ideas. 0-40 Calm, 40-60 Warm, 60-80 Hot, 80+ Euphoric.",
+    h("div", { class: "ideas" }, order.filter((k) => eu.assets[k]).map((k) => {
+      const e = eu.assets[k];
+      return h("div", { class: `idea eu ${e.alert ? "alert-" + e.alert.level : ""}` },
+        h("h3", null, e.label, euTag(e)), euBar(e.score), euBanner(e),
+        h("table", { class: "kv" }, h("tbody", null, Object.entries(P).map(([pk, pl]) => h("tr", { style: "cursor:default" }, h("td", { class: "l" }, pl),
+          h("td", null, meterBar((e.parts || {})[pk])))))),
+        h("ul", { class: "reasons" }, (e.why || []).filter(Boolean).map((w) => h("li", null, w))),
+        e.alert ? null : h("p", { class: "note" }, e.note),
+        spark((e.history || []).map((x) => x.score), 300, 36));
+    })));
+}
+
 // ------------------------------------------------------------------ tab: global macro
 const QGROUPS = [
   ["United States", ["spx", "ndx", "dji", "rut", "vix"]],
@@ -263,6 +296,7 @@ async function viewMacro(app) {
   const d = await doc("gm_macro");
   if (!d) return missing(app, "macro data");
   const nw = (await doc("gm_news")) || { items: [] };
+  const eu = await doc("gm_euphoria").catch(() => null);
   const q = d.quotes || {}, f = d.fred || {}, dv = d.derived || {};
   const scoreCard = (name, x, sub) => h("div", { class: "panel regime" }, h("div", { class: "k" }, name),
     h("div", { class: "zone" }, `${x.regime} `, h("span", { class: sign(x.score) }, isNum(x.score) ? `(${x.score > 0 ? "+" : ""}${x.score})` : "")),
@@ -287,6 +321,7 @@ async function viewMacro(app) {
       scoreCard("Global risk appetite", d.global, "VIX, credit spreads, S&P 500 trend, dollar, US yields, yield curve, copper/gold, news"),
       scoreCard("India risk appetite", d.india, "Nifty trend, India VIX, rupee, crude, FII flows, India news"),
       scoreCard("Overall", d.overall, "Average of the two")),
+    euphoriaSection(eu),
     section("What it means", "Plain-words rules on what moved in the last month and how it usually affects each asset class",
       panel(h("ul", { class: "interp" }, (d.interpret || []).map((x) => h("li", { class: x.tone > 0 ? "pos" : x.tone < 0 ? "neg" : "" }, x.text))))),
     QGROUPS.map(([g, keys]) => section(g, null, h("div", { class: "qgrid" }, keys.filter((k) => q[k]).map((k) => quoteCard(k, q[k]))))),
@@ -328,6 +363,7 @@ async function viewFlows(app) {
       stat("India", d.regime.india || "–", isNum(d.scores.india) ? `${d.scores.india > 0 ? "+" : ""}${d.scores.india}` : null, sign(d.scores.india)),
       stat("Leading asset", A[0] ? A[0].label : "–", A[0] ? `score ${A[0].score}` : null),
       stat("Weakest asset", A.length ? A[A.length - 1].label : "–", A.length ? `score ${A[A.length - 1].score}` : null)),
+    A.filter((a) => a.euphoria && a.euphoria.alert).map((a) => euBanner(a.euphoria, a.label)),
     section("Asset classes ranked", "Click a column to sort. Suggested mix = your base mix tilted by the score (at most ±50% of each base weight).",
       panel(table("flows", [
         { k: "label", label: "Asset", l: true, fmt: (r) => h("span", { class: "name" }, r.label, h("small", null, r.flow_symbol ? `flow: ${r.flow_symbol}` : r.note || "")) },
@@ -341,6 +377,7 @@ async function viewFlows(app) {
         { k: "r6m", label: "6m ₹", fmt: (r) => h("span", { class: sign(r.r6m) }, pct(r.r6m)) },
         { k: "r1y", label: "1y ₹", fmt: (r) => h("span", { class: sign(r.r1y) }, pct(r.r1y)) },
         { k: "trend", label: "Trend", fmt: (r) => trendTag(r.trend) },
+        { k: "eu", label: "Euphoria", fmt: (r) => euTag(r.euphoria), sort: (r) => (r.euphoria || {}).score },
         { k: "vol", label: "Volatility", fmt: (r) => (isNum(r.vol) ? `${r.vol}%` : "–") },
         { k: "base", label: "Base mix", fmt: (r) => `${r.base}%` },
         { k: "tilt", label: "Suggested", fmt: (r) => h("b", { class: r.tilt > r.base + 0.5 ? "pos" : r.tilt < r.base - 0.5 ? "neg" : "" }, `${r.tilt}%`) },
@@ -368,13 +405,15 @@ async function viewCrypto(app) {
   render(app,
     pageHead("Crypto", "Market overview, coins ranked by price action, and long ideas from the rules (spot investing, no shorts).", d.updated),
     await problemsBanner("hourly"),
+    euBanner(m.euphoria, "Crypto"),
     h("div", { class: "stats" },
       stat("Total market cap", big(m.total_mcap), isNum(m.mcap_chg24) ? `${pct(m.mcap_chg24)} in 24 h` : null, sign(m.mcap_chg24)),
       stat("Bitcoin", `$${px(b.price)}`, `${pct(b.d1)} 24 h · ${pct(b.m1)} 30 d`, sign(b.d1)),
       stat("BTC dominance", isNum(m.btc_dom) ? `${m.btc_dom.toFixed(1)}%` : "–", isNum(domChg) ? `${domChg > 0 ? "+" : ""}${domChg.toFixed(1)} pp in 7 days` : "ETH " + (isNum(m.eth_dom) ? `${m.eth_dom.toFixed(1)}%` : "–")),
       stat("Fear & Greed", isNum(fng.value) ? `${fng.value} ${fng.label}` : "–", isNum(m.fng_avg7) ? `7-day average ${m.fng_avg7}` : null),
       stat("Altcoins beating BTC", isNum(m.altseason) ? `${m.altseason}%` : "–", "over 90 days (≥75% = alt season)"),
-      stat("Macro fit", isNum(m.fit) ? `${m.fit}/100` : "–", "from the Money flow tab")),
+      stat("Macro fit", isNum(m.fit) ? `${m.fit}/100` : "–", "from the Money flow tab"),
+      stat("Euphoria meter", m.euphoria && isNum(m.euphoria.score) ? `${Math.round(m.euphoria.score)} ${m.euphoria.level}` : "–", "details on the Global macro tab")),
     section(`Market: ${(m.regime || {}).label || "–"}`, null, panel(h("ul", { class: "interp" }, ((m.regime || {}).why || []).map((w) => h("li", null, w))),
       (m.fng_hist || []).length > 5 ? h("div", null, h("h3", { class: "mini" }, "Fear & Greed, last 60 days"), lineChart([{ name: "Fear & Greed", values: m.fng_hist.map((x) => x.value) }], m.fng_hist.map((x) => x.date), { height: 140, min: 0, max: 100 })) : null)),
     section("Trade ideas", state.view === "swing" ? "4-hour candles; higher timeframe = daily. Target 1:2, exit after 14 days." : "Daily candles; higher timeframe = weekly. Target 1:3, exit after 90 days.",
@@ -411,6 +450,8 @@ async function viewCommod(app) {
       h("h3", null, x.label, " ", h("small", null, `${x.symbol} · COMEX, USD`), " ", tvLink(x.tv, "D")),
       h("div", { class: "zone" }, `$${px(x.price)} `, h("span", { class: sign(x.d1) }, pct(x.d1)), " ", h("span", { class: `tag ${x.bias === "Bullish" ? "pos" : x.bias === "Bearish" ? "neg" : "muted"}` }, `${x.bias} ${x.direction > 0 ? "+" : ""}${x.direction}`)),
       gscale(x.direction, ["Bearish", "Neutral", "Bullish"]),
+      x.euphoria ? h("p", { class: "note" }, "Euphoria meter ", euTag(x.euphoria)) : null,
+      euBanner(x.euphoria),
       h("div", { class: "lv" }, h("div", null, h("span", null, "1 week"), h("b", { class: sign(x.w1) }, pct(x.w1))), h("div", null, h("span", null, "1 month"), h("b", { class: sign(x.m1) }, pct(x.m1))), h("div", null, h("span", null, "1 year"), h("b", { class: sign(x.y1) }, pct(x.y1)))),
       h("p", { class: "note" }, "Trend: weekly ", trendTag(x.trend_w), " daily ", trendTag(x.trend_d), " 4-hour ", trendTag(x.trend_4h), ` · RSI ${x.rsi_d} · daily range ${x.atr_pct}%`),
       h("div", { class: "range" }, h("span", null, `52w low ${px(x.lo52)}`), h("span", { class: "bar" }, isNum(rngPos) ? h("b", { style: `left:${rngPos}%` }) : null), h("span", null, `high ${px(x.hi52)}`)),
@@ -577,6 +618,11 @@ function viewReadme(app) {
       li("Crypto and US: long only. Commodities: longs and the mirror shorts (base breakdown, rally into a falling EMA)."),
       li("Score 0–100: trend 25 (trend points + ADX), momentum 20 (relative strength vs the group: crypto vs BTC, US vs the other stocks; RSI zone), setup quality 25, volume 10 (breakout volume vs 20-candle average), macro fit 20 (from Money flow; US stocks blend in their sector's flow score). Against the higher-timeframe trend: −5 and a warning."),
       li("Ideas scoring 50+ are logged in the Track record; lower ones show as \"watch only\".")),
+    blk("Euphoria meter (0-100, warning only)",
+      li("Parts, each measured against the asset's own history: price stretch 40 (gap above the 200-day average and 30-day gain as 5-year percentiles: median = 0, top 5% = full; weekly RSI 60-80), crowd mood 20 (crypto Fear & Greed 7-day average 50-90; US VIX 20 down to 12; India VIX 16 down to 10), large speculators 20 (CFTC non-commercial net long % of open interest, 3-year percentile; gold, silver, copper, S&P; not Bitcoin), breadth 10 (crypto: alt season / coins above 200-day; US: stocks above 200-day), news flood 10 (positive share and headline count vs the last 60 days; starts after 20 days of stored headlines)."),
+      li("Levels: Calm below 40, Warm 40-60, Hot 60-80, Euphoric 80+. It never changes scores, ideas or the Money flow mix."),
+      li("Alerts follow the backtest (22 Nov 2026, history 2000-2026): Crypto - Hot (60+) = \"don't chase\"; Hot in the last 60 days and then a close below the 50-day average = red \"first crack\" (BTC was lower 90 days later 70% of the time). Silver and copper - red at 80+. Gold, US equity, India - information only: high readings there meant strong trends, not tops."),
+      li("Euphoria is momentum: prices often rose 10-40% more after the first high reading. Use it to stop chasing, size down and tighten stops, not as a short signal.")),
     blk("Commodities direction score (−100..+100)",
       li("40% daily trend + 15% 4-hour trend + 45% drivers. Gold: falling real yields, weaker dollar, risk-off, gold news. Silver: real yields, dollar, industrial demand (copper/gold), silver news. Copper: growth (copper/gold), global risk, dollar, copper news. ±25 = bullish/bearish.")),
     blk("US equity scores",

@@ -15,7 +15,7 @@ import traceback
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from . import commodities, config as C, crypto, flows, macro, news, record, sources, store, usequity
+from . import commodities, config as C, crypto, euphoria, flows, macro, news, record, sources, store, usequity
 
 IST = timezone(timedelta(hours=5, minutes=30))
 
@@ -69,6 +69,10 @@ def hourly(db, force=False):
     fit = {a["key"]: a["fit"] for a in fl.get("assets", [])}
     cr = step("crypto", lambda: crypto.analyse(fit.get("crypto", 50), hist), st)
     cm = step("commodities", lambda: commodities.analyse(mac, candles), st)
+    eu = step("euphoria", lambda: euphoria.live(hist, nw.get("sentiment", {}), cr[0] if cr else None,
+                                                get_doc(db, "gm_us"), candles), st)
+    if eu:
+        add_euphoria(eu, cr, cm, fl)
     if cr:
         st["record_crypto"] = step("crypto record", lambda: record.update(
             db, "crypto", cr[0]["views"]["swing"]["ideas"] + cr[0]["views"]["positional"]["ideas"], cr[1]), st)
@@ -81,6 +85,9 @@ def hourly(db, force=False):
     day.update({"global": mac.get("global", {}).get("score"), "india": mac.get("india", {}).get("score"),
                 "overall": mac.get("overall", {}).get("score"),
                 "assets": {a["key"]: a["score"] for a in fl.get("assets", [])}})
+    day["news"] = {k: {kk: v.get(kk) for kk in ("score", "n", "pos", "neg")} for k, v in nw.get("sentiment", {}).items()}
+    if eu:
+        day["euphoria"] = {k: v["score"] for k, v in eu["assets"].items()}
     if cr and cr[0]["market"].get("btc_dom"):
         day["btc_dom"] = round(cr[0]["market"]["btc_dom"], 2)
     if cr and (cr[0]["market"].get("fng") or {}).get("value") is not None:
@@ -101,6 +108,8 @@ def hourly(db, force=False):
         db.put_doc("gm_crypto", cr[0])
     if cm:
         db.put_doc("gm_commod", cm[0])
+    if eu:
+        db.put_doc("gm_euphoria", eu)
     db.put_doc("gm_hist", hist)
     st.update({"problems": list(sources.PROBLEMS), "finished": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                "counts": {"quotes": len(mac.get("quotes", {})), "news": len(nw.get("items", [])),
@@ -110,6 +119,30 @@ def hourly(db, force=False):
     st_all["hourly"] = st
     db.put_doc("gm_status", st_all)
     report("Hourly job", st)
+
+
+def add_euphoria(eu, cr, cm, fl):
+    """Warning only: put each asset's meter next to its data and add a line to its long ideas."""
+    A = eu["assets"]
+    short = lambda a: {k: a.get(k) for k in ("score", "level", "alert", "policy", "note")}  # noqa: E731
+    if cr and "crypto" in A:
+        cr[0]["market"]["euphoria"] = short(A["crypto"])
+        if A["crypto"].get("alert"):
+            for v in cr[0]["views"].values():
+                for i in v["ideas"]:
+                    i["warns"].append(f"Euphoria: {A['crypto']['alert']['title']}")
+    if cm:
+        for k, m in cm[0]["metals"].items():
+            if k in A:
+                m["euphoria"] = short(A[k])
+        for v in cm[0]["views"].values():
+            for i in v["ideas"]:
+                a = A.get(i["symbol"].lower(), {})
+                if a.get("alert") and i["side"] == "Long":
+                    i["warns"].append(f"Euphoria: {a['alert']['title']}")
+    for a in (fl or {}).get("assets", []):
+        if a["key"] in A:
+            a["euphoria"] = short(A[a["key"]])
 
 
 def us(db, force=False):

@@ -1,17 +1,99 @@
 {
  "days": {
   "2026-11-22": {
-   "global": 34,
+   "global": 2,
    "india": -10,
-   "overall": 12,
+   "overall": -4,
    "assets": {
-    "fd": 54,
-    "us_eq": 44,
-    "silver": 42,
-    "gold": 41,
-    "in_eq": 36,
-    "crypto": 29,
-    "us_bond": 21
+    "fd": 58,
+    "gold": 51,
+    "us_eq": 48,
+    "silver": 38,
+    "us_bond": 36,
+    "in_eq": 34,
+    "crypto": 25
+   },
+   "news": {
+    "risk": {
+     "score": -40.6,
+     "n": 136,
+     "pos": 34,
+     "neg": 102
+    },
+    "fed": {
+     "score": 22.9,
+     "n": 31,
+     "pos": 19,
+     "neg": 12
+    },
+    "us_eq": {
+     "score": 39.9,
+     "n": 23,
+     "pos": 17,
+     "neg": 6
+    },
+    "in_eq": {
+     "score": -22.7,
+     "n": 40,
+     "pos": 18,
+     "neg": 22
+    },
+    "bonds": {
+     "score": -49.6,
+     "n": 17,
+     "pos": 0,
+     "neg": 17
+    },
+    "dollar": {
+     "score": null,
+     "n": 0,
+     "pos": 0,
+     "neg": 0
+    },
+    "gold": {
+     "score": 64.5,
+     "n": 24,
+     "pos": 20,
+     "neg": 2
+    },
+    "silver": {
+     "score": 7.7,
+     "n": 8,
+     "pos": 4,
+     "neg": 2
+    },
+    "copper": {
+     "score": -55.8,
+     "n": 24,
+     "pos": 2,
+     "neg": 22
+    },
+    "oil": {
+     "score": -61.6,
+     "n": 17,
+     "pos": 0,
+     "neg": 17
+    },
+    "crypto": {
+     "score": -67.0,
+     "n": 17,
+     "pos": 0,
+     "neg": 17
+    },
+    "macro": {
+     "score": -59.4,
+     "n": 40,
+     "pos": 2,
+     "neg": 38
+    }
+   },
+   "euphoria": {
+    "crypto": 33.3,
+    "gold": null,
+    "silver": null,
+    "copper": null,
+    "us_eq": 100.0,
+    "in_eq": 100.0
    },
    "btc_dom": 58.2,
    "fng": 40

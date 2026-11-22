@@ -1,12 +1,12 @@
 {
- "updated": "2026-11-22T10:41:05+00:00",
+ "updated": "2026-11-22T16:23:25+00:00",
  "assets": [
   {
    "key": "fd",
    "label": "Bank fixed deposits",
    "symbol": null,
    "mom": 62,
-   "fit": 45,
+   "fit": 52,
    "r1m": 0.54,
    "r3m": 1.62,
    "r6m": 3.25,
@@ -23,36 +23,97 @@
     },
     {
      "factor": "Risk-off (safety demand)",
-     "effect": -0.12,
+     "effect": 0.04,
      "weight": 0.5,
      "inverse": true
     }
    ],
    "note": "FD at 6.5% vs India CPI 4.0% (edit in gmd/config.py)",
-   "score": 54,
+   "score": 58,
    "stance": "Neutral",
    "base": 20,
-   "tilt": 23.0,
+   "tilt": 23.3,
    "chg7": null
+  },
+  {
+   "key": "gold",
+   "label": "Gold",
+   "symbol": "GC=F",
+   "mom": 47,
+   "fit": 55,
+   "r1m": 19.18,
+   "r3m": -27.72,
+   "r6m": 0.29,
+   "r1y": 84.46,
+   "vol": 46.9,
+   "trend": "mixed",
+   "cmf": 0.022,
+   "obv": 0.24,
+   "fit_parts": [
+    {
+     "factor": "Falling real yields",
+     "effect": 0.05,
+     "weight": 0.3,
+     "inverse": false
+    },
+    {
+     "factor": "Weaker dollar",
+     "effect": 0.38,
+     "weight": 0.25,
+     "inverse": false
+    },
+    {
+     "factor": "Global risk appetite",
+     "effect": -0.02,
+     "weight": 0.15,
+     "inverse": true
+    },
+    {
+     "factor": "Gold news",
+     "effect": 1.0,
+     "weight": 0.15,
+     "inverse": false
+    },
+    {
+     "factor": "Rising inflation",
+     "effect": -1.0,
+     "weight": 0.15,
+     "inverse": false
+    }
+   ],
+   "flow_symbol": "GLD",
+   "flow": "flat",
+   "score": 51,
+   "stance": "Neutral",
+   "base": 12,
+   "tilt": 13.1,
+   "chg7": null,
+   "euphoria": {
+    "score": null,
+    "level": "No data",
+    "alert": null,
+    "policy": "info",
+    "note": "Backtest: here a high reading has meant a strong trend, not a top - shown for information only."
+   }
   },
   {
    "key": "us_eq",
    "label": "US equity",
    "symbol": "SPY",
-   "mom": 30,
-   "fit": 61,
-   "r1m": -8.46,
-   "r3m": -20.23,
-   "r6m": -26.62,
-   "r1y": -23.63,
-   "vol": 45.4,
-   "trend": "down",
-   "cmf": 0.16,
-   "obv": -0.19,
+   "mom": 33,
+   "fit": 66,
+   "r1m": 17.79,
+   "r3m": -36.27,
+   "r6m": -53.65,
+   "r1y": -79.14,
+   "vol": 42.1,
+   "trend": "mixed",
+   "cmf": 0.041,
+   "obv": -0.04,
    "fit_parts": [
     {
      "factor": "Global risk appetite",
-     "effect": 0.34,
+     "effect": 0.02,
      "weight": 0.35,
      "inverse": false
     },
@@ -76,33 +137,40 @@
     },
     {
      "factor": "Stronger rupee",
-     "effect": -1.0,
+     "effect": 1.0,
      "weight": 0.1,
      "inverse": true
     }
    ],
    "flow_symbol": "SPY",
-   "flow": "in",
-   "score": 44,
-   "stance": "Underweight",
+   "flow": "flat",
+   "score": 48,
+   "stance": "Neutral",
    "base": 15,
-   "tilt": 15.6,
-   "chg7": null
+   "tilt": 15.9,
+   "chg7": null,
+   "euphoria": {
+    "score": 100.0,
+    "level": "Euphoric",
+    "alert": null,
+    "policy": "info",
+    "note": "Backtest: here a high reading has meant a strong trend, not a top (2022 and 2025 tops were macro-driven) - information only."
+   }
   },
   {
    "key": "silver",
    "label": "Silver",
    "symbol": "SI=F",
-   "mom": 25,
-   "fit": 63,
-   "r1m": -9.25,
-   "r3m": -17.89,
-   "r6m": -49.27,
-   "r1y": -50.13,
-   "vol": 37.4,
+   "mom": 28,
+   "fit": 51,
+   "r1m": 5.06,
+   "r3m": -21.71,
+   "r6m": -45.87,
+   "r1y": -61.77,
+   "vol": 41.1,
    "trend": "down",
-   "cmf": 0.382,
-   "obv": 0.82,
+   "cmf": 0.316,
+   "obv": 0.33,
    "fit_parts": [
     {
      "factor": "Falling real yields",
@@ -112,13 +180,13 @@
     },
     {
      "factor": "Weaker dollar",
-     "effect": 1.0,
+     "effect": 0.38,
      "weight": 0.2,
      "inverse": false
     },
     {
      "factor": "Growth (copper/gold)",
-     "effect": -0.18,
+     "effect": -0.45,
      "weight": 0.2,
      "inverse": false
     },
@@ -130,87 +198,88 @@
     },
     {
      "factor": "Global risk appetite",
-     "effect": 0.34,
+     "effect": 0.02,
      "weight": 0.2,
      "inverse": false
     }
    ],
    "flow_symbol": "SLV",
    "flow": "in",
-   "score": 42,
+   "score": 38,
    "stance": "Underweight",
    "base": 5,
-   "tilt": 5.1,
-   "chg7": null
+   "tilt": 4.8,
+   "chg7": null,
+   "euphoria": {
+    "score": null,
+    "level": "No data",
+    "alert": null,
+    "policy": "euphoric",
+    "note": "Backtest 2000-2026: at 80+ silver was lower 90 days later 56% of the time; 10 of 12 such episodes saw a 15%+ drop from the next peak."
+   }
   },
   {
-   "key": "gold",
-   "label": "Gold",
-   "symbol": "GC=F",
-   "mom": 25,
-   "fit": 61,
-   "r1m": -4.43,
-   "r3m": -29.97,
-   "r6m": -51.65,
-   "r1y": -66.61,
-   "vol": 41.9,
+   "key": "us_bond",
+   "label": "US bonds",
+   "symbol": "TLT",
+   "mom": 12,
+   "fit": 65,
+   "r1m": 1.57,
+   "r3m": -50.95,
+   "r6m": -61.07,
+   "r1y": -82.66,
+   "vol": 42.0,
    "trend": "down",
-   "cmf": 0.207,
-   "obv": 0.19,
+   "cmf": -0.011,
+   "obv": 0.12,
    "fit_parts": [
     {
-     "factor": "Falling real yields",
-     "effect": 0.05,
-     "weight": 0.3,
-     "inverse": false
-    },
-    {
-     "factor": "Weaker dollar",
-     "effect": 1.0,
-     "weight": 0.25,
+     "factor": "Falling US yields",
+     "effect": 0.02,
+     "weight": 0.45,
      "inverse": false
     },
     {
      "factor": "Global risk appetite",
-     "effect": -0.34,
+     "effect": -0.02,
+     "weight": 0.25,
+     "inverse": true
+    },
+    {
+     "factor": "Rising inflation",
+     "effect": 1.0,
      "weight": 0.15,
      "inverse": true
     },
     {
-     "factor": "Gold news",
+     "factor": "Stronger rupee",
      "effect": 1.0,
      "weight": 0.15,
-     "inverse": false
-    },
-    {
-     "factor": "Rising inflation",
-     "effect": -1.0,
-     "weight": 0.15,
-     "inverse": false
+     "inverse": true
     }
    ],
-   "flow_symbol": "GLD",
-   "flow": "in",
-   "score": 41,
+   "flow_symbol": "TLT",
+   "flow": "flat",
+   "score": 36,
    "stance": "Underweight",
-   "base": 12,
-   "tilt": 12.1,
+   "base": 5,
+   "tilt": 4.6,
    "chg7": null
   },
   {
    "key": "in_eq",
    "label": "Indian equity",
    "symbol": "^NSEI",
-   "mom": 19,
-   "fit": 57,
-   "r1m": -4.73,
-   "r3m": -22.41,
-   "r6m": -12.16,
-   "r1y": 8.81,
-   "vol": 26.8,
-   "trend": "down",
-   "cmf": 0.022,
-   "obv": -0.14,
+   "mom": 27,
+   "fit": 42,
+   "r1m": -1.78,
+   "r3m": -8.17,
+   "r6m": -26.95,
+   "r1y": -1.75,
+   "vol": 28.8,
+   "trend": "mixed",
+   "cmf": -0.137,
+   "obv": -0.19,
    "fit_parts": [
     {
      "factor": "India risk appetite",
@@ -220,19 +289,19 @@
     },
     {
      "factor": "Weaker dollar",
-     "effect": 1.0,
+     "effect": 0.38,
      "weight": 0.15,
      "inverse": false
     },
     {
      "factor": "Cheaper crude",
-     "effect": -0.47,
+     "effect": 0.24,
      "weight": 0.15,
      "inverse": false
     },
     {
      "factor": "Stronger rupee",
-     "effect": 1.0,
+     "effect": -1.0,
      "weight": 0.15,
      "inverse": false
     },
@@ -244,31 +313,38 @@
     }
    ],
    "flow_symbol": "NIFTYBEES.NS",
-   "flow": "flat",
-   "score": 36,
+   "flow": "out",
+   "score": 34,
    "stance": "Underweight",
    "base": 35,
-   "tilt": 33.3,
-   "chg7": null
+   "tilt": 31.8,
+   "chg7": null,
+   "euphoria": {
+    "score": 100.0,
+    "level": "Euphoric",
+    "alert": null,
+    "policy": "info",
+    "note": "Backtest: here a high reading has meant a strong trend, not a top - information only."
+   }
   },
   {
    "key": "crypto",
    "label": "Crypto",
    "symbol": "BTC-USD",
-   "mom": 4,
-   "fit": 60,
-   "r1m": -6.64,
-   "r3m": -43.02,
-   "r6m": -57.71,
-   "r1y": -70.84,
-   "vol": 48.6,
+   "mom": 5,
+   "fit": 49,
+   "r1m": -1.65,
+   "r3m": -44.73,
+   "r6m": -64.32,
+   "r1y": -84.04,
+   "vol": 55.6,
    "trend": "down",
-   "cmf": -0.188,
-   "obv": -0.21,
+   "cmf": -0.288,
+   "obv": -0.13,
    "fit_parts": [
     {
      "factor": "Global risk appetite",
-     "effect": 0.34,
+     "effect": 0.02,
      "weight": 0.3,
      "inverse": false
     },
@@ -280,7 +356,7 @@
     },
     {
      "factor": "Weaker dollar",
-     "effect": 1.0,
+     "effect": 0.38,
      "weight": 0.2,
      "inverse": false
     },
@@ -299,72 +375,31 @@
    ],
    "flow_symbol": "BTC-USD",
    "flow": "out",
-   "score": 29,
+   "score": 25,
    "stance": "Underweight",
    "base": 8,
-   "tilt": 7.0,
-   "chg7": null
-  },
-  {
-   "key": "us_bond",
-   "label": "US bonds",
-   "symbol": "TLT",
-   "mom": 1,
-   "fit": 46,
-   "r1m": -21.76,
-   "r3m": -57.09,
-   "r6m": -77.54,
-   "r1y": -87.86,
-   "vol": 43.7,
-   "trend": "down",
-   "cmf": -0.223,
-   "obv": -0.42,
-   "fit_parts": [
-    {
-     "factor": "Falling US yields",
-     "effect": 0.02,
-     "weight": 0.45,
-     "inverse": false
-    },
-    {
-     "factor": "Global risk appetite",
-     "effect": -0.34,
-     "weight": 0.25,
-     "inverse": true
-    },
-    {
-     "factor": "Rising inflation",
-     "effect": 1.0,
-     "weight": 0.15,
-     "inverse": true
-    },
-    {
-     "factor": "Stronger rupee",
-     "effect": -1.0,
-     "weight": 0.15,
-     "inverse": true
-    }
-   ],
-   "flow_symbol": "TLT",
-   "flow": "out",
-   "score": 21,
-   "stance": "Underweight",
-   "base": 5,
-   "tilt": 3.9,
-   "chg7": null
+   "tilt": 6.5,
+   "chg7": null,
+   "euphoria": {
+    "score": 33.3,
+    "level": "Calm",
+    "alert": null,
+    "policy": "crack",
+    "note": "Backtest 2014-2026: when the meter had been 60+ and Bitcoin then closed below its 50-day average, it was lower 90 days later 70% of the time and fell 25%+ in 41% of cases (e.g. 27 Dec 2024, 7 Jan 2025)."
+   }
   }
  ],
  "factors": {
-  "Global risk appetite": 0.34,
+  "Global risk appetite": 0.02,
   "India risk appetite": -0.1,
-  "Weaker dollar": 1.0,
+  "Weaker dollar": 0.38,
   "Falling US yields": 0.02,
   "Falling real yields": 0.05,
   "Fed liquidity": 0.48,
-  "Cheaper crude": -0.47,
-  "Stronger rupee": 1.0,
+  "Cheaper crude": 0.24,
+  "Stronger rupee": -1.0,
   "Rising inflation": -1.0,
-  "Growth (copper/gold)": -0.18,
+  "Growth (copper/gold)": -0.45,
   "US equity news": 0.66,
   "India news": -0.38,
   "Gold news": 1.0,
@@ -372,14 +407,14 @@
   "Crypto news": -1.0
  },
  "regime": {
-  "global": "Risk-on",
+  "global": "Neutral",
   "india": "Neutral",
   "overall": "Neutral"
  },
  "scores": {
-  "global": 34,
+  "global": 2,
   "india": -10,
-  "overall": 12
+  "overall": -4
  },
  "history": [],
  "fd_rate": 6.5,

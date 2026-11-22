@@ -2,466 +2,906 @@
  {
   "id": 1,
   "done": false,
-  "key": "crypto|positional|TRX|Long|BO|2026-11-21T00:00",
+  "key": "crypto|swing|XRP|Long|BO|2026-11-22T12:00",
   "tab": "crypto",
-  "view": "positional",
-  "symbol": "TRX",
-  "name": "TRX coin",
+  "view": "swing",
+  "symbol": "XRP",
+  "name": "XRP coin",
   "side": "Long",
   "setup": "BO",
-  "score": 56,
-  "tf": "1d",
-  "signal_ts": "2026-11-21T00:00:00Z",
-  "entry_after": "2026-11-22T00:00:00Z",
-  "planned_entry": 98.04,
-  "stop": 93.5631,
-  "target": 111.4706,
+  "score": 59,
+  "tf": "4h",
+  "signal_ts": "2026-11-22T12:00:00Z",
+  "entry_after": "2026-11-22T16:00:00Z",
+  "planned_entry": 50.0518,
+  "stop": 48.7615,
+  "target": 52.6326,
   "status": "pending",
-  "max_days": 90,
+  "max_days": 14,
   "info": {
    "parts": {
-    "trend": 16.8,
-    "momentum": 16.3,
-    "setup": 10.3,
-    "volume": 6.0,
-    "macro": 12.0,
-    "vol_ratio": 1.87
-   },
-   "reasons": [
-    "16-candle base, range 3.8\u00d7 ATR",
-    "breakout candle body 100% of its range",
-    "closed 0.14 ATR above the base"
-   ],
-   "warns": [
-    "against the weekly trend"
-   ],
-   "trend": "up",
-   "yahoo": "TRX-USD",
-   "sector": null,
-   "risk_pct": 4.57,
-   "rr": 3.0
-  }
- },
- {
-  "id": 2,
-  "done": false,
-  "key": "commodities|positional|COPPER|Long|PB|2026-11-21T00:00",
-  "tab": "commodities",
-  "view": "positional",
-  "symbol": "COPPER",
-  "name": "Copper",
-  "side": "Long",
-  "setup": "PB",
-  "score": 51,
-  "tf": "1d",
-  "signal_ts": "2026-11-21T00:00:00Z",
-  "entry_after": "2026-11-21T17:30:00Z",
-  "planned_entry": 7.1653,
-  "stop": 6.8007,
-  "target": 8.2592,
-  "status": "pending",
-  "max_days": 90,
-  "info": {
-   "parts": {
-    "trend": 16.8,
-    "momentum": 16.9,
-    "setup": 7.2,
+    "trend": 19.8,
+    "momentum": 18.2,
+    "setup": 11.3,
     "volume": 0,
-    "macro": 10.4,
-    "vol_ratio": 0.38
+    "macro": 9.8,
+    "vol_ratio": 0.72
    },
    "reasons": [
-    "pulled back to the 50 EMA in an uptrend",
-    "turn candle closed above the previous high",
-    "lower wick 17% at the EMA touch"
+    "9-candle base, range 1.7\u00d7 ATR",
+    "breakout candle body 76% of its range",
+    "closed 0.25 ATR above the base"
    ],
    "warns": [
     "volume below average"
    ],
    "trend": "up",
-   "yahoo": "HG=F",
+   "yahoo": "XRP-USD",
    "sector": null,
-   "risk_pct": 5.09,
+   "risk_pct": 2.58,
+   "rr": 2.0
+  }
+ },
+ {
+  "id": 2,
+  "done": false,
+  "key": "crypto|positional|DOGE|Long|PB|2026-11-21T00:00",
+  "tab": "crypto",
+  "view": "positional",
+  "symbol": "DOGE",
+  "name": "DOGE coin",
+  "side": "Long",
+  "setup": "PB",
+  "score": 70,
+  "tf": "1d",
+  "signal_ts": "2026-11-21T00:00:00Z",
+  "entry_after": "2026-11-22T00:00:00Z",
+  "planned_entry": 220.8411,
+  "stop": 202.8354,
+  "target": 274.858,
+  "status": "pending",
+  "max_days": 90,
+  "info": {
+   "parts": {
+    "trend": 23.4,
+    "momentum": 19.1,
+    "setup": 12.1,
+    "volume": 6.0,
+    "macro": 9.8,
+    "vol_ratio": 1.41
+   },
+   "reasons": [
+    "pulled back to the 50 EMA in an uptrend",
+    "turn candle closed above the previous high",
+    "lower wick 40% at the EMA touch"
+   ],
+   "warns": [],
+   "trend": "up",
+   "yahoo": "DOGE-USD",
+   "sector": null,
+   "risk_pct": 8.15,
    "rr": 3.0
   }
  },
  {
   "id": 3,
   "done": false,
-  "key": "us|swing|T102|Long|PB|2026-11-22T00:00",
-  "tab": "us",
-  "view": "swing",
-  "symbol": "T102",
-  "name": "T102 Inc",
-  "side": "Long",
-  "setup": "PB",
-  "score": 75,
+  "key": "commodities|positional|SILVER|Short|BD|2026-11-21T00:00",
+  "tab": "commodities",
+  "view": "positional",
+  "symbol": "SILVER",
+  "name": "Silver",
+  "side": "Short",
+  "setup": "BD",
+  "score": 69,
   "tf": "1d",
-  "signal_ts": "2026-11-22T00:00:00Z",
-  "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 484.7603,
-  "stop": 475.8012,
-  "target": 502.6784,
+  "signal_ts": "2026-11-21T00:00:00Z",
+  "entry_after": "2026-11-21T17:30:00Z",
+  "planned_entry": 34.7548,
+  "stop": 36.2649,
+  "target": 30.2247,
   "status": "pending",
-  "max_days": 14,
+  "max_days": 90,
   "info": {
    "parts": {
-    "trend": 23.6,
+    "trend": 21.9,
     "momentum": 18.8,
-    "setup": 21.9,
-    "volume": 0,
-    "macro": 10.3,
-    "vol_ratio": 0.76
+    "setup": 12.9,
+    "volume": 6.0,
+    "macro": 9.7,
+    "vol_ratio": 1.56
    },
    "reasons": [
-    "pulled back to the 20 EMA in an uptrend",
-    "turn candle closed above the previous high",
-    "lower wick 57% at the EMA touch"
+    "48-candle base, range 3.6\u00d7 ATR",
+    "breakout candle body 73% of its range",
+    "closed 0.85 ATR below the base"
    ],
-   "warns": [
-    "volume below average"
-   ],
-   "trend": "up",
-   "yahoo": "T102",
-   "sector": "Energy",
-   "risk_pct": 1.85,
-   "rr": 2.0
+   "warns": [],
+   "trend": "down",
+   "yahoo": "SI=F",
+   "sector": null,
+   "risk_pct": 4.34,
+   "rr": 3.0
   }
  },
  {
   "id": 4,
   "done": false,
-  "key": "us|swing|T075|Long|PB|2026-11-22T00:00",
+  "key": "us|swing|T264|Long|PB|2026-11-22T00:00",
   "tab": "us",
   "view": "swing",
-  "symbol": "T075",
-  "name": "T075 Inc",
+  "symbol": "T264",
+  "name": "T264 Inc",
   "side": "Long",
   "setup": "PB",
-  "score": 70,
+  "score": 84,
   "tf": "1d",
   "signal_ts": "2026-11-22T00:00:00Z",
   "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 34.4681,
-  "stop": 32.5156,
-  "target": 38.3731,
+  "planned_entry": 1744.3348,
+  "stop": 1679.839,
+  "target": 1873.3266,
   "status": "pending",
   "max_days": 14,
   "info": {
    "parts": {
-    "trend": 25.0,
-    "momentum": 19.1,
-    "setup": 16.5,
-    "volume": 3.0,
-    "macro": 6.5,
-    "vol_ratio": 1.14
+    "trend": 24.1,
+    "momentum": 19.9,
+    "setup": 18.8,
+    "volume": 6.0,
+    "macro": 15.2,
+    "vol_ratio": 1.4
    },
    "reasons": [
     "pulled back to the 20 EMA in an uptrend",
     "turn candle closed above the previous high",
-    "lower wick 35% at the EMA touch"
+    "lower wick 43% at the EMA touch"
    ],
-   "warns": [],
+   "warns": [
+    "S&P 500 weekly trend is down"
+   ],
    "trend": "up",
-   "yahoo": "T075",
-   "sector": "Health Care",
-   "risk_pct": 5.66,
+   "yahoo": "T264",
+   "sector": "Information Technology",
+   "risk_pct": 3.7,
    "rr": 2.0
   }
  },
  {
   "id": 5,
   "done": false,
-  "key": "us|swing|T221|Long|PB|2026-11-22T00:00",
+  "key": "us|swing|T250|Long|PB|2026-11-22T00:00",
   "tab": "us",
   "view": "swing",
-  "symbol": "T221",
-  "name": "T221 Inc",
+  "symbol": "T250",
+  "name": "T250 Inc",
   "side": "Long",
   "setup": "PB",
-  "score": 69,
+  "score": 76,
   "tf": "1d",
   "signal_ts": "2026-11-22T00:00:00Z",
   "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 506.9612,
-  "stop": 473.2998,
-  "target": 574.284,
+  "planned_entry": 197.6947,
+  "stop": 193.035,
+  "target": 207.0142,
   "status": "pending",
   "max_days": 14,
   "info": {
    "parts": {
-    "trend": 23.3,
-    "momentum": 19.9,
-    "setup": 14.7,
-    "volume": 0,
-    "macro": 11.1,
-    "vol_ratio": 0.92
+    "trend": 25.0,
+    "momentum": 17.9,
+    "setup": 13.3,
+    "volume": 6.0,
+    "macro": 13.8,
+    "vol_ratio": 1.38
    },
    "reasons": [
     "pulled back to the 20 EMA in an uptrend",
     "turn candle closed above the previous high",
-    "lower wick 37% at the EMA touch"
+    "lower wick 10% at the EMA touch"
    ],
-   "warns": [],
+   "warns": [
+    "S&P 500 weekly trend is down"
+   ],
    "trend": "up",
-   "yahoo": "T221",
-   "sector": "Financials",
-   "risk_pct": 6.64,
+   "yahoo": "T250",
+   "sector": "Energy",
+   "risk_pct": 2.36,
    "rr": 2.0
   }
  },
  {
   "id": 6,
   "done": false,
-  "key": "us|swing|T092|Long|BO|2026-11-22T00:00",
+  "key": "us|swing|T274|Long|PB|2026-11-22T00:00",
   "tab": "us",
   "view": "swing",
-  "symbol": "T092",
-  "name": "T092 Inc",
-  "side": "Long",
-  "setup": "BO",
-  "score": 64,
-  "tf": "1d",
-  "signal_ts": "2026-11-22T00:00:00Z",
-  "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 288.7798,
-  "stop": 270.6244,
-  "target": 325.0907,
-  "status": "pending",
-  "max_days": 14,
-  "info": {
-   "parts": {
-    "trend": 23.6,
-    "momentum": 18.7,
-    "setup": 12.2,
-    "volume": 0,
-    "macro": 9.2,
-    "vol_ratio": 0.99
-   },
-   "reasons": [
-    "8-candle base, range 1.6\u00d7 ATR",
-    "breakout candle body 86% of its range",
-    "closed 0.72 ATR above the base"
-   ],
-   "warns": [],
-   "trend": "up",
-   "yahoo": "T092",
-   "sector": "Information Technology",
-   "risk_pct": 6.29,
-   "rr": 2.0
-  }
- },
- {
-  "id": 7,
-  "done": false,
-  "key": "us|swing|T052|Long|PB|2026-11-22T00:00",
-  "tab": "us",
-  "view": "swing",
-  "symbol": "T052",
-  "name": "T052 Inc",
+  "symbol": "T274",
+  "name": "T274 Inc",
   "side": "Long",
   "setup": "PB",
-  "score": 63,
+  "score": 74,
   "tf": "1d",
   "signal_ts": "2026-11-22T00:00:00Z",
   "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 611.3271,
-  "stop": 564.1398,
-  "target": 705.7018,
+  "planned_entry": 1528.6726,
+  "stop": 1451.0418,
+  "target": 1683.934,
   "status": "pending",
   "max_days": 14,
   "info": {
    "parts": {
-    "trend": 21.5,
-    "momentum": 19.5,
-    "setup": 10.2,
+    "trend": 25.0,
+    "momentum": 19.4,
+    "setup": 13.0,
     "volume": 3.0,
-    "macro": 9.2,
-    "vol_ratio": 1.28
+    "macro": 13.8,
+    "vol_ratio": 1.21
    },
    "reasons": [
     "pulled back to the 20 EMA in an uptrend",
     "turn candle closed above the previous high",
     "lower wick 13% at the EMA touch"
    ],
-   "warns": [],
+   "warns": [
+    "S&P 500 weekly trend is down"
+   ],
    "trend": "up",
-   "yahoo": "T052",
+   "yahoo": "T274",
+   "sector": "Energy",
+   "risk_pct": 5.08,
+   "rr": 2.0
+  }
+ },
+ {
+  "id": 7,
+  "done": false,
+  "key": "us|swing|T216|Long|BO|2026-11-22T00:00",
+  "tab": "us",
+  "view": "swing",
+  "symbol": "T216",
+  "name": "T216 Inc",
+  "side": "Long",
+  "setup": "BO",
+  "score": 72,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 103.6598,
+  "stop": 99.0607,
+  "target": 112.858,
+  "status": "pending",
+  "max_days": 14,
+  "info": {
+   "parts": {
+    "trend": 23.0,
+    "momentum": 18.6,
+    "setup": 9.3,
+    "volume": 6.0,
+    "macro": 15.2,
+    "vol_ratio": 1.38
+   },
+   "reasons": [
+    "12-candle base, range 3.0\u00d7 ATR",
+    "breakout candle body 92% of its range",
+    "closed 0.35 ATR above the base"
+   ],
+   "warns": [
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T216",
    "sector": "Information Technology",
-   "risk_pct": 7.72,
+   "risk_pct": 4.44,
    "rr": 2.0
   }
  },
  {
   "id": 8,
   "done": false,
-  "key": "us|swing|T090|Long|BO|2026-11-22T00:00",
+  "key": "us|swing|T112|Long|PB|2026-11-22T00:00",
   "tab": "us",
   "view": "swing",
-  "symbol": "T090",
-  "name": "T090 Inc",
+  "symbol": "T112",
+  "name": "T112 Inc",
   "side": "Long",
-  "setup": "BO",
-  "score": 63,
+  "setup": "PB",
+  "score": 66,
   "tf": "1d",
   "signal_ts": "2026-11-22T00:00:00Z",
   "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 121.2174,
-  "stop": 111.0391,
-  "target": 141.5741,
+  "planned_entry": 447.7005,
+  "stop": 419.748,
+  "target": 503.6054,
   "status": "pending",
   "max_days": 14,
   "info": {
    "parts": {
-    "trend": 22.6,
-    "momentum": 15.0,
-    "setup": 9.6,
-    "volume": 6.0,
-    "macro": 10.3,
-    "vol_ratio": 1.64
+    "trend": 21.4,
+    "momentum": 18.8,
+    "setup": 10.2,
+    "volume": 0,
+    "macro": 15.2,
+    "vol_ratio": 0.05
    },
    "reasons": [
-    "12-candle base, range 2.2\u00d7 ATR",
-    "breakout candle body 66% of its range",
-    "closed 0.40 ATR above the base"
+    "pulled back to the 20 EMA in an uptrend",
+    "turn candle closed above the previous high",
+    "lower wick 13% at the EMA touch"
    ],
-   "warns": [],
+   "warns": [
+    "volume below average",
+    "S&P 500 weekly trend is down"
+   ],
    "trend": "up",
-   "yahoo": "T090",
-   "sector": "Energy",
-   "risk_pct": 8.4,
+   "yahoo": "T112",
+   "sector": "Information Technology",
+   "risk_pct": 6.24,
    "rr": 2.0
   }
  },
  {
   "id": 9,
   "done": false,
-  "key": "us|swing|T292|Long|PB|2026-11-22T00:00",
+  "key": "us|swing|T130|Long|BO|2026-11-22T00:00",
   "tab": "us",
   "view": "swing",
-  "symbol": "T292",
-  "name": "T292 Inc",
+  "symbol": "T130",
+  "name": "T130 Inc",
   "side": "Long",
-  "setup": "PB",
-  "score": 61,
+  "setup": "BO",
+  "score": 66,
   "tf": "1d",
   "signal_ts": "2026-11-22T00:00:00Z",
   "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 60.2723,
-  "stop": 57.813,
-  "target": 65.191,
+  "planned_entry": 169.4133,
+  "stop": 162.5985,
+  "target": 183.0431,
   "status": "pending",
   "max_days": 14,
   "info": {
    "parts": {
-    "trend": 21.2,
-    "momentum": 15.5,
-    "setup": 14.3,
+    "trend": 19.7,
+    "momentum": 17.8,
+    "setup": 8.2,
     "volume": 6.0,
-    "macro": 9.2,
-    "vol_ratio": 1.47
+    "macro": 13.8,
+    "vol_ratio": 1.46
    },
    "reasons": [
-    "pulled back to the 20 EMA in an uptrend",
-    "turn candle closed above the previous high",
-    "lower wick 41% at the EMA touch"
+    "14-candle base, range 2.7\u00d7 ATR",
+    "breakout candle body 63% of its range",
+    "closed 0.19 ATR above the base"
    ],
    "warns": [
-    "against the weekly trend"
+    "S&P 500 weekly trend is down"
    ],
    "trend": "up",
-   "yahoo": "T292",
-   "sector": "Information Technology",
-   "risk_pct": 4.08,
+   "yahoo": "T130",
+   "sector": "Energy",
+   "risk_pct": 4.02,
    "rr": 2.0
   }
  },
  {
   "id": 10,
   "done": false,
-  "key": "us|swing|T107|Long|PB|2026-11-22T00:00",
+  "key": "us|swing|T205|Long|BO|2026-11-22T00:00",
   "tab": "us",
   "view": "swing",
-  "symbol": "T107",
-  "name": "T107 Inc",
+  "symbol": "T205",
+  "name": "T205 Inc",
   "side": "Long",
-  "setup": "PB",
-  "score": 60,
+  "setup": "BO",
+  "score": 65,
   "tf": "1d",
   "signal_ts": "2026-11-22T00:00:00Z",
   "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 298.115,
-  "stop": 277.3055,
-  "target": 339.734,
+  "planned_entry": 387.2813,
+  "stop": 365.707,
+  "target": 430.4299,
   "status": "pending",
   "max_days": 14,
   "info": {
    "parts": {
-    "trend": 22.7,
-    "momentum": 17.5,
-    "setup": 7.4,
+    "trend": 25.0,
+    "momentum": 13.4,
+    "setup": 11.7,
     "volume": 6.0,
-    "macro": 6.5,
-    "vol_ratio": 1.4
+    "macro": 8.4,
+    "vol_ratio": 1.95
    },
    "reasons": [
-    "pulled back to the 20 EMA in an uptrend",
-    "turn candle closed above the previous high",
-    "lower wick 1% at the EMA touch"
+    "8-candle base, range 1.5\u00d7 ATR",
+    "breakout candle body 79% of its range",
+    "closed 0.45 ATR above the base"
    ],
-   "warns": [],
+   "warns": [
+    "RSI 80: stretched",
+    "S&P 500 weekly trend is down"
+   ],
    "trend": "up",
-   "yahoo": "T107",
-   "sector": "Health Care",
-   "risk_pct": 6.98,
+   "yahoo": "T205",
+   "sector": "Financials",
+   "risk_pct": 5.57,
    "rr": 2.0
   }
  },
  {
   "id": 11,
   "done": false,
-  "key": "us|swing|T218|Long|PB|2026-11-22T00:00",
+  "key": "us|swing|T260|Long|PB|2026-11-22T00:00",
   "tab": "us",
   "view": "swing",
-  "symbol": "T218",
-  "name": "T218 Inc",
+  "symbol": "T260",
+  "name": "T260 Inc",
   "side": "Long",
   "setup": "PB",
-  "score": 60,
+  "score": 65,
   "tf": "1d",
   "signal_ts": "2026-11-22T00:00:00Z",
   "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 516.3004,
-  "stop": 493.8777,
-  "target": 561.1457,
+  "planned_entry": 301.1085,
+  "stop": 287.7749,
+  "target": 327.7758,
   "status": "pending",
   "max_days": 14,
   "info": {
    "parts": {
-    "trend": 21.9,
-    "momentum": 16.3,
-    "setup": 11.5,
-    "volume": 0,
-    "macro": 10.3,
-    "vol_ratio": 0.13
+    "trend": 19.3,
+    "momentum": 17.0,
+    "setup": 7.7,
+    "volume": 6.0,
+    "macro": 15.2,
+    "vol_ratio": 1.4
    },
    "reasons": [
     "pulled back to the 20 EMA in an uptrend",
     "turn candle closed above the previous high",
-    "lower wick 22% at the EMA touch"
+    "lower wick 2% at the EMA touch"
    ],
    "warns": [
-    "volume below average"
+    "S&P 500 weekly trend is down"
    ],
    "trend": "up",
-   "yahoo": "T218",
-   "sector": "Energy",
-   "risk_pct": 4.34,
+   "yahoo": "T260",
+   "sector": "Information Technology",
+   "risk_pct": 4.43,
    "rr": 2.0
   }
  },
  {
   "id": 12,
+  "done": false,
+  "key": "us|swing|T204|Long|PB|2026-11-22T00:00",
+  "tab": "us",
+  "view": "swing",
+  "symbol": "T204",
+  "name": "T204 Inc",
+  "side": "Long",
+  "setup": "PB",
+  "score": 64,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 303.0293,
+  "stop": 286.9957,
+  "target": 335.0966,
+  "status": "pending",
+  "max_days": 14,
+  "info": {
+   "parts": {
+    "trend": 20.4,
+    "momentum": 18.2,
+    "setup": 7.3,
+    "volume": 3.0,
+    "macro": 15.2,
+    "vol_ratio": 1.03
+   },
+   "reasons": [
+    "pulled back to the 20 EMA in an uptrend",
+    "turn candle closed above the previous high",
+    "lower wick 4% at the EMA touch"
+   ],
+   "warns": [
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T204",
+   "sector": "Information Technology",
+   "risk_pct": 5.29,
+   "rr": 2.0
+  }
+ },
+ {
+  "id": 13,
+  "done": false,
+  "key": "us|swing|T232|Long|PB|2026-11-22T00:00",
+  "tab": "us",
+  "view": "swing",
+  "symbol": "T232",
+  "name": "T232 Inc",
+  "side": "Long",
+  "setup": "PB",
+  "score": 64,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 190.2713,
+  "stop": 177.9597,
+  "target": 214.8944,
+  "status": "pending",
+  "max_days": 14,
+  "info": {
+   "parts": {
+    "trend": 23.8,
+    "momentum": 18.7,
+    "setup": 6.5,
+    "volume": 0,
+    "macro": 15.2,
+    "vol_ratio": 0.3
+   },
+   "reasons": [
+    "pulled back to the 20 EMA in an uptrend",
+    "turn candle closed above the previous high",
+    "lower wick 8% at the EMA touch"
+   ],
+   "warns": [
+    "volume below average",
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T232",
+   "sector": "Information Technology",
+   "risk_pct": 6.47,
+   "rr": 2.0
+  }
+ },
+ {
+  "id": 14,
+  "done": false,
+  "key": "us|positional|T196|Long|ML|2026-11-22T00:00",
+  "tab": "us",
+  "view": "positional",
+  "symbol": "T196",
+  "name": "T196 Inc",
+  "side": "Long",
+  "setup": "ML",
+  "score": 83,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 296.5687,
+  "stop": 267.8799,
+  "target": 382.6349,
+  "status": "pending",
+  "max_days": 90,
+  "info": {
+   "parts": {
+    "trend": 24.8,
+    "momentum": 13.2,
+    "setup": 24.0,
+    "volume": 6.0,
+    "macro": 15.2,
+    "vol_ratio": 1.94
+   },
+   "reasons": [
+    "new 50-day closing high, 0.2% from the 1-year high",
+    "relative strength top 3% of its group"
+   ],
+   "warns": [
+    "RSI 84: stretched",
+    "far from the 20 EMA (extended)",
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T196",
+   "sector": "Information Technology",
+   "risk_pct": 9.67,
+   "rr": 3.0
+  }
+ },
+ {
+  "id": 15,
+  "done": false,
+  "key": "us|positional|T216|Long|PB|2026-11-22T00:00",
+  "tab": "us",
+  "view": "positional",
+  "symbol": "T216",
+  "name": "T216 Inc",
+  "side": "Long",
+  "setup": "PB",
+  "score": 78,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 103.6598,
+  "stop": 96.9975,
+  "target": 123.6468,
+  "status": "pending",
+  "max_days": 90,
+  "info": {
+   "parts": {
+    "trend": 23.0,
+    "momentum": 18.6,
+    "setup": 15.4,
+    "volume": 6.0,
+    "macro": 15.2,
+    "vol_ratio": 1.38
+   },
+   "reasons": [
+    "pulled back to the 50 EMA in an uptrend",
+    "turn candle closed above the previous high",
+    "lower wick 78% at the EMA touch"
+   ],
+   "warns": [
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T216",
+   "sector": "Information Technology",
+   "risk_pct": 6.43,
+   "rr": 3.0
+  }
+ },
+ {
+  "id": 16,
+  "done": false,
+  "key": "us|positional|T205|Long|ML|2026-11-22T00:00",
+  "tab": "us",
+  "view": "positional",
+  "symbol": "T205",
+  "name": "T205 Inc",
+  "side": "Long",
+  "setup": "ML",
+  "score": 77,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 387.2813,
+  "stop": 351.7943,
+  "target": 493.7423,
+  "status": "pending",
+  "max_days": 90,
+  "info": {
+   "parts": {
+    "trend": 25.0,
+    "momentum": 13.4,
+    "setup": 24.3,
+    "volume": 6.0,
+    "macro": 8.4,
+    "vol_ratio": 1.95
+   },
+   "reasons": [
+    "new 50-day closing high, 0.2% from the 1-year high",
+    "relative strength top 2% of its group"
+   ],
+   "warns": [
+    "RSI 80: stretched",
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T205",
+   "sector": "Financials",
+   "risk_pct": 9.16,
+   "rr": 3.0
+  }
+ },
+ {
+  "id": 17,
+  "done": false,
+  "key": "us|positional|T242|Long|ML|2026-11-22T00:00",
+  "tab": "us",
+  "view": "positional",
+  "symbol": "T242",
+  "name": "T242 Inc",
+  "side": "Long",
+  "setup": "ML",
+  "score": 77,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 199.1237,
+  "stop": 179.5964,
+  "target": 257.7057,
+  "status": "pending",
+  "max_days": 90,
+  "info": {
+   "parts": {
+    "trend": 25.0,
+    "momentum": 11.4,
+    "setup": 21.1,
+    "volume": 6.0,
+    "macro": 13.8,
+    "vol_ratio": 1.59
+   },
+   "reasons": [
+    "new 50-day closing high, 0.6% from the 1-year high",
+    "relative strength top 18% of its group"
+   ],
+   "warns": [
+    "RSI 81: stretched",
+    "far from the 20 EMA (extended)",
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T242",
+   "sector": "Energy",
+   "risk_pct": 9.81,
+   "rr": 3.0
+  }
+ },
+ {
+  "id": 18,
+  "done": false,
+  "key": "us|positional|T316|Long|ML|2026-11-22T00:00",
+  "tab": "us",
+  "view": "positional",
+  "symbol": "T316",
+  "name": "T316 Inc",
+  "side": "Long",
+  "setup": "ML",
+  "score": 77,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 301.2214,
+  "stop": 272.7971,
+  "target": 386.4945,
+  "status": "pending",
+  "max_days": 90,
+  "info": {
+   "parts": {
+    "trend": 22.6,
+    "momentum": 15.5,
+    "setup": 23.6,
+    "volume": 0,
+    "macro": 15.2,
+    "vol_ratio": 0.28
+   },
+   "reasons": [
+    "new 50-day closing high, 0.4% from the 1-year high",
+    "relative strength top 4% of its group"
+   ],
+   "warns": [
+    "volume below average",
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T316",
+   "sector": "Information Technology",
+   "risk_pct": 9.44,
+   "rr": 3.0
+  }
+ },
+ {
+  "id": 19,
+  "done": false,
+  "key": "us|positional|T193|Long|ML|2026-11-22T00:00",
+  "tab": "us",
+  "view": "positional",
+  "symbol": "T193",
+  "name": "T193 Inc",
+  "side": "Long",
+  "setup": "ML",
+  "score": 75,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 373.1157,
+  "stop": 339.0085,
+  "target": 475.4374,
+  "status": "pending",
+  "max_days": 90,
+  "info": {
+   "parts": {
+    "trend": 20.6,
+    "momentum": 17.9,
+    "setup": 21.8,
+    "volume": 6.0,
+    "macro": 8.4,
+    "vol_ratio": 1.49
+   },
+   "reasons": [
+    "new 50-day closing high, 0.4% from the 1-year high",
+    "relative strength top 18% of its group"
+   ],
+   "warns": [
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T193",
+   "sector": "Financials",
+   "risk_pct": 9.14,
+   "rr": 3.0
+  }
+ },
+ {
+  "id": 20,
+  "done": false,
+  "key": "us|positional|T083|Long|ML|2026-11-22T00:00",
+  "tab": "us",
+  "view": "positional",
+  "symbol": "T083",
+  "name": "T083 Inc",
+  "side": "Long",
+  "setup": "ML",
+  "score": 74,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 110.4647,
+  "stop": 100.8852,
+  "target": 139.2033,
+  "status": "pending",
+  "max_days": 90,
+  "info": {
+   "parts": {
+    "trend": 22.1,
+    "momentum": 15.2,
+    "setup": 23.2,
+    "volume": 3.0,
+    "macro": 10.0,
+    "vol_ratio": 1.29
+   },
+   "reasons": [
+    "new 50-day closing high, 0.4% from the 1-year high",
+    "relative strength top 7% of its group"
+   ],
+   "warns": [
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T083",
+   "sector": "Health Care",
+   "risk_pct": 8.67,
+   "rr": 3.0
+  }
+ },
+ {
+  "id": 21,
+  "done": false,
+  "key": "us|positional|T147|Long|ML|2026-11-22T00:00",
+  "tab": "us",
+  "view": "positional",
+  "symbol": "T147",
+  "name": "T147 Inc",
+  "side": "Long",
+  "setup": "ML",
+  "score": 74,
+  "tf": "1d",
+  "signal_ts": "2026-11-22T00:00:00Z",
+  "entry_after": "2026-11-22T06:45:00Z",
+  "planned_entry": 360.1985,
+  "stop": 326.1236,
+  "target": 462.4231,
+  "status": "pending",
+  "max_days": 90,
+  "info": {
+   "parts": {
+    "trend": 23.2,
+    "momentum": 13.8,
+    "setup": 21.1,
+    "volume": 6.0,
+    "macro": 10.0,
+    "vol_ratio": 1.32
+   },
+   "reasons": [
+    "new 50-day closing high, 0.6% from the 1-year high",
+    "relative strength top 19% of its group"
+   ],
+   "warns": [
+    "S&P 500 weekly trend is down"
+   ],
+   "trend": "up",
+   "yahoo": "T147",
+   "sector": "Health Care",
+   "risk_pct": 9.46,
+   "rr": 3.0
+  }
+ },
+ {
+  "id": 22,
   "done": false,
   "key": "us|positional|T261|Long|ML|2026-11-22T00:00",
   "tab": "us",
@@ -470,416 +910,80 @@
   "name": "T261 Inc",
   "side": "Long",
   "setup": "ML",
-  "score": 78,
-  "tf": "1d",
-  "signal_ts": "2026-11-22T00:00:00Z",
-  "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 895.5841,
-  "stop": 807.3457,
-  "target": 1160.2994,
-  "status": "pending",
-  "max_days": 90,
-  "info": {
-   "parts": {
-    "trend": 24.8,
-    "momentum": 15.5,
-    "setup": 23.3,
-    "volume": 3.0,
-    "macro": 11.1,
-    "vol_ratio": 1.12
-   },
-   "reasons": [
-    "new 50-day closing high, 0.5% from the 1-year high",
-    "relative strength top 4% of its group"
-   ],
-   "warns": [
-    "RSI 76: stretched"
-   ],
-   "trend": "up",
-   "yahoo": "T261",
-   "sector": "Financials",
-   "risk_pct": 9.85,
-   "rr": 3.0
-  }
- },
- {
-  "id": 13,
-  "done": false,
-  "key": "us|positional|T052|Long|ML|2026-11-22T00:00",
-  "tab": "us",
-  "view": "positional",
-  "symbol": "T052",
-  "name": "T052 Inc",
-  "side": "Long",
-  "setup": "ML",
-  "score": 76,
-  "tf": "1d",
-  "signal_ts": "2026-11-22T00:00:00Z",
-  "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 611.3271,
-  "stop": 537.7015,
-  "target": 832.2042,
-  "status": "pending",
-  "max_days": 90,
-  "info": {
-   "parts": {
-    "trend": 21.5,
-    "momentum": 19.8,
-    "setup": 22.8,
-    "volume": 3.0,
-    "macro": 9.2,
-    "vol_ratio": 1.28
-   },
-   "reasons": [
-    "new 50-day closing high, 0.8% from the 1-year high",
-    "relative strength top 2% of its group"
-   ],
-   "warns": [
-    "wide stop (12.0%)"
-   ],
-   "trend": "up",
-   "yahoo": "T052",
-   "sector": "Information Technology",
-   "risk_pct": 12.04,
-   "rr": 3.0
-  }
- },
- {
-  "id": 14,
-  "done": false,
-  "key": "us|positional|T017|Long|ML|2026-11-22T00:00",
-  "tab": "us",
-  "view": "positional",
-  "symbol": "T017",
-  "name": "T017 Inc",
-  "side": "Long",
-  "setup": "ML",
   "score": 73,
   "tf": "1d",
   "signal_ts": "2026-11-22T00:00:00Z",
   "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 607.6305,
-  "stop": 552.7993,
-  "target": 772.1241,
+  "planned_entry": 34.2186,
+  "stop": 30.5842,
+  "target": 45.1217,
   "status": "pending",
   "max_days": 90,
   "info": {
    "parts": {
-    "trend": 24.3,
-    "momentum": 15.2,
-    "setup": 19.6,
-    "volume": 3.0,
-    "macro": 11.1,
-    "vol_ratio": 1.27
+    "trend": 22.2,
+    "momentum": 14.5,
+    "setup": 21.9,
+    "volume": 6.0,
+    "macro": 8.4,
+    "vol_ratio": 1.82
    },
    "reasons": [
-    "new 50-day closing high, 1.8% from the 1-year high",
-    "relative strength top 7% of its group"
-   ],
-   "warns": [
-    "RSI 77: stretched"
-   ],
-   "trend": "up",
-   "yahoo": "T017",
-   "sector": "Financials",
-   "risk_pct": 9.02,
-   "rr": 3.0
-  }
- },
- {
-  "id": 15,
-  "done": false,
-  "key": "us|positional|T022|Long|ML|2026-11-22T00:00",
-  "tab": "us",
-  "view": "positional",
-  "symbol": "T022",
-  "name": "T022 Inc",
-  "side": "Long",
-  "setup": "ML",
-  "score": 70,
-  "tf": "1d",
-  "signal_ts": "2026-11-22T00:00:00Z",
-  "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 1011.1055,
-  "stop": 925.5617,
-  "target": 1267.737,
-  "status": "pending",
-  "max_days": 90,
-  "info": {
-   "parts": {
-    "trend": 25.0,
-    "momentum": 12.4,
-    "setup": 22.6,
-    "volume": 0,
-    "macro": 10.3,
-    "vol_ratio": 0.36
-   },
-   "reasons": [
-    "new 50-day closing high, 0.5% from the 1-year high",
-    "relative strength top 10% of its group"
-   ],
-   "warns": [
-    "RSI 80: stretched",
-    "far from the 20 EMA (extended)",
-    "volume below average"
-   ],
-   "trend": "up",
-   "yahoo": "T022",
-   "sector": "Energy",
-   "risk_pct": 8.46,
-   "rr": 3.0
-  }
- },
- {
-  "id": 16,
-  "done": false,
-  "key": "us|positional|T122|Long|BO|2026-11-22T00:00",
-  "tab": "us",
-  "view": "positional",
-  "symbol": "T122",
-  "name": "T122 Inc",
-  "side": "Long",
-  "setup": "BO",
-  "score": 70,
-  "tf": "1d",
-  "signal_ts": "2026-11-22T00:00:00Z",
-  "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 1075.2116,
-  "stop": 1032.667,
-  "target": 1202.8453,
-  "status": "pending",
-  "max_days": 90,
-  "info": {
-   "parts": {
-    "trend": 25.0,
-    "momentum": 15.7,
-    "setup": 9.3,
-    "volume": 10,
-    "macro": 10.3,
-    "vol_ratio": 2.09
-   },
-   "reasons": [
-    "26-candle base, range 3.9\u00d7 ATR",
-    "breakout candle body 72% of its range",
-    "closed 0.60 ATR above the base"
-   ],
-   "warns": [],
-   "trend": "up",
-   "yahoo": "T122",
-   "sector": "Energy",
-   "risk_pct": 3.96,
-   "rr": 3.0
-  }
- },
- {
-  "id": 17,
-  "done": false,
-  "key": "us|positional|T054|Long|ML|2026-11-22T00:00",
-  "tab": "us",
-  "view": "positional",
-  "symbol": "T054",
-  "name": "T054 Inc",
-  "side": "Long",
-  "setup": "ML",
-  "score": 69,
-  "tf": "1d",
-  "signal_ts": "2026-11-22T00:00:00Z",
-  "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 387.2766,
-  "stop": 353.2986,
-  "target": 489.2106,
-  "status": "pending",
-  "max_days": 90,
-  "info": {
-   "parts": {
-    "trend": 24.3,
-    "momentum": 12.0,
-    "setup": 22.8,
-    "volume": 0,
-    "macro": 10.3,
-    "vol_ratio": 0.35
-   },
-   "reasons": [
-    "new 50-day closing high, 0.2% from the 1-year high",
+    "new 50-day closing high, 0.6% from the 1-year high",
     "relative strength top 13% of its group"
    ],
    "warns": [
-    "RSI 80: stretched",
-    "far from the 20 EMA (extended)",
-    "volume below average"
+    "wide stop (10.6%)",
+    "S&P 500 weekly trend is down"
    ],
    "trend": "up",
-   "yahoo": "T054",
-   "sector": "Energy",
-   "risk_pct": 8.77,
+   "yahoo": "T261",
+   "sector": "Financials",
+   "risk_pct": 10.62,
    "rr": 3.0
   }
  },
  {
-  "id": 18,
+  "id": 23,
   "done": false,
-  "key": "us|positional|T103|Long|ML|2026-11-22T00:00",
+  "key": "us|positional|T195|Long|ML|2026-11-22T00:00",
   "tab": "us",
   "view": "positional",
-  "symbol": "T103",
-  "name": "T103 Inc",
+  "symbol": "T195",
+  "name": "T195 Inc",
   "side": "Long",
   "setup": "ML",
-  "score": 67,
+  "score": 72,
   "tf": "1d",
   "signal_ts": "2026-11-22T00:00:00Z",
   "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 471.1114,
-  "stop": 423.8158,
-  "target": 612.9983,
+  "planned_entry": 742.4368,
+  "stop": 662.6839,
+  "target": 981.6955,
   "status": "pending",
   "max_days": 90,
   "info": {
    "parts": {
-    "trend": 23.7,
-    "momentum": 15.5,
-    "setup": 21.3,
-    "volume": 0,
-    "macro": 6.5,
-    "vol_ratio": 0.54
+    "trend": 23.9,
+    "momentum": 13.5,
+    "setup": 21.5,
+    "volume": 3.0,
+    "macro": 10.0,
+    "vol_ratio": 1.08
    },
    "reasons": [
-    "new 50-day closing high, 1.3% from the 1-year high",
-    "relative strength top 4% of its group"
+    "new 50-day closing high, 0.4% from the 1-year high",
+    "relative strength top 21% of its group"
    ],
    "warns": [
-    "wide stop (10.0%)",
-    "volume below average"
+    "RSI 75: stretched",
+    "wide stop (10.7%)",
+    "S&P 500 weekly trend is down"
    ],
    "trend": "up",
-   "yahoo": "T103",
+   "yahoo": "T195",
    "sector": "Health Care",
-   "risk_pct": 10.04,
-   "rr": 3.0
-  }
- },
- {
-  "id": 19,
-  "done": false,
-  "key": "us|positional|T318|Long|PB|2026-11-22T00:00",
-  "tab": "us",
-  "view": "positional",
-  "symbol": "T318",
-  "name": "T318 Inc",
-  "side": "Long",
-  "setup": "PB",
-  "score": 64,
-  "tf": "1d",
-  "signal_ts": "2026-11-22T00:00:00Z",
-  "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 774.147,
-  "stop": 706.5494,
-  "target": 976.9397,
-  "status": "pending",
-  "max_days": 90,
-  "info": {
-   "parts": {
-    "trend": 20.0,
-    "momentum": 19.1,
-    "setup": 9.0,
-    "volume": 6.0,
-    "macro": 10.3,
-    "vol_ratio": 1.64
-   },
-   "reasons": [
-    "pulled back to the 50 EMA in an uptrend",
-    "turn candle closed above the previous high",
-    "lower wick 42% at the EMA touch"
-   ],
-   "warns": [],
-   "trend": "up",
-   "yahoo": "T318",
-   "sector": "Energy",
-   "risk_pct": 8.73,
-   "rr": 3.0
-  }
- },
- {
-  "id": 20,
-  "done": false,
-  "key": "us|positional|T068|Long|PB|2026-11-22T00:00",
-  "tab": "us",
-  "view": "positional",
-  "symbol": "T068",
-  "name": "T068 Inc",
-  "side": "Long",
-  "setup": "PB",
-  "score": 63,
-  "tf": "1d",
-  "signal_ts": "2026-11-22T00:00:00Z",
-  "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 564.9803,
-  "stop": 525.0789,
-  "target": 684.6845,
-  "status": "pending",
-  "max_days": 90,
-  "info": {
-   "parts": {
-    "trend": 21.3,
-    "momentum": 16.3,
-    "setup": 10.4,
-    "volume": 6.0,
-    "macro": 9.2,
-    "vol_ratio": 1.71
-   },
-   "reasons": [
-    "pulled back to the 50 EMA in an uptrend",
-    "turn candle closed above the previous high",
-    "lower wick 37% at the EMA touch"
-   ],
-   "warns": [],
-   "trend": "up",
-   "yahoo": "T068",
-   "sector": "Information Technology",
-   "risk_pct": 7.06,
-   "rr": 3.0
-  }
- },
- {
-  "id": 21,
-  "done": false,
-  "key": "us|positional|T134|Long|PB|2026-11-22T00:00",
-  "tab": "us",
-  "view": "positional",
-  "symbol": "T134",
-  "name": "T134 Inc",
-  "side": "Long",
-  "setup": "PB",
-  "score": 58,
-  "tf": "1d",
-  "signal_ts": "2026-11-22T00:00:00Z",
-  "entry_after": "2026-11-22T06:45:00Z",
-  "planned_entry": 140.8853,
-  "stop": 133.1261,
-  "target": 164.163,
-  "status": "pending",
-  "max_days": 90,
-  "info": {
-   "parts": {
-    "trend": 20.0,
-    "momentum": 15.4,
-    "setup": 12.6,
-    "volume": 0,
-    "macro": 10.3,
-    "vol_ratio": 0.22
-   },
-   "reasons": [
-    "pulled back to the 50 EMA in an uptrend",
-    "turn candle closed above the previous high",
-    "lower wick 47% at the EMA touch"
-   ],
-   "warns": [
-    "volume below average"
-   ],
-   "trend": "up",
-   "yahoo": "T134",
-   "sector": "Energy",
-   "risk_pct": 5.51,
+   "risk_pct": 10.74,
    "rr": 3.0
   }
  }

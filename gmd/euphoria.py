@@ -25,7 +25,7 @@ from . import sources, ta
 
 ASSETS = {
     # key: label, Yahoo symbol, CFTC contract code (legacy report), mood source
-    "crypto": ("Crypto (Bitcoin)", "BTC-USD", "133741", "fng"),
+    "crypto": ("Crypto (Bitcoin)", "BTC-USD", None, "fng"),     # CME BTC speculators are mostly basis trades: left out (backtest 22 Nov 2026)
     "gold": ("Gold", "GC=F", "088691", None),
     "silver": ("Silver", "SI=F", "084691", None),
     "copper": ("Copper", "HG=F", "085692", None),
@@ -36,6 +36,17 @@ WEIGHTS = {"stretch": 40, "mood": 20, "crowd": 20, "breadth": 10, "news": 10}
 LEVELS = [(40, "Calm"), (60, "Warm"), (80, "Hot"), (101, "Euphoric")]
 PCT_WIN = 1260          # ~5 years of daily values for percentiles
 COT_WIN = 156           # 3 years of weekly reports
+# what to do with the meter, from the backtest (22 Nov 2026)
+POLICY = {"crypto": "crack", "silver": "euphoric", "copper": "euphoric", "gold": "info", "us_eq": "info", "in_eq": "info"}
+POLICY_NOTE = {
+    "crypto": "Backtest 2014-2026: when the meter had been 60+ and Bitcoin then closed below its 50-day average, it was lower "
+              "90 days later 70% of the time and fell 25%+ in 41% of cases (e.g. 27 Dec 2024, 7 Jan 2025).",
+    "silver": "Backtest 2000-2026: at 80+ silver was lower 90 days later 56% of the time; 10 of 12 such episodes saw a 15%+ drop from the next peak.",
+    "copper": "Backtest 2000-2026: the May 2021 and May 2024 copper tops came with readings of 89 and 100.",
+    "gold": "Backtest: here a high reading has meant a strong trend, not a top - shown for information only.",
+    "us_eq": "Backtest: here a high reading has meant a strong trend, not a top (2022 and 2025 tops were macro-driven) - information only.",
+    "in_eq": "Backtest: here a high reading has meant a strong trend, not a top - information only.",
+}
 NEWS_TAG = {"crypto": "crypto", "gold": "gold", "silver": "silver", "copper": "copper", "us_eq": "us_eq", "in_eq": "in_eq"}
 
 
@@ -171,8 +182,9 @@ def live(hist_doc: dict, news_sent: dict, crypto_doc: dict | None, us_doc: dict 
     out = {}
     for key, (label, sym, code, mk) in ASSETS.items():
         df = candles.get(sym)
-        if df is None or len(df) < 260:
-            df = sources.yahoo(sym, "1d", "10y")
+        df = sources.yahoo(sym, "1d", "10y")            # percentiles need years of history
+        if (df is None or df.empty) and candles.get(sym) is not None:
+            df = candles[sym]
         if df is None or df.empty:
             continue
         cot = cot_history(code, "2019-01-01") if code else None
@@ -192,7 +204,8 @@ def live(hist_doc: dict, news_sent: dict, crypto_doc: dict | None, us_doc: dict 
                        "pctile": round(float(r.pctile) * 100) if pd.notna(r.pctile) else None}
         why = []
         if pd.notna(last.gap):
-            why.append(f"{last.gap * 100:+.1f}% vs 200-day average ({round((last.p_gap or 0) * 100)}/100 stretch)")
+            pg = 0 if pd.isna(last.p_gap) else last.p_gap
+            why.append(f"{last.gap * 100:+.1f}% vs 200-day average (stretch {round(pg * 100)}/100)")
         if pd.notna(last.r30):
             why.append(f"{last.r30 * 100:+.1f}% in 30 days")
         if pd.notna(last.wrsi):
@@ -205,11 +218,36 @@ def live(hist_doc: dict, news_sent: dict, crypto_doc: dict | None, us_doc: dict 
         if mk in ("vix", "ivix") and vixs.get(mk) is not None:
             why.append(f"{'US VIX' if mk == 'vix' else 'India VIX'} {vixs[mk].iloc[-1]:.1f}")
         hist = h[["score"]].dropna().tail(365)
+        c = h.close.dropna()
+        ma50 = c.rolling(50).mean()
+        hot60 = float(h.score.tail(60).max()) if h.score.tail(60).notna().any() else None
+        below50 = bool(c.iloc[-1] < ma50.iloc[-1]) if pd.notna(ma50.iloc[-1]) else False
+        alert = make_alert(key, score, hot60, below50)
         out[key] = {"label": label, "score": score, "level": level(score),
                     "parts": {k: None if v is None else round(v * 100) for k, v in parts.items()},
-                    "why": why, "cot": cot_now,
+                    "why": why, "cot": cot_now, "alert": alert, "policy": POLICY[key], "note": POLICY_NOTE[key],
+                    "hot60": hot60, "below50": below50,
                     "history": [{"date": d.strftime("%Y-%m-%d"), "score": float(v)} for d, v in hist.score.items()][::3]}
     return {"updated": datetime.now(timezone.utc).isoformat(timespec="seconds"), "assets": out}
+
+
+def make_alert(key, score, hot60, below50):
+    pol = POLICY[key]
+    if score is None:
+        return None
+    if pol == "crack":
+        if (hot60 or 0) >= 60 and below50:
+            return {"level": "red", "title": "First crack after euphoria",
+                    "text": "The crowd was Hot in the last 60 days and price has now closed below its 50-day average. "
+                            "Don't buy the dip on hope: protect profits, tighten stops, no fresh buying until the trend repairs."}
+        if score >= 60:
+            return {"level": "amber", "title": f"{level(score)}: don't chase",
+                    "text": "The move looks crowded. Avoid fresh buying on excitement, size down, tighten stops, consider booking part profits."}
+        return None
+    if pol == "euphoric" and score >= 80:
+        return {"level": "red", "title": "Euphoric: don't chase",
+                "text": "Over-loved move. No fresh buying on excitement; tighten stops and consider part profits."}
+    return None
 
 
 def breadth(key, crypto_doc, us_doc):

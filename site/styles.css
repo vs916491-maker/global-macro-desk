@@ -486,3 +486,15 @@ table.kv { width: 100%; table-layout: auto; }
 .kv .effbar, .factors .effbar { grid-template-columns: minmax(50px, 90px) 40px; }
 .idea, .metal { min-width: 0; }
 .idea table.kv td.l, .metal table.kv td.l { white-space: normal; }
+.eu-banner { border: 1px solid var(--hair); border-left: 4px solid var(--q-weakening); background: var(--surface); border-radius: 8px; padding: 10px 14px; margin: 12px 0; }
+.eu-banner.red { border-left-color: var(--down); }
+.eu-banner b { font-size: 14.5px; }
+.eu-banner p { margin: 4px 0 0; font-size: 13.5px; }
+.eubar { position: relative; margin: 14px 0 6px; }
+.eubar .track { display: grid; grid-template-columns: 40fr 20fr 20fr 20fr; height: 8px; border-radius: 4px; overflow: hidden; gap: 2px; }
+.eubar .track i:nth-child(1) { background: var(--axis); } .eubar .track i:nth-child(2) { background: #e9c46a; }
+.eubar .track i:nth-child(3) { background: #e08a80; } .eubar .track i:nth-child(4) { background: #b42323; }
+.eubar .marker { position: absolute; top: -4px; width: 4px; height: 16px; border-radius: 2px; background: var(--ink); transform: translateX(-2px); box-shadow: 0 0 0 2px var(--surface); }
+.eubar .ends { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); margin-top: 5px; }
+.idea.eu h3 { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.idea.alert-red { border-color: var(--down); }
