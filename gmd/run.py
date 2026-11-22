@@ -130,7 +130,8 @@ def add_euphoria(eu, cr, cm, fl):
         if A["crypto"].get("alert"):
             for v in cr[0]["views"].values():
                 for i in v["ideas"]:
-                    i["warns"].append(f"Euphoria: {A['crypto']['alert']['title']}")
+                    if i["side"] == "Long":
+                        i["warns"].append(f"Euphoria: {A['crypto']['alert']['title']}")
     if cm:
         for k, m in cm[0]["metals"].items():
             if k in A:

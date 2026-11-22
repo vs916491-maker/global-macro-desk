@@ -1,5 +1,6 @@
 """Crypto tab: market overview (dominance, Fear & Greed, altseason), trending coins ranked by price
-action, and Swing (4-hour) / Positional (daily) ideas. Long only (spot investing)."""
+action, and Swing (4-hour) / Positional (daily) ideas. Longs (spot) and shorts (perpetual futures; added
+22 Nov 2026 at his request, same short setups as commodities)."""
 
 from __future__ import annotations
 
@@ -97,11 +98,16 @@ def analyse(fit: float, hist: dict) -> tuple[dict, dict]:
             h4I = ta.add(h4, 20)
             frames[("swing", c["sym"])] = h4
             views["swing"] += setups.find(h4I, "swing", {**base_ctx, "tf": "4h", "rs": rs30.get(c["sym"]), "htf": d_t,
-                                                           "htf_name": "daily"}, allow_short=False)
+                                                           "htf_name": "daily"}, allow_short=True)
         frames[("positional", c["sym"])] = dd
         views["positional"] += setups.find(dI, "positional", {**base_ctx, "tf": "1d", "rs": rs90.get(c["sym"]),
-                                                               "htf": wk_t, "htf_name": "weekly"}, allow_short=False)
+                                                               "htf": wk_t, "htf_name": "weekly"}, allow_short=True)
     for v in views:
+        for i in views[v]:
+            if i["side"] == "Short":
+                i["warns"].append("Short needs perpetual futures: short squeezes of 15-25% in a day happen")
+                if v == "positional":
+                    i["warns"].append("Funding fees add up when a perpetual short is held for weeks")
         views[v].sort(key=lambda x: x["score"], reverse=True)
     rows.sort(key=lambda r: r["trend_score"], reverse=True)
 

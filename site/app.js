@@ -455,7 +455,7 @@ async function viewCrypto(app) {
   const domChg = isNum(m.btc_dom) && isNum(m.btc_dom_7d_ago) ? m.btc_dom - m.btc_dom_7d_ago : null;
   const v = (d.views || {})[state.view];
   render(app,
-    pageHead("Crypto", "Market overview, coins ranked by price action, and long ideas from the rules (spot investing, no shorts).", d.updated),
+    pageHead("Crypto", "Market overview, coins ranked by price action, and long (spot) and short (perpetual futures) ideas from the rules.", d.updated),
     await problemsBanner("hourly"),
     euBanner(m.euphoria, "Crypto"),
     h("div", { class: "stats" },
@@ -468,7 +468,7 @@ async function viewCrypto(app) {
       stat("Euphoria meter", m.euphoria && isNum(m.euphoria.score) ? `${Math.round(m.euphoria.score)} ${m.euphoria.level}` : "–", "details on the Global macro tab")),
     section(`Market: ${(m.regime || {}).label || "–"}`, null, panel(h("ul", { class: "interp" }, ((m.regime || {}).why || []).map((w) => h("li", null, w))),
       (m.fng_hist || []).length > 5 ? h("div", null, h("h3", { class: "mini" }, "Fear & Greed, last 60 days"), lineChart([{ name: "Fear & Greed", values: m.fng_hist.map((x) => x.value) }], m.fng_hist.map((x) => x.date), { height: 140, min: 0, max: 100 })) : null)),
-    section("Trade ideas", state.view === "swing" ? "4-hour candles; higher timeframe = daily. Target 1:2, exit after 14 days." : "Daily candles; higher timeframe = weekly. Target 1:3, exit after 90 days.",
+    section("Trade ideas", state.view === "swing" ? "4-hour candles, long and short; higher timeframe = daily. Target 1:2, exit after 14 days. Shorts need perpetual futures." : "Daily candles, long and short; higher timeframe = weekly. Target 1:3, exit after 90 days. Shorts need perpetual futures (funding fees add up).",
       h("div", { class: "filters" }, viewSeg()), ideasBlock(v, state.view === "swing" ? "240" : "D")),
     section("Trending coins", "Top coins by market cap (stablecoins and wrapped tokens left out), ranked by trend score: 7-day and 30-day strength vs the rest, trend, volume surge, CoinGecko trending list",
       panel(table("coins", [
@@ -670,7 +670,7 @@ function viewReadme(app) {
       li("Base breakout: a sideways base (swing 8–30 candles within 3× ATR; positional 15–60 within 4.5× ATR; first-to-last close within half the range), then a candle with body ≥ 50% closing 0.1 ATR beyond the base and the 50 EMA, previous close still inside. Stop beyond the base (or the breakout candle if the base is deeper than the stop limit)."),
       li("Trend pullback: uptrend (4 of 5: price over 20 EMA, over 50 EMA, 20 over 50, 50 over 200, 50 EMA rising), a dip to the 20 EMA (swing) or 50 EMA (positional) within 0.5 ATR in the last 5 candles after holding above it, then a bullish candle closing above the previous high. RSI 38–68. Stop below the pullback low."),
       li("Momentum leader (positional, long only): new 50-day closing high within 5% of the 1-year high, uptrend above the 200 EMA, relative strength in the top 30% of its group."),
-      li("Crypto and US: long only. Commodities: longs and the mirror shorts (base breakdown, rally into a falling EMA)."),
+      li("US equity: long only. Crypto and commodities: longs and the mirror shorts (base breakdown, rally into a falling EMA). Crypto shorts need perpetual futures: every crypto short carries a squeeze warning, positional ones a funding-fee warning; Euphoria alerts only add warnings to longs."),
       li("Score 0–100: trend 25 (trend points + ADX), momentum 20 (relative strength vs the group: crypto vs BTC, US vs the other stocks; RSI zone), setup quality 25, volume 10 (breakout volume vs 20-candle average), macro fit 20 (from Money flow; US stocks blend in their sector's flow score). Against the higher-timeframe trend: −5 and a warning."),
       li("Ideas scoring 50+ are logged in the Track record; lower ones show as \"watch only\".")),
     blk("Euphoria meter (0-100, warning only)",
