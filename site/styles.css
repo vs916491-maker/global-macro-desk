@@ -537,3 +537,16 @@ details.fold .fold-chips { gap: 8px; }
 }
 @media (max-width: 600px) { .euchip { min-width: calc(50% - 6px); } }
 details.fold .fold-chips { flex: 1 1 100%; } .euchip { flex: 1 1 130px; }
+/* folding sections (Global macro tab) */
+details.fold.plain { background: none; border: 0; padding: 0; margin-top: 26px; border-radius: 0; }
+details.fold.plain > summary { padding: 0 0 10px; gap: 6px 14px; align-items: baseline; border-bottom: 1px solid var(--hair); margin-bottom: 12px; }
+details.fold.plain > summary::before { align-self: center; }
+details.fold.plain > summary h2 { margin: 0; font-size: 20px; }
+details.fold.plain > summary p { margin: 0 0 0 auto; color: var(--muted); font-size: 13.5px; text-align: right; }
+details.fold.plain:not([open]) > summary { margin-bottom: 0; }
+details.fold.plain[open] { padding-bottom: 0; }
+details.fold.plain > summary:hover h2 { text-decoration: underline; text-decoration-color: var(--axis); text-underline-offset: 4px; }
+.fold-all { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+.fold-all .btn { font-size: 13px; padding: 5px 12px; }
+@media (max-width: 700px) { details.fold.plain > summary p { margin-left: 0; text-align: left; flex-basis: 100%; } }
+.euchip .lv { white-space: nowrap; }

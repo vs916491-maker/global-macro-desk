@@ -90,6 +90,24 @@ function section(title, sub, ...kids) {
   return h("section", null, h("div", { class: "section-head" }, h("h2", null, title), sub ? h("p", null, sub) : null), ...kids);
 }
 const panel = (...kids) => h("div", { class: "panel" }, ...kids);
+// section that folds away with an arrow; open/closed is remembered per section
+function foldStore() { try { return JSON.parse(localStorage.getItem("gm-folds") || "{}"); } catch (e) { return {}; } }
+function fold(id, title, sub, ...kids) {
+  const closed = foldStore()[id] === 0;
+  const det = h("details", { class: "fold plain", open: closed ? null : true, "data-fold": id },
+    h("summary", null, h("h2", null, title), sub ? h("p", null, sub) : null), h("div", { class: "fold-body" }, ...kids));
+  det.addEventListener("toggle", () => { const st = foldStore(); st[id] = det.open ? 1 : 0; store("gm-folds", JSON.stringify(st)); });
+  return det;
+}
+function foldAllButtons() {
+  const set = (open) => {
+    const st = foldStore();
+    document.querySelectorAll("details.fold.plain").forEach((d) => { d.open = open; st[d.dataset.fold] = open ? 1 : 0; });
+    store("gm-folds", JSON.stringify(st));
+  };
+  return h("div", { class: "fold-all" }, h("button", { type: "button", class: "btn", onclick: () => set(false) }, "Collapse all"),
+    h("button", { type: "button", class: "btn", onclick: () => set(true) }, "Expand all"));
+}
 const scroll = (t) => h("div", { class: "table-scroll" }, t);
 function trendTag(t) {
   const m = { up: ["pos", "Up"], down: ["neg", "Down"], sideways: ["muted", "Sideways"], mixed: ["muted", "Mixed"], flat: ["muted", "Flat"] }[t] || ["muted", t || "–"];
@@ -374,13 +392,14 @@ async function viewMacro(app) {
     pageHead("Global macro", "Where each asset class stands: score −100 (bearish) … +100 (bullish) from momentum, money flow and macro fit (the Money flow score), plus the Fed, rates and news behind it.", d.updated),
     await problemsBanner("hourly"),
     assetCards(fl, eu),
-    section("Score history", "Daily asset-class score (−100 bearish … +100 bullish); days before 22 Nov 2026 rebuilt from past prices and Fed data, without news",
+    foldAllButtons(),
+    fold("hist", "Score history", "Daily asset-class score (−100 bearish … +100 bullish); days before 22 Nov 2026 rebuilt from past prices and Fed data, without news",
       panel(assetHistory(fl))),
     euphoriaSection(eu),
-    section("What it means", "Plain-words rules on what moved in the last month and how it usually affects each asset class",
+    fold("means", "What it means", "Plain-words rules on what moved in the last month and how it usually affects each asset class",
       panel(h("ul", { class: "interp" }, (d.interpret || []).map((x) => h("li", { class: x.tone > 0 ? "pos" : x.tone < 0 ? "neg" : "" }, x.text))))),
-    QGROUPS.map(([g, keys]) => section(g, null, h("div", { class: "qgrid" }, keys.filter((k) => q[k]).map((k) => quoteCard(k, q[k]))))),
-    section("Fed, rates and inflation", "From FRED (St. Louis Fed); daily series lag one day, monthly ones a few weeks",
+    QGROUPS.map(([g, keys]) => fold(`q-${g}`, g, null, h("div", { class: "qgrid" }, keys.filter((k) => q[k]).map((k) => quoteCard(k, q[k]))))),
+    fold("fed", "Fed, rates and inflation", "From FRED (St. Louis Fed); daily series lag one day, monthly ones a few weeks",
       h("div", { class: "grid2" },
         panel(scroll(h("table", null, h("thead", null, h("tr", null, ["Series", "Now", "1m", "3m", "1y", "As of"].map((c, i) => h("th", { class: i === 0 ? "l" : null }, c)))),
           h("tbody", null, fredRows.map((r) => h("tr", { style: "cursor:default" }, h("td", { class: "l name" }, r.label), h("td", null, `${fmt(r.last, 2)}%`),
@@ -388,9 +407,9 @@ async function viewMacro(app) {
         panel(h("table", { class: "kv" }, h("tbody", null, extra.map(([a, b, c]) => h("tr", { style: "cursor:default" }, h("td", { class: "l name" }, a), h("td", null, b), h("td", { class: "l muted" }, c))))),
           h("h3", { class: "mini" }, "Next central bank decisions"),
           h("table", { class: "kv" }, h("tbody", null, (d.calendar || []).map((c) => h("tr", { style: "cursor:default" }, h("td", { class: "l name" }, c.event), h("td", null, c.date), h("td", { class: "l muted" }, `in ${c.days} days`)))))))),
-    section(`Global risk appetite: ${d.global.regime}${isNum(d.global.score) ? ` (${d.global.score > 0 ? "+" : ""}${d.global.score})` : ""}`, "Feeds the macro fit of US equity, bonds, gold, silver and crypto", panel(partsTable(d.global.parts || []))),
-    section(`India risk appetite: ${d.india.regime}${isNum(d.india.score) ? ` (${d.india.score > 0 ? "+" : ""}${d.india.score})` : ""}`, d.fii && d.fii.last_date ? `FII cash net on ${d.fii.last_date}: ₹${fmt0((d.fii.last || {}).fii)} Cr, DII ₹${fmt0((d.fii.last || {}).dii)} Cr` : null, panel(partsTable(d.india.parts || []))),
-    section("News", `${nw.count || 0} headlines from ${nw.feeds || 0} free feeds, last 4 days. Tone = keyword rules, so read the headline yourself.`,
+    fold("global", `Global risk appetite: ${d.global.regime}${isNum(d.global.score) ? ` (${d.global.score > 0 ? "+" : ""}${d.global.score})` : ""}`, "Feeds the macro fit of US equity, bonds, gold, silver and crypto", panel(partsTable(d.global.parts || []))),
+    fold("india", `India risk appetite: ${d.india.regime}${isNum(d.india.score) ? ` (${d.india.score > 0 ? "+" : ""}${d.india.score})` : ""}`, d.fii && d.fii.last_date ? `FII cash net on ${d.fii.last_date}: ₹${fmt0((d.fii.last || {}).fii)} Cr, DII ₹${fmt0((d.fii.last || {}).dii)} Cr` : null, panel(partsTable(d.india.parts || []))),
+    fold("news", "News", `${nw.count || 0} headlines from ${nw.feeds || 0} free feeds, last 4 days. Tone = keyword rules, so read the headline yourself.`,
       h("div", { class: "filters" }, seg("newsTag", state.newsTag, [["all", "All"], ...Object.entries(tags).map(([k, v]) => [k, `${v}${sent[k] && isNum(sent[k].score) ? ` ${sent[k].score > 0 ? "+" : ""}${Math.round(sent[k].score)}` : ""}`])])),
       panel(h("ul", { class: "news" }, items.slice(0, 80).map((it) => h("li", null,
         h("a", { href: it.link, target: "_blank", rel: "noopener" }, it.title),
