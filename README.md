@@ -32,7 +32,11 @@ Site: https://vs916491-maker.github.io/global-macro-desk/ (after step 4)
    uses Yahoo stand-ins for yields and credit and shows no CPI, PCE, Fed funds or Fed balance sheet.
    Get a free key at https://fredaccount.stlouisfed.org/apikeys (sign up → Request API key), then add it as
    repo secret `FRED_API_KEY`.
-6. **First data** – Actions → "Hourly update" → Run workflow (tick *force*); then "US equity scan" → Run workflow (tick *force*).
+6. **AI view (Gemini, free)** – go to https://aistudio.google.com/apikey → sign in with Google → **Create API key**
+   → copy it. Add it as repo secret `GEMINI_API_KEY`. Then Supabase → SQL Editor → run
+   `supabase/002_ai_brief.sql` (schedules it at 8:25 am and 6:55 pm IST). First run: Actions → "AI view" →
+   Run workflow (tick *force*).
+7. **First data** – Actions → "Hourly update" → Run workflow (tick *force*); then "US equity scan" → Run workflow (tick *force*).
    Each run's summary lists any data source problems.
 
 ## Main files
@@ -48,6 +52,7 @@ Site: https://vs916491-maker.github.io/global-macro-desk/ (after step 4)
 - `hourly.yml` – Supabase pg_cron at :07 every hour; GitHub cron :37 as backup (skips if it already ran)
 - `us-equity.yml` – pg_cron 21:40 UTC Mon–Fri; GitHub cron 22:25 UTC backup
 - `selftest.yml` – push to branch `selftest`: dry run with live data, results saved to branch `selftest-out`
+- `ai-brief.yml` – Gemini AI view, pg_cron 02:55 and 13:25 UTC (backup 03:20 / 14:20); skips if it ran in 3 h
 - `pages.yml` – publishes `site/`; `keepalive.yml` – Sundays, keeps schedules alive
 
 For personal analysis only, not investment advice. All data sources are free and unofficial and can change without notice.

@@ -558,3 +558,13 @@ details.fold.plain > summary:hover h2 { text-decoration: underline; text-decorat
 [data-theme="dark"] .qcard.good { background: rgba(27, 175, 122, 0.16); }
 [data-theme="dark"] .qcard.bad { background: rgba(214, 64, 64, 0.16); }
 [data-theme="dark"] .qcard.flat { background: rgba(160, 170, 180, 0.10); }
+/* AI view */
+.ai-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #fff; background: #6b4fd8; border-radius: 4px; padding: 1px 6px; margin-right: 8px; vertical-align: 2px; }
+.ai-headline { font-size: 16.5px; font-weight: 600; margin: 0 0 8px; }
+.ai-note { margin: 8px 0 4px; padding: 8px 10px; border-radius: 8px; background: rgba(107, 79, 216, 0.07); border: 1px solid rgba(107, 79, 216, 0.25); font-size: 13px; }
+.ai-note p { margin: 4px 0 0; }
+.ai-news { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-top: 8px; }
+.ai-news-item { border: 1px solid var(--hair); border-radius: 8px; padding: 8px 10px; font-size: 13.5px; }
+.ai-news-item.hype { border-color: var(--down); background: rgba(214, 64, 64, 0.06); }
+.ai-news-item p { margin: 4px 0; }
+.ai-news-item .tag { margin-left: 4px; }

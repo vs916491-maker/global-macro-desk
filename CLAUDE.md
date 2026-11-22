@@ -44,6 +44,10 @@ Built 22 Nov 2026. Sister sites: F&O Desk (`fno-desk`), Sector Strength, NSE Fun
 - Backtest (`tests/euphoria_backtest.py`, workflow `euphoria-test.yml`, results branch `euphoria-test-out`): euphoria alone is momentum (prices often rose 10-40% more). Worked: crypto Hot then close below the 50-day (lower 90 days later 70%, 25%+ drop 41%; e.g. 27 Dec 2024, 7 Jan 2025); silver at 80+ (lower 90 days later 56%). Not useful: gold, US equity, Nifty (high = strong trend). BTC tops: Nov 2021 58, Mar 2024 67, Dec 2024 62, Jan 2025 57, Oct 2025 35 (missed).
 - Live policy (`POLICY`): crypto = amber "don't chase" at 60+, red "first crack" when 60+ in the last 60 days and close < 50-day; silver/copper = red at 80+; gold/US/India = info only. Alerts add a warning line to crypto and long commodity ideas.
 
+## AI view (`gmd/ai.py`, Gemini free tier; added 22 Nov 2026 at his request)
+- His choices: daily brief + news reading per asset (with "hype" flag) + For/Against second opinion on ideas; twice a day (pg_cron `gm-ai-brief` 02:55 and 13:25 UTC, `supabase/002_ai_brief.sql`; workflow `ai-brief.yml`); **text only** (never changes scores/ideas/mix).
+- One Gemini call per run (JSON output); model auto-picked from the key's list (newest stable "flash"), fallback gemini-2.5-flash / 2.0-flash. Sends only desk numbers, ~140 headlines, top 20 ideas (no personal data; free-tier inputs may be used by Google). Number check: any sentence with a number not in the data sent is dropped (`removed`). Doc `gm_ai`; idea comments keyed `tab|view|symbol|side|setup`. Needs secret `GEMINI_API_KEY`.
+
 ## Scheduling
 Supabase pg_cron → `dispatch_repo_workflow('global-macro-desk', …)`: `gm-hourly` at :07 every hour, `gm-us-equity` 21:40 UTC Mon–Fri. GitHub cron is a backup; jobs skip if they ran recently (hourly 40 min, US 5 h). The Vault token must include this repo.
 

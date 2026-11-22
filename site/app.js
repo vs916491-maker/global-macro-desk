@@ -203,6 +203,7 @@ function table(id, cols, rows, opts = {}) {
 
 // ------------------------------------------------------------------ data
 const cache = {};
+let AI = null;          // gm_ai: Gemini text (brief, news reading, idea comments)
 async function doc(key) {
   if (LIVE) {
     const { data, error } = await sb.from("docs").select("data,updated_at").eq("key", key).maybeSingle();
@@ -238,7 +239,14 @@ async function problemsBanner(job) {
 // ------------------------------------------------------------------ idea card (all tabs)
 const PART_LABEL = { trend: "Trend", momentum: "Momentum", setup: "Setup", volume: "Volume", macro: "Macro fit" };
 const PART_MAX = { trend: 25, momentum: 20, setup: 25, volume: 10, macro: 20 };
-function ideaCard(x, rank, interval) {
+function aiIdea(tab, x) {
+  const c = AI && AI.ideas && AI.ideas[`${tab}|${x.view}|${x.symbol}|${x.side}|${x.setup}`];
+  if (!c) return null;
+  const cls = c.verdict === "Supports" ? "pos" : c.verdict === "Caution" ? "neg" : "muted";
+  return h("div", { class: "ai-note" }, h("span", { class: "ai-badge" }, "AI"), h("span", { class: `tag ${cls}` }, c.verdict || "–"),
+    c.supports ? h("p", null, h("b", null, "For: "), c.supports) : null, c.risks ? h("p", null, h("b", null, "Against: "), c.risks) : null);
+}
+function ideaCard(x, rank, interval, tab) {
   return h("div", { class: `idea ${rank === 1 ? "top" : ""}` },
     h("h3", null, h("span", null, h("span", { class: "rank" }, `#${rank}`), " ", x.symbol, " ", h("small", null, x.name && x.name !== x.symbol ? x.name : "")),
       h("span", null, sideTag(x.side))),
@@ -253,12 +261,13 @@ function ideaCard(x, rank, interval) {
       h("em", null, `${Math.round((x.parts || {})[k] || 0)}/${PART_MAX[k]}`)))),
     h("ul", { class: "reasons" }, (x.reasons || []).map((r) => h("li", null, r))),
     (x.warns || []).length ? h("ul", { class: "warns" }, x.warns.map((w) => h("li", null, w))) : null,
+    tab ? aiIdea(tab, x) : null,
     h("div", { class: "meta" }, `Trend ${x.trend}, RSI ${x.rsi}`, (x.parts || {}).vol_ratio ? `, volume ${x.parts.vol_ratio}× average` : "", " · ", tvLink(x.tv, interval || (x.tf === "4h" ? "240" : "D"))));
 }
-function ideasBlock(v, interval, emptyText) {
+function ideasBlock(v, interval, emptyText, tab) {
   const ideas = (v && v.ideas) || [];
   if (!ideas.length) return h("p", { class: "empty" }, emptyText || "No setups on the latest completed candles. That is normal: the rules wait for clean breakouts and pullbacks.");
-  return h("div", { class: "ideas" }, ideas.map((x, i) => ideaCard(x, i + 1, interval)));
+  return h("div", { class: "ideas" }, ideas.map((x, i) => ideaCard(x, i + 1, interval, tab)));
 }
 
 // ------------------------------------------------------------------ euphoria meter (warning only)
@@ -348,6 +357,46 @@ function assetHistory(fl) {
       : h("p", { class: "empty" }, "Pick at least one asset class above."));
 }
 
+// ------------------------------------------------------------------ AI view (Gemini; text only)
+function aiFooter(ai) {
+  return h("p", { class: "note" }, `AI view by Google Gemini (${ai.model || "–"}), ${when(ai.updated)} IST, from the desk's own numbers and headlines only. `,
+    "It can be wrong: scores and ideas stay rule-based.", (ai.removed || []).length ? ` ${ai.removed.length} sentence(s) with numbers not in the data were removed.` : "");
+}
+function aiBriefSection() {
+  const ai = AI;
+  if (!ai) return fold("ai", "AI view", "Gemini brief twice a day (8:25 am and 6:55 pm IST)", panel(h("p", { class: "empty" }, "No AI view yet: add the GEMINI_API_KEY secret (see README), then run 'AI view' in GitHub Actions.")));
+  const b = ai.brief || {};
+  const VC = { Bullish: "pos", Bearish: "neg", Neutral: "muted" };
+  return fold("ai", "AI view", ai.stale || ai.error ? `Last good view kept: ${ai.error || ""}` : "Gemini brief twice a day (8:25 am and 6:55 pm IST)",
+    panel(
+      b.headline ? h("p", { class: "ai-headline" }, h("span", { class: "ai-badge" }, "AI"), b.headline) : null,
+      b.summary ? h("p", null, b.summary) : null,
+      h("table", { class: "kv" }, h("tbody", null, AC.filter(([k]) => (b.assets || {})[k]).map(([k, name]) => {
+        const a = b.assets[k];
+        return h("tr", { style: "cursor:default" }, h("td", { class: "l name" }, name), h("td", { class: "l" }, h("span", { class: `tag ${VC[a.view] || "muted"}` }, a.view || "–")),
+          h("td", { class: "l" }, a.why || ""));
+      }))),
+      h("div", { class: "grid2" },
+        (b.risks || []).length ? h("div", null, h("h3", { class: "mini" }, "Risks"), h("ul", { class: "reasons" }, b.risks.map((r) => h("li", null, r)))) : null,
+        (b.watch || []).length ? h("div", null, h("h3", { class: "mini" }, "Watch next"), h("ul", { class: "reasons" }, b.watch.map((r) => h("li", null, r)))) : null),
+      aiFooter(ai)));
+}
+function aiNewsBlock() {
+  const n = AI && AI.news;
+  if (!n || !n.assets) return null;
+  const order = [["fed", "Fed / rates"], ["us_eq", "US equity"], ["in_eq", "Indian equity"], ["us_bond", "US bonds"], ["gold", "Gold"], ["silver", "Silver"], ["copper", "Copper"], ["crypto", "Crypto"]];
+  const LC = { Positive: "pos", Negative: "neg", Mixed: "muted", Quiet: "muted" };
+  return panel(h("h3", { class: "mini", style: "margin-top:0" }, h("span", { class: "ai-badge" }, "AI"), "News reading by asset"),
+    n.hype_note ? h("p", { class: "note" }, n.hype_note) : null,
+    h("div", { class: "ai-news" }, order.filter(([k]) => n.assets[k]).map(([k, name]) => {
+      const a = n.assets[k];
+      return h("div", { class: `ai-news-item ${a.hype ? "hype" : ""}` },
+        h("div", null, h("b", null, name), " ", h("span", { class: `tag ${LC[a.label] || "muted"}` }, a.label || "–"), a.hype ? h("span", { class: "tag neg" }, "Hype") : null),
+        h("p", null, a.why || ""),
+        (a.headlines || []).length ? h("ul", { class: "reasons" }, a.headlines.map((x) => h("li", null, h("a", { href: x.link, target: "_blank", rel: "noopener" }, x.title)))) : null);
+    })));
+}
+
 // ------------------------------------------------------------------ tab: global macro
 const QGROUPS = [
   ["United States", ["spx", "ndx", "dji", "rut", "vix"]],
@@ -418,6 +467,7 @@ async function viewMacro(app) {
     foldAllButtons(),
     fold("hist", "Score history", "Daily asset-class score (−100 bearish … +100 bullish); days before 22 Nov 2026 rebuilt from past prices and Fed data, without news",
       panel(assetHistory(fl))),
+    aiBriefSection(),
     euphoriaSection(eu),
     fold("means", "What it means", "Plain-words rules on what moved in the last month and how it usually affects each asset class",
       panel(h("ul", { class: "interp" }, (d.interpret || []).map((x) => h("li", { class: x.tone > 0 ? "pos" : x.tone < 0 ? "neg" : "" }, x.text))))),
@@ -434,6 +484,7 @@ async function viewMacro(app) {
     fold("global", `Global risk appetite: ${d.global.regime}${isNum(d.global.score) ? ` (${d.global.score > 0 ? "+" : ""}${d.global.score})` : ""}`, "Feeds the macro fit of US equity, bonds, gold, silver and crypto", panel(partsTable(d.global.parts || []))),
     fold("india", `India risk appetite: ${d.india.regime}${isNum(d.india.score) ? ` (${d.india.score > 0 ? "+" : ""}${d.india.score})` : ""}`, d.fii && d.fii.last_date ? `FII cash net on ${d.fii.last_date}: ₹${fmt0((d.fii.last || {}).fii)} Cr, DII ₹${fmt0((d.fii.last || {}).dii)} Cr` : null, panel(partsTable(d.india.parts || []))),
     fold("news", "News", `${nw.count || 0} headlines from ${nw.feeds || 0} free feeds, last 4 days. Tone = keyword rules, so read the headline yourself.`,
+      aiNewsBlock(),
       h("div", { class: "filters" }, seg("newsTag", state.newsTag, [["all", "All"], ...Object.entries(tags).map(([k, v]) => [k, `${v}${sent[k] && isNum(sent[k].score) ? ` ${sent[k].score > 0 ? "+" : ""}${Math.round(sent[k].score)}` : ""}`])])),
       panel(h("ul", { class: "news" }, items.slice(0, 80).map((it) => h("li", null,
         h("a", { href: it.link, target: "_blank", rel: "noopener" }, it.title),
@@ -512,7 +563,7 @@ async function viewCrypto(app) {
     section(`Market: ${(m.regime || {}).label || "–"}`, null, panel(h("ul", { class: "interp" }, ((m.regime || {}).why || []).map((w) => h("li", null, w))),
       (m.fng_hist || []).length > 5 ? h("div", null, h("h3", { class: "mini" }, "Fear & Greed, last 60 days"), lineChart([{ name: "Fear & Greed", values: m.fng_hist.map((x) => x.value) }], m.fng_hist.map((x) => x.date), { height: 140, min: 0, max: 100 })) : null)),
     section("Trade ideas", state.view === "swing" ? "4-hour candles, long and short; higher timeframe = daily. Target 1:2, exit after 14 days. Shorts need perpetual futures." : "Daily candles, long and short; higher timeframe = weekly. Target 1:3, exit after 90 days. Shorts need perpetual futures (funding fees add up).",
-      h("div", { class: "filters" }, viewSeg()), ideasBlock(v, state.view === "swing" ? "240" : "D")),
+      h("div", { class: "filters" }, viewSeg()), ideasBlock(v, state.view === "swing" ? "240" : "D", null, "crypto")),
     section("Trending coins", "Top coins by market cap (stablecoins and wrapped tokens left out), ranked by trend score: 7-day and 30-day strength vs the rest, trend, volume surge, CoinGecko trending list",
       panel(table("coins", [
         { k: "sym", label: "Coin", l: true, fmt: (r) => h("span", { class: "name" }, r.sym, " ", tvLink(r.tv, "D", "↗"), h("small", null, `${r.name}${r.rank ? ` · #${r.rank}` : ""}`), r.cg_trending ? h("span", { class: "flag fno" }, "Trending") : null) },
@@ -564,7 +615,7 @@ async function viewCommod(app) {
       stat("Real 10Y yield", isNum(c.real10) ? `${fmt(c.real10, 2)}%` : "–", isNum(c.real10_m1) ? `${c.real10_m1 > 0 ? "+" : ""}${Math.round(c.real10_m1 * 100)} bp in 1 month` : null, sign(-c.real10_m1)),
       stat("Global regime", c.regime || "–", isNum(c.vix) ? `US VIX ${fmt(c.vix, 1)}` : null))),
     section("Trading ideas", state.view === "swing" ? "4-hour candles, long and short; higher timeframe = daily. Target 1:2, exit after 14 days." : "Daily candles, long and short; higher timeframe = weekly. Target 1:3, exit after 90 days.",
-      h("div", { class: "filters" }, viewSeg()), ideasBlock(v, state.view === "swing" ? "240" : "D", "No setup on the latest completed candles for gold, silver or copper. Use the direction score and trends above until one forms.")));
+      h("div", { class: "filters" }, viewSeg()), ideasBlock(v, state.view === "swing" ? "240" : "D", "No setup on the latest completed candles for gold, silver or copper. Use the direction score and trends above until one forms.", "commodities")));
 }
 
 // ------------------------------------------------------------------ tab: US equity
@@ -602,7 +653,7 @@ async function viewUS(app) {
           stat("New 52w highs / lows", `${b.new_highs} / ${b.new_lows}`),
           stat("Up / down today", `${b.adv} / ${b.dec}`)))),
     section(`Top ${(v && v.ideas || []).length || 10} ideas`, state.view === "swing" ? "Daily candles; weekly trend as filter. Target 1:2, exit after 14 days. Long only." : "Daily candles with the 50 EMA and momentum leaders; weekly trend as filter. Target 1:3, exit after 90 days. Long only.",
-      h("div", { class: "filters" }, viewSeg()), ideasBlock(v, "D"),
+      h("div", { class: "filters" }, viewSeg()), ideasBlock(v, "D", null, "us"),
       v && (v.more || []).length ? h("details", { class: "run" }, h("summary", null, `${v.more.length} more setups`), panel(table("usmore", [
         { k: "symbol", label: "Stock", l: true, fmt: (r) => h("span", { class: "name" }, r.symbol, " ", tvLink(r.tv, "D", "↗"), h("small", null, `${r.name} · ${r.sector || ""}`)) },
         { k: "setup_name", label: "Setup", l: true }, { k: "score", label: "Score", fmt: (r) => meterBar(r.score) },
@@ -696,6 +747,10 @@ function viewReadme(app) {
       li("Key Drivers: US 10Y yield, Fed balance sheet (weekly; rising = QE / money added, falling = QT), USD/INR, India 10Y G-Sec yield (TradingView TVC:IN10Y, delayed; backup = official monthly figure from FRED/OECD), Brent crude, dollar index."),
       li("Card colours (United States, India, Key Drivers, Commodities and crypto) show what the last month's move means for markets: green = good, red = bad, grey = little change. Rising is bad for yields, VIX, crude, the dollar and USD-INR (a weaker rupee); rising is good for indices, metals, crypto and the Fed balance sheet. Little change = under 10 bp for yields, 0.5% for DXY and USD-INR, 0.25% for the Fed balance sheet, 5% for VIX, 1% otherwise."),
       li("Score history: one line per asset class, daily (last run of the day). Days before 22 Nov 2026 were rebuilt from past prices and Fed data with the same rules, without news and FII flows. Tap a name to hide or show its line.")),
+    blk("AI view (Google Gemini, free tier) - text only",
+      li("Twice a day (about 8:25 am and 6:55 pm IST) the desk sends Gemini its own numbers (scores, key drivers, Fed data, euphoria, calendar), the latest ~140 headlines and the top 20 ideas. Gemini returns a brief, a news reading per asset (with a 'Hype' flag when headlines are one-sided and excited) and a For / Against comment on each idea."),
+      li("It never changes scores, ideas or the mix. It has no web search (free tier) and is told to use only the numbers sent; any sentence quoting a number that is not in the data is removed before it is shown."),
+      li("Free-tier inputs may be used by Google to improve its products: only public market data is sent, never your trades.")),
     blk("Global and India risk appetite (−100 risk-off … +100 risk-on)",
       li("Global: US VIX 20 (below 14 = +1, 14–18 = +0.5, 18–22 = 0, 22–28 = −0.5, above = −1, ±0.25 for falling/rising vs its 20-day average), high-yield credit spread 15, S&P 500 trend 15, dollar index 1-month move 15 (−2.5% = +1), US 10Y 1-month move 10 (−40 bp = +1), yield curve 5, copper/gold 1-month 10, news tone 10."),
       li("India: Nifty trend 25, India VIX 15, rupee 1-month move 15, Brent 1-month move 15, FII cash flows over 5 sessions 15 (±₹15,000 Cr = ±1), India news tone 15."),
@@ -770,6 +825,7 @@ async function route() {
   } else {
     who.replaceChildren(h("span", null, "Preview with sample data"));
   }
+  AI = await doc("gm_ai").catch(() => null);
   try {
     if (tab === "flows") await viewFlows(app);
     else if (tab === "crypto") await viewCrypto(app);

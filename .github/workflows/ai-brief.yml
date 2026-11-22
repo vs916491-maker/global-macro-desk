@@ -1,0 +1,39 @@
+name: AI view (Gemini, twice a day)
+
+# Normally started by Supabase pg_cron at 02:55 and 13:25 UTC (8:25 am and 6:55 pm IST), after the hourly
+# update. The GitHub schedule is a backup; the job skips if it ran in the last 3 hours.
+on:
+  schedule:
+    - cron: "20 3,14 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even if it ran recently"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-brief
+  cancel-in-progress: false
+
+jobs:
+  ai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Ask Gemini
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FORCE: ${{ github.event.inputs.force }}
+        run: python -m gmd.ai
