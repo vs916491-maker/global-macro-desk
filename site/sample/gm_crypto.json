@@ -1,0 +1,719 @@
+{
+ "updated": "2026-11-22T10:34:02+00:00",
+ "market": {
+  "total_mcap": 3100000000000.0,
+  "mcap_chg24": 1.2,
+  "btc_dom": 58.2,
+  "eth_dom": 11.9,
+  "btc_dom_7d_ago": null,
+  "fng": {
+   "date": "2026-11-22",
+   "value": 40,
+   "label": "Neutral"
+  },
+  "fng_avg7": 50,
+  "fng_hist": [
+   {
+    "date": "2026-09-24",
+    "value": 26,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-09-25",
+    "value": 23,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-09-26",
+    "value": 21,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-09-27",
+    "value": 20,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-09-28",
+    "value": 20,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-09-29",
+    "value": 20,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-09-30",
+    "value": 21,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-01",
+    "value": 23,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-02",
+    "value": 26,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-03",
+    "value": 29,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-04",
+    "value": 32,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-05",
+    "value": 36,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-06",
+    "value": 40,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-07",
+    "value": 44,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-08",
+    "value": 48,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-09",
+    "value": 51,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-10",
+    "value": 54,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-11",
+    "value": 57,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-12",
+    "value": 58,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-13",
+    "value": 59,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-14",
+    "value": 59,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-15",
+    "value": 59,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-16",
+    "value": 57,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-17",
+    "value": 55,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-18",
+    "value": 53,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-19",
+    "value": 49,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-20",
+    "value": 46,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-21",
+    "value": 42,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-22",
+    "value": 38,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-23",
+    "value": 34,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-24",
+    "value": 30,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-25",
+    "value": 27,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-26",
+    "value": 24,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-27",
+    "value": 22,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-28",
+    "value": 20,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-29",
+    "value": 20,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-30",
+    "value": 20,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-10-31",
+    "value": 20,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-01",
+    "value": 22,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-02",
+    "value": 24,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-03",
+    "value": 27,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-04",
+    "value": 31,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-05",
+    "value": 34,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-06",
+    "value": 38,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-07",
+    "value": 42,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-08",
+    "value": 46,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-09",
+    "value": 50,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-10",
+    "value": 53,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-11",
+    "value": 56,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-12",
+    "value": 58,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-13",
+    "value": 59,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-14",
+    "value": 59,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-15",
+    "value": 59,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-16",
+    "value": 58,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-17",
+    "value": 56,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-18",
+    "value": 54,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-19",
+    "value": 51,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-20",
+    "value": 47,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-21",
+    "value": 43,
+    "label": "Neutral"
+   },
+   {
+    "date": "2026-11-22",
+    "value": 40,
+    "label": "Neutral"
+   }
+  ],
+  "altseason": 58,
+  "btc": {
+   "price": 100.0,
+   "d1": -3.0884,
+   "w1": 2.3712,
+   "m1": -25.2315,
+   "trend_d": "sideways",
+   "trend_w": "up",
+   "rsi": 45.9,
+   "from_high": -14.5,
+   "above200": true
+  },
+  "fit": 31,
+  "trending_cg": [
+   "SUI",
+   "TON"
+  ],
+  "regime": {
+   "label": "Mixed",
+   "points": 1,
+   "why": [
+    "BTC above its 200-day average",
+    "58% of the top coins beat BTC over 90 days"
+   ]
+  }
+ },
+ "coins": [
+  {
+   "id": "doge",
+   "sym": "DOGE",
+   "name": "DOGE coin",
+   "rank": 7,
+   "mcap": 14285714285.7143,
+   "vol24": 142857142.8571,
+   "d1": -2.816,
+   "w1": 2.688,
+   "m1": 19.401,
+   "ath_chg": -39.8227,
+   "price": 14.2857,
+   "trend": "up",
+   "trend_pts": 3,
+   "adx": 30.9,
+   "rsi": 57.2,
+   "from_high": -50.4,
+   "above200": false,
+   "trend_d": "up",
+   "trend_w": "down",
+   "rs90": 0.38,
+   "vs_btc_90d": -1.3,
+   "r90": -7.3,
+   "cg_trending": false,
+   "tv": "CRYPTO:DOGEUSD",
+   "vol_surge": 0.63,
+   "trend_score": 71
+  },
+  {
+   "id": "sui",
+   "sym": "SUI",
+   "name": "SUI coin",
+   "rank": 12,
+   "mcap": 8333333333.3333,
+   "vol24": 83333333.3333,
+   "d1": -6.2714,
+   "w1": 1.3591,
+   "m1": 3.3665,
+   "ath_chg": -32.7577,
+   "price": 8.3333,
+   "trend": "up",
+   "trend_pts": 5,
+   "adx": 32.9,
+   "rsi": 62.6,
+   "from_high": -9.6,
+   "above200": true,
+   "trend_d": "up",
+   "trend_w": "up",
+   "rs90": 0.92,
+   "vs_btc_90d": 25.2,
+   "r90": 19.2,
+   "cg_trending": true,
+   "tv": "CRYPTO:SUIUSD",
+   "vol_surge": 0.22,
+   "trend_score": 71
+  },
+  {
+   "id": "link",
+   "sym": "LINK",
+   "name": "LINK coin",
+   "rank": 10,
+   "mcap": 10000000000.0,
+   "vol24": 100000000.0,
+   "d1": -0.4411,
+   "w1": 3.3767,
+   "m1": 0.4521,
+   "ath_chg": -8.684,
+   "price": 10.0,
+   "trend": "sideways",
+   "trend_pts": 1,
+   "adx": 16.7,
+   "rsi": 55.3,
+   "from_high": -13.8,
+   "above200": true,
+   "trend_d": "sideways",
+   "trend_w": "up",
+   "rs90": 0.69,
+   "vs_btc_90d": 13.9,
+   "r90": 7.9,
+   "cg_trending": false,
+   "tv": "CRYPTO:LINKUSD",
+   "vol_surge": 1.58,
+   "trend_score": 63
+  },
+  {
+   "id": "avax",
+   "sym": "AVAX",
+   "name": "AVAX coin",
+   "rank": 11,
+   "mcap": 9090909090.9091,
+   "vol24": 90909090.9091,
+   "d1": 2.8185,
+   "w1": -10.2169,
+   "m1": 8.3498,
+   "ath_chg": -59.8741,
+   "price": 9.0909,
+   "trend": "up",
+   "trend_pts": 5,
+   "adx": 34.0,
+   "rsi": 59.1,
+   "from_high": -4.6,
+   "above200": true,
+   "trend_d": "up",
+   "trend_w": "up",
+   "rs90": 1.0,
+   "vs_btc_90d": 53.0,
+   "r90": 47.0,
+   "cg_trending": false,
+   "tv": "CRYPTO:AVAXUSD",
+   "vol_surge": 0.85,
+   "trend_score": 54
+  },
+  {
+   "id": "bnb",
+   "sym": "BNB",
+   "name": "BNB coin",
+   "rank": 4,
+   "mcap": 25000000000.0,
+   "vol24": 250000000.0,
+   "d1": -3.0758,
+   "w1": 8.6026,
+   "m1": 2.1267,
+   "ath_chg": -26.6407,
+   "price": 25.0,
+   "trend": "down",
+   "trend_pts": -5,
+   "adx": 36.5,
+   "rsi": 37.5,
+   "from_high": -41.6,
+   "above200": false,
+   "trend_d": "down",
+   "trend_w": "down",
+   "rs90": 0.23,
+   "vs_btc_90d": -10.0,
+   "r90": -16.0,
+   "cg_trending": false,
+   "tv": "CRYPTO:BNBUSD",
+   "vol_surge": 1.66,
+   "trend_score": 53
+  },
+  {
+   "id": "sol",
+   "sym": "SOL",
+   "name": "SOL coin",
+   "rank": 5,
+   "mcap": 20000000000.0,
+   "vol24": 200000000.0,
+   "d1": 2.7658,
+   "w1": -6.1059,
+   "m1": 8.3895,
+   "ath_chg": -29.184,
+   "price": 20.0,
+   "trend": "sideways",
+   "trend_pts": -1,
+   "adx": 28.2,
+   "rsi": 37.3,
+   "from_high": -11.2,
+   "above200": true,
+   "trend_d": "sideways",
+   "trend_w": "up",
+   "rs90": 0.77,
+   "vs_btc_90d": 14.2,
+   "r90": 8.2,
+   "cg_trending": false,
+   "tv": "CRYPTO:SOLUSD",
+   "vol_surge": 1.62,
+   "trend_score": 49
+  },
+  {
+   "id": "ada",
+   "sym": "ADA",
+   "name": "ADA coin",
+   "rank": 8,
+   "mcap": 12500000000.0,
+   "vol24": 125000000.0,
+   "d1": -1.989,
+   "w1": -0.7881,
+   "m1": -6.4989,
+   "ath_chg": -5.4506,
+   "price": 12.5,
+   "trend": "up",
+   "trend_pts": 5,
+   "adx": 30.9,
+   "rsi": 54.7,
+   "from_high": -3.4,
+   "above200": true,
+   "trend_d": "up",
+   "trend_w": "up",
+   "rs90": 0.85,
+   "vs_btc_90d": 14.8,
+   "r90": 8.8,
+   "cg_trending": false,
+   "tv": "CRYPTO:ADAUSD",
+   "vol_surge": 0.03,
+   "trend_score": 46
+  },
+  {
+   "id": "btc",
+   "sym": "BTC",
+   "name": "BTC coin",
+   "rank": 1,
+   "mcap": 100000000000.0,
+   "vol24": 1000000000.0,
+   "d1": -3.0884,
+   "w1": 2.3712,
+   "m1": -25.2315,
+   "ath_chg": -10.9579,
+   "price": 100.0,
+   "trend": "sideways",
+   "trend_pts": 1,
+   "adx": 26.7,
+   "rsi": 45.9,
+   "from_high": -14.5,
+   "above200": true,
+   "trend_d": "sideways",
+   "trend_w": "up",
+   "rs90": 0.46,
+   "vs_btc_90d": 0.0,
+   "r90": -6.0,
+   "cg_trending": false,
+   "tv": "CRYPTO:BTCUSD",
+   "vol_surge": 1.11,
+   "trend_score": 44
+  },
+  {
+   "id": "eth",
+   "sym": "ETH",
+   "name": "ETH coin",
+   "rank": 2,
+   "mcap": 50000000000.0,
+   "vol24": 500000000.0,
+   "d1": -2.0705,
+   "w1": 0.2379,
+   "m1": -21.0911,
+   "ath_chg": -50.4062,
+   "price": 50.0,
+   "trend": "sideways",
+   "trend_pts": 0,
+   "adx": 12.3,
+   "rsi": 54.2,
+   "from_high": -38.9,
+   "above200": false,
+   "trend_d": "sideways",
+   "trend_w": "down",
+   "rs90": 0.62,
+   "vs_btc_90d": 2.1,
+   "r90": -3.9,
+   "cg_trending": false,
+   "tv": "CRYPTO:ETHUSD",
+   "vol_surge": 1.38,
+   "trend_score": 44
+  },
+  {
+   "id": "trx",
+   "sym": "TRX",
+   "name": "TRX coin",
+   "rank": 9,
+   "mcap": 11111111111.1111,
+   "vol24": 111111111.1111,
+   "d1": -3.489,
+   "w1": -0.2435,
+   "m1": 6.8258,
+   "ath_chg": -6.2575,
+   "price": 11.1111,
+   "trend": "down",
+   "trend_pts": -5,
+   "adx": 14.3,
+   "rsi": 46.5,
+   "from_high": -24.1,
+   "above200": false,
+   "trend_d": "down",
+   "trend_w": "down",
+   "rs90": 0.31,
+   "vs_btc_90d": -3.8,
+   "r90": -9.8,
+   "cg_trending": false,
+   "tv": "CRYPTO:TRXUSD",
+   "vol_surge": 1.16,
+   "trend_score": 41
+  },
+  {
+   "id": "xlm",
+   "sym": "XLM",
+   "name": "XLM coin",
+   "rank": 13,
+   "mcap": 7692307692.3077,
+   "vol24": 76923076.9231,
+   "d1": -2.5205,
+   "w1": -3.1413,
+   "m1": -21.9029,
+   "ath_chg": -30.8544,
+   "price": 7.6923,
+   "trend": "sideways",
+   "trend_pts": -1,
+   "adx": 23.6,
+   "rsi": 61.3,
+   "from_high": -22.3,
+   "above200": false,
+   "trend_d": "sideways",
+   "trend_w": "down",
+   "rs90": 0.15,
+   "vs_btc_90d": -14.0,
+   "r90": -20.0,
+   "cg_trending": false,
+   "tv": "CRYPTO:XLMUSD",
+   "vol_surge": 1.33,
+   "trend_score": 32
+  },
+  {
+   "id": "ton",
+   "sym": "TON",
+   "name": "TON coin",
+   "rank": 14,
+   "mcap": 7142857142.8571,
+   "vol24": 71428571.4286,
+   "d1": 1.3209,
+   "w1": -5.9389,
+   "m1": -14.9781,
+   "ath_chg": -18.9182,
+   "price": 7.1429,
+   "trend": "down",
+   "trend_pts": -5,
+   "adx": 32.1,
+   "rsi": 23.0,
+   "from_high": -37.3,
+   "above200": false,
+   "trend_d": "down",
+   "trend_w": "down",
+   "rs90": 0.08,
+   "vs_btc_90d": -21.7,
+   "r90": -27.7,
+   "cg_trending": true,
+   "tv": "CRYPTO:TONUSD",
+   "vol_surge": 0.61,
+   "trend_score": 28
+  },
+  {
+   "id": "xrp",
+   "sym": "XRP",
+   "name": "XRP coin",
+   "rank": 3,
+   "mcap": 33333333333.3333,
+   "vol24": 333333333.3333,
+   "d1": -1.0735,
+   "w1": -2.4907,
+   "m1": -6.1977,
+   "ath_chg": -15.58,
+   "price": 33.3333,
+   "trend": "down",
+   "trend_pts": -3,
+   "adx": 28.1,
+   "rsi": 52.1,
+   "from_high": -50.8,
+   "above200": false,
+   "trend_d": "down",
+   "trend_w": "down",
+   "rs90": 0.54,
+   "vs_btc_90d": 0.6,
+   "r90": -5.4,
+   "cg_trending": false,
+   "tv": "CRYPTO:XRPUSD",
+   "vol_surge": 0.13,
+   "trend_score": 27
+  }
+ ],
+ "views": {
+  "swing": {
+   "ideas": [],
+   "count": 0
+  },
+  "positional": {
+   "ideas": [],
+   "count": 0
+  }
+ }
+}

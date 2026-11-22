@@ -1,0 +1,38 @@
+name: US equity scan (after the US close)
+
+# Normally started by Supabase pg_cron at 21:40 UTC Mon-Fri (03:10 IST Tue-Sat), after the 4 pm New York
+# close in both summer and winter time. The GitHub schedule is a backup; the job skips if it ran in the last 5 hours.
+on:
+  schedule:
+    - cron: "25 22 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even if it ran recently"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: us-equity
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Scan S&P 500 + Nasdaq 100
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          FORCE: ${{ github.event.inputs.force }}
+        run: python -m gmd.run us

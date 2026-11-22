@@ -1,0 +1,36 @@
+name: Self-test with live data (read-only)
+
+# Push anything to the branch "selftest" (or run by hand): runs both jobs as a dry run (no database
+# writes) with real data and saves the results to the branch "selftest-out" for checking.
+on:
+  push:
+    branches: [selftest]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Dry run
+        run: python -m gmd.run all --dry --force 2>&1 | tee run.log
+      - name: Save results to branch selftest-out
+        run: |
+          mkdir -p /tmp/res && cp -r out/* run.log /tmp/res/ || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan selftest-out
+          git rm -rf . > /dev/null
+          cp -r /tmp/res/* .
+          git add -A
+          git commit -m "Self-test results $(date -u +%FT%TZ)"
+          git push -f origin selftest-out

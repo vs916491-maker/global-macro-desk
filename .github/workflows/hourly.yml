@@ -1,0 +1,38 @@
+name: Hourly update (macro, money flow, crypto, commodities)
+
+# Normally started by Supabase pg_cron at 7 minutes past every hour (supabase/001_global_macro_desk.sql).
+# The GitHub schedule below is only a backup: the job skips itself if it already ran in the last 40 minutes.
+on:
+  schedule:
+    - cron: "37 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run even if it ran a few minutes ago"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hourly
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Update the desk
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          FORCE: ${{ github.event.inputs.force }}
+        run: python -m gmd.run hourly

@@ -1,0 +1,2386 @@
+{
+ "items": [
+  {
+   "title": "Gold rises to record high as war fears grow (Google News: Fed)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.268564+00:00",
+   "source": "Google News: Fed",
+   "desc": "",
+   "tags": [
+    "fed",
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Google News: India markets)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.268514+00:00",
+   "source": "Google News: India markets",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953,
+    "in_eq": -0.664
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Google News: Wall Street)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.268439+00:00",
+   "source": "Google News: Wall Street",
+   "desc": "",
+   "tags": [
+    "us_eq",
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953,
+    "us_eq": -0.664
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Google News: copper)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.268375+00:00",
+   "source": "Google News: copper",
+   "desc": "",
+   "tags": [
+    "gold",
+    "copper",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953,
+    "copper": -0.664
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Google News: gold)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.268215+00:00",
+   "source": "Google News: gold",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Cointelegraph)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.268185+00:00",
+   "source": "Cointelegraph",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (CoinDesk)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.268143+00:00",
+   "source": "CoinDesk",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Google News: silver)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.268099+00:00",
+   "source": "Google News: silver",
+   "desc": "",
+   "tags": [
+    "gold",
+    "silver",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953,
+    "silver": 0.488
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Livemint)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.268071+00:00",
+   "source": "Livemint",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Economic Times)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.267895+00:00",
+   "source": "Economic Times",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Federal Reserve)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.267857+00:00",
+   "source": "Federal Reserve",
+   "desc": "",
+   "tags": [
+    "fed",
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Moneycontrol)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.267816+00:00",
+   "source": "Moneycontrol",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (MarketWatch Pulse)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.267614+00:00",
+   "source": "MarketWatch Pulse",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (Yahoo Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.267563+00:00",
+   "source": "Yahoo Finance",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (MarketWatch)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.267517+00:00",
+   "source": "MarketWatch",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (CNBC Economy)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.267293+00:00",
+   "source": "CNBC Economy",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (CNBC Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.267237+00:00",
+   "source": "CNBC Finance",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Gold rises to record high as war fears grow (CNBC)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T10:34:01.267001+00:00",
+   "source": "CNBC",
+   "desc": "",
+   "tags": [
+    "gold",
+    "macro"
+   ],
+   "risk": -0.788,
+   "asset": {
+    "gold": 0.953
+   },
+   "age_h": 0.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Google News: Fed)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.268564+00:00",
+   "source": "Google News: Fed",
+   "desc": "",
+   "tags": [
+    "fed",
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Google News: India markets)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.268514+00:00",
+   "source": "Google News: India markets",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Google News: Wall Street)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.268439+00:00",
+   "source": "Google News: Wall Street",
+   "desc": "",
+   "tags": [
+    "us_eq",
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Google News: copper)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.268375+00:00",
+   "source": "Google News: copper",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "copper",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Google News: gold)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.268215+00:00",
+   "source": "Google News: gold",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "gold",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Cointelegraph)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.268185+00:00",
+   "source": "Cointelegraph",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (CoinDesk)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.268143+00:00",
+   "source": "CoinDesk",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Google News: silver)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.268099+00:00",
+   "source": "Google News: silver",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "silver",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Livemint)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.268071+00:00",
+   "source": "Livemint",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Economic Times)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.267895+00:00",
+   "source": "Economic Times",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Federal Reserve)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.267857+00:00",
+   "source": "Federal Reserve",
+   "desc": "",
+   "tags": [
+    "fed",
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Moneycontrol)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.267816+00:00",
+   "source": "Moneycontrol",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (MarketWatch Pulse)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.267614+00:00",
+   "source": "MarketWatch Pulse",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (Yahoo Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.267563+00:00",
+   "source": "Yahoo Finance",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (MarketWatch)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.267517+00:00",
+   "source": "MarketWatch",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (CNBC Economy)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.267293+00:00",
+   "source": "CNBC Economy",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (CNBC Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.267237+00:00",
+   "source": "CNBC Finance",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Treasury yields jump after hot inflation data (CNBC)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T05:34:01.267001+00:00",
+   "source": "CNBC",
+   "desc": "",
+   "tags": [
+    "bonds",
+    "macro"
+   ],
+   "risk": -0.583,
+   "asset": {
+    "bonds": -0.583
+   },
+   "age_h": 5.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Google News: Fed)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.268564+00:00",
+   "source": "Google News: Fed",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Google News: India markets)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.268514+00:00",
+   "source": "Google News: India markets",
+   "desc": "",
+   "tags": [
+    "fed",
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Google News: Wall Street)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.268439+00:00",
+   "source": "Google News: Wall Street",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Google News: copper)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.268375+00:00",
+   "source": "Google News: copper",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq",
+    "copper"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788,
+    "copper": 0.38
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Google News: gold)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.268215+00:00",
+   "source": "Google News: gold",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq",
+    "gold"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788,
+    "gold": -0.261
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Cointelegraph)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.268185+00:00",
+   "source": "Cointelegraph",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (CoinDesk)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.268143+00:00",
+   "source": "CoinDesk",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Google News: silver)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.268099+00:00",
+   "source": "Google News: silver",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq",
+    "silver"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788,
+    "silver": -0.261
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Livemint)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.268071+00:00",
+   "source": "Livemint",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Economic Times)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.267895+00:00",
+   "source": "Economic Times",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Federal Reserve)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.267857+00:00",
+   "source": "Federal Reserve",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Moneycontrol)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.267816+00:00",
+   "source": "Moneycontrol",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (MarketWatch Pulse)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.267614+00:00",
+   "source": "MarketWatch Pulse",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (Yahoo Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.267563+00:00",
+   "source": "Yahoo Finance",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (MarketWatch)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.267517+00:00",
+   "source": "MarketWatch",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (CNBC Economy)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.267293+00:00",
+   "source": "CNBC Economy",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq",
+    "macro"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (CNBC Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.267237+00:00",
+   "source": "CNBC Finance",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Stocks rally as Fed signals rate cut (CNBC)",
+   "link": "https://example.com",
+   "ts": "2026-11-22T00:34:01.267001+00:00",
+   "source": "CNBC",
+   "desc": "",
+   "tags": [
+    "fed",
+    "us_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "us_eq": 0.788
+   },
+   "age_h": 10.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Google News: Fed)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.268564+00:00",
+   "source": "Google News: Fed",
+   "desc": "",
+   "tags": [
+    "fed",
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Google News: India markets)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.268514+00:00",
+   "source": "Google News: India markets",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788,
+    "in_eq": -0.38
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Google News: Wall Street)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.268439+00:00",
+   "source": "Google News: Wall Street",
+   "desc": "",
+   "tags": [
+    "us_eq",
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788,
+    "us_eq": -0.38
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Google News: copper)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.268375+00:00",
+   "source": "Google News: copper",
+   "desc": "",
+   "tags": [
+    "copper",
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788,
+    "copper": -0.38
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Google News: gold)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.268215+00:00",
+   "source": "Google News: gold",
+   "desc": "",
+   "tags": [
+    "gold",
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788,
+    "gold": 0.261
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Cointelegraph)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.268185+00:00",
+   "source": "Cointelegraph",
+   "desc": "",
+   "tags": [
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (CoinDesk)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.268143+00:00",
+   "source": "CoinDesk",
+   "desc": "",
+   "tags": [
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Google News: silver)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.268099+00:00",
+   "source": "Google News: silver",
+   "desc": "",
+   "tags": [
+    "silver",
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788,
+    "silver": 0.261
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Livemint)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.268071+00:00",
+   "source": "Livemint",
+   "desc": "",
+   "tags": [
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Economic Times)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.267895+00:00",
+   "source": "Economic Times",
+   "desc": "",
+   "tags": [
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Federal Reserve)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.267857+00:00",
+   "source": "Federal Reserve",
+   "desc": "",
+   "tags": [
+    "fed",
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Moneycontrol)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.267816+00:00",
+   "source": "Moneycontrol",
+   "desc": "",
+   "tags": [
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (MarketWatch Pulse)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.267614+00:00",
+   "source": "MarketWatch Pulse",
+   "desc": "",
+   "tags": [
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (Yahoo Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.267563+00:00",
+   "source": "Yahoo Finance",
+   "desc": "",
+   "tags": [
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (MarketWatch)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.267517+00:00",
+   "source": "MarketWatch",
+   "desc": "",
+   "tags": [
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (CNBC Economy)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.267293+00:00",
+   "source": "CNBC Economy",
+   "desc": "",
+   "tags": [
+    "crypto",
+    "macro"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (CNBC Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.267237+00:00",
+   "source": "CNBC Finance",
+   "desc": "",
+   "tags": [
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Bitcoin plunges below $80,000 amid liquidations (CNBC)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T19:34:01.267001+00:00",
+   "source": "CNBC",
+   "desc": "",
+   "tags": [
+    "crypto"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "crypto": -0.788
+   },
+   "age_h": 15.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Google News: Fed)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.268564+00:00",
+   "source": "Google News: Fed",
+   "desc": "",
+   "tags": [
+    "fed",
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Google News: India markets)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.268514+00:00",
+   "source": "Google News: India markets",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Google News: Wall Street)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.268439+00:00",
+   "source": "Google News: Wall Street",
+   "desc": "",
+   "tags": [
+    "us_eq",
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Google News: copper)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.268375+00:00",
+   "source": "Google News: copper",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "copper"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Google News: gold)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.268215+00:00",
+   "source": "Google News: gold",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "gold"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Cointelegraph)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.268185+00:00",
+   "source": "Cointelegraph",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (CoinDesk)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.268143+00:00",
+   "source": "CoinDesk",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Google News: silver)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.268099+00:00",
+   "source": "Google News: silver",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "silver"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Livemint)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.268071+00:00",
+   "source": "Livemint",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Economic Times)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.267895+00:00",
+   "source": "Economic Times",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Federal Reserve)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.267857+00:00",
+   "source": "Federal Reserve",
+   "desc": "",
+   "tags": [
+    "fed",
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Moneycontrol)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.267816+00:00",
+   "source": "Moneycontrol",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (MarketWatch Pulse)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.267614+00:00",
+   "source": "MarketWatch Pulse",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (Yahoo Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.267563+00:00",
+   "source": "Yahoo Finance",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (MarketWatch)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.267517+00:00",
+   "source": "MarketWatch",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (CNBC Economy)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.267293+00:00",
+   "source": "CNBC Economy",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "macro"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (CNBC Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.267237+00:00",
+   "source": "CNBC Finance",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Nifty falls 1% as FIIs sell, rupee slips (CNBC)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T14:34:01.267001+00:00",
+   "source": "CNBC",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": -0.87,
+   "asset": {
+    "in_eq": -0.762
+   },
+   "age_h": 20.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Google News: Fed)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.268564+00:00",
+   "source": "Google News: Fed",
+   "desc": "",
+   "tags": [
+    "fed",
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Google News: India markets)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.268514+00:00",
+   "source": "Google News: India markets",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583,
+    "in_eq": -0.38
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Google News: Wall Street)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.268439+00:00",
+   "source": "Google News: Wall Street",
+   "desc": "",
+   "tags": [
+    "us_eq",
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583,
+    "us_eq": -0.38
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Google News: copper)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.268375+00:00",
+   "source": "Google News: copper",
+   "desc": "",
+   "tags": [
+    "copper",
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583,
+    "copper": -0.38
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Google News: gold)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.268215+00:00",
+   "source": "Google News: gold",
+   "desc": "",
+   "tags": [
+    "gold",
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583,
+    "gold": 0.261
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Cointelegraph)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.268185+00:00",
+   "source": "Cointelegraph",
+   "desc": "",
+   "tags": [
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (CoinDesk)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.268143+00:00",
+   "source": "CoinDesk",
+   "desc": "",
+   "tags": [
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Google News: silver)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.268099+00:00",
+   "source": "Google News: silver",
+   "desc": "",
+   "tags": [
+    "silver",
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583,
+    "silver": 0.261
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Livemint)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.268071+00:00",
+   "source": "Livemint",
+   "desc": "",
+   "tags": [
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Economic Times)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.267895+00:00",
+   "source": "Economic Times",
+   "desc": "",
+   "tags": [
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Federal Reserve)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.267857+00:00",
+   "source": "Federal Reserve",
+   "desc": "",
+   "tags": [
+    "fed",
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Moneycontrol)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.267816+00:00",
+   "source": "Moneycontrol",
+   "desc": "",
+   "tags": [
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (MarketWatch Pulse)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.267614+00:00",
+   "source": "MarketWatch Pulse",
+   "desc": "",
+   "tags": [
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (Yahoo Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.267563+00:00",
+   "source": "Yahoo Finance",
+   "desc": "",
+   "tags": [
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (MarketWatch)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.267517+00:00",
+   "source": "MarketWatch",
+   "desc": "",
+   "tags": [
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (CNBC Economy)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.267293+00:00",
+   "source": "CNBC Economy",
+   "desc": "",
+   "tags": [
+    "oil",
+    "macro"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (CNBC Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.267237+00:00",
+   "source": "CNBC Finance",
+   "desc": "",
+   "tags": [
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Oil surges on Middle East attack (CNBC)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T09:34:01.267001+00:00",
+   "source": "CNBC",
+   "desc": "",
+   "tags": [
+    "oil"
+   ],
+   "risk": -0.834,
+   "asset": {
+    "oil": 0.583
+   },
+   "age_h": 25.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Google News: Fed)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.268564+00:00",
+   "source": "Google News: Fed",
+   "desc": "",
+   "tags": [
+    "fed",
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Google News: India markets)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.268514+00:00",
+   "source": "Google News: India markets",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899,
+    "in_eq": -0.664
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Google News: Wall Street)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.268439+00:00",
+   "source": "Google News: Wall Street",
+   "desc": "",
+   "tags": [
+    "us_eq",
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899,
+    "us_eq": -0.664
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Google News: copper)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.268375+00:00",
+   "source": "Google News: copper",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Google News: gold)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.268215+00:00",
+   "source": "Google News: gold",
+   "desc": "",
+   "tags": [
+    "gold",
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899,
+    "gold": 0.488
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Cointelegraph)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.268185+00:00",
+   "source": "Cointelegraph",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (CoinDesk)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.268143+00:00",
+   "source": "CoinDesk",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Google News: silver)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.268099+00:00",
+   "source": "Google News: silver",
+   "desc": "",
+   "tags": [
+    "silver",
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899,
+    "silver": 0.488
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Livemint)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.268071+00:00",
+   "source": "Livemint",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Economic Times)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.267895+00:00",
+   "source": "Economic Times",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Federal Reserve)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.267857+00:00",
+   "source": "Federal Reserve",
+   "desc": "",
+   "tags": [
+    "fed",
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Moneycontrol)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.267816+00:00",
+   "source": "Moneycontrol",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (MarketWatch Pulse)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.267614+00:00",
+   "source": "MarketWatch Pulse",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (Yahoo Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.267563+00:00",
+   "source": "Yahoo Finance",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (MarketWatch)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.267517+00:00",
+   "source": "MarketWatch",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (CNBC Economy)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.267293+00:00",
+   "source": "CNBC Economy",
+   "desc": "",
+   "tags": [
+    "copper",
+    "macro"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (CNBC Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.267237+00:00",
+   "source": "CNBC Finance",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Copper slides on China slowdown worries (CNBC)",
+   "link": "https://example.com",
+   "ts": "2026-11-21T04:34:01.267001+00:00",
+   "source": "CNBC",
+   "desc": "",
+   "tags": [
+    "copper"
+   ],
+   "risk": -0.939,
+   "asset": {
+    "copper": -0.899
+   },
+   "age_h": 30.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Google News: Fed)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.268564+00:00",
+   "source": "Google News: Fed",
+   "desc": "",
+   "tags": [
+    "fed",
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Google News: India markets)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.268514+00:00",
+   "source": "Google News: India markets",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Google News: Wall Street)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.268439+00:00",
+   "source": "Google News: Wall Street",
+   "desc": "",
+   "tags": [
+    "us_eq",
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788,
+    "us_eq": 0.38
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Google News: copper)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.268375+00:00",
+   "source": "Google News: copper",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "copper"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788,
+    "copper": 0.38
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Google News: gold)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.268215+00:00",
+   "source": "Google News: gold",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "gold"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788,
+    "gold": -0.261
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Cointelegraph)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.268185+00:00",
+   "source": "Cointelegraph",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (CoinDesk)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.268143+00:00",
+   "source": "CoinDesk",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Google News: silver)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.268099+00:00",
+   "source": "Google News: silver",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "silver"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788,
+    "silver": -0.261
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Livemint)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.268071+00:00",
+   "source": "Livemint",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Economic Times)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.267895+00:00",
+   "source": "Economic Times",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Federal Reserve)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.267857+00:00",
+   "source": "Federal Reserve",
+   "desc": "",
+   "tags": [
+    "fed",
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Moneycontrol)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.267816+00:00",
+   "source": "Moneycontrol",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (MarketWatch Pulse)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.267614+00:00",
+   "source": "MarketWatch Pulse",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (Yahoo Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.267563+00:00",
+   "source": "Yahoo Finance",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (MarketWatch)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.267517+00:00",
+   "source": "MarketWatch",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (CNBC Economy)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.267293+00:00",
+   "source": "CNBC Economy",
+   "desc": "",
+   "tags": [
+    "in_eq",
+    "macro"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (CNBC Finance)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.267237+00:00",
+   "source": "CNBC Finance",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  },
+  {
+   "title": "Sensex, Nifty end higher on strong earnings (CNBC)",
+   "link": "https://example.com",
+   "ts": "2026-11-20T23:34:01.267001+00:00",
+   "source": "CNBC",
+   "desc": "",
+   "tags": [
+    "in_eq"
+   ],
+   "risk": 0.834,
+   "asset": {
+    "in_eq": 0.788
+   },
+   "age_h": 35.0
+  }
+ ],
+ "sentiment": {
+  "risk": {
+   "score": -40.7,
+   "n": 144,
+   "pos": 36,
+   "neg": 108
+  },
+  "fed": {
+   "score": 24.8,
+   "n": 32,
+   "pos": 20,
+   "neg": 12
+  },
+  "us_eq": {
+   "score": 41.4,
+   "n": 24,
+   "pos": 18,
+   "neg": 6
+  },
+  "in_eq": {
+   "score": -22.8,
+   "n": 42,
+   "pos": 19,
+   "neg": 23
+  },
+  "bonds": {
+   "score": -50.0,
+   "n": 18,
+   "pos": 0,
+   "neg": 18
+  },
+  "dollar": {
+   "score": null,
+   "n": 0,
+   "pos": 0,
+   "neg": 0
+  },
+  "gold": {
+   "score": 65.7,
+   "n": 25,
+   "pos": 21,
+   "neg": 2
+  },
+  "silver": {
+   "score": 7.7,
+   "n": 8,
+   "pos": 4,
+   "neg": 2
+  },
+  "copper": {
+   "score": -56.7,
+   "n": 25,
+   "pos": 2,
+   "neg": 23
+  },
+  "oil": {
+   "score": -62.5,
+   "n": 18,
+   "pos": 0,
+   "neg": 18
+  },
+  "crypto": {
+   "score": -67.5,
+   "n": 18,
+   "pos": 0,
+   "neg": 18
+  },
+  "macro": {
+   "score": -59.8,
+   "n": 42,
+   "pos": 2,
+   "neg": 40
+  }
+ },
+ "feeds": 18,
+ "count": 144,
+ "tag_names": {
+  "fed": "Fed / rates",
+  "us_eq": "US equity",
+  "in_eq": "India",
+  "bonds": "Bonds",
+  "dollar": "Dollar / FX",
+  "gold": "Gold",
+  "silver": "Silver",
+  "copper": "Copper",
+  "oil": "Oil",
+  "crypto": "Crypto",
+  "macro": "Macro"
+ }
+}
