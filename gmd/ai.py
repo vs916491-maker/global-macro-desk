@@ -25,6 +25,7 @@ from .run import get_doc, recently
 API = "https://generativelanguage.googleapis.com/v1beta"
 # Only used if the model list cannot be read. gemini-2.0-flash and 2.5-flash-lite are retired for new keys (404).
 FALLBACK_MODELS = ["gemini-flash-latest", "gemini-2.5-flash"]
+BUSY = "busy/rate limit"
 SKIP_WORDS = ("image", "tts", "audio", "live", "embedding", "aqa", "learnlm", "gemma", "robotics", "computer")
 ASSETS = {"us_eq": "US equity", "in_eq": "Indian equity", "us_bond": "US bonds", "gold": "Gold", "silver": "Silver",
           "copper": "Copper", "crypto": "Crypto"}
@@ -47,7 +48,10 @@ def pick_model(key: str) -> list[str]:
         unstable = any(w in n for w in ("preview", "exp"))
         return (not unstable, "lite" not in n, ver, -len(n))
     flash.sort(key=rank, reverse=True)
-    picked = (flash[:4] or []) + [m for m in FALLBACK_MODELS if m not in flash[:4]]
+    full = [n for n in flash if "lite" not in n][:4]
+    # Flash-Lite as backup: Google's free tier often answers 503 "high demand" on the full Flash models
+    lite = [n for n in flash if "lite" in n and not any(w in n for w in ("preview", "exp"))][:2]
+    picked = full + lite + [m for m in FALLBACK_MODELS if m not in full + lite]
     print("Gemini models to try:", ", ".join(picked))
     return picked
 
@@ -58,16 +62,17 @@ def gemini(key: str, models: list[str], prompt: str, system: str) -> tuple[dict,
             "generationConfig": {"temperature": 0.3, "responseMimeType": "application/json", "maxOutputTokens": 8192}}
     errors: list[str] = []
     for m in models:
-        for attempt in range(3):
+        for attempt in range(2):
             try:
                 r = requests.post(f"{API}/models/{m}:generateContent", headers={"x-goog-api-key": key},
                                   json=body, timeout=180)
                 if r.status_code in (429, 500, 502, 503, 504):
                     # busy or rate-limited: wait and try the same model again
-                    err = f"{m}: HTTP {r.status_code} (busy/rate limit, try {attempt + 1})"
+                    err = f"{m}: HTTP {r.status_code} {BUSY} (try {attempt + 1})"
                     errors.append(err)
                     print("  " + err)
-                    time.sleep(20 * (attempt + 1))
+                    if attempt == 0:
+                        time.sleep(15)
                     continue
                 if r.status_code != 200:
                     err = f"{m}: HTTP {r.status_code} {short_error(r)}"
@@ -281,6 +286,12 @@ def main():
         # keep the old 'updated' time so the next scheduled run tries again instead of skipping for 3 hours
         db.put_doc("gm_ai", {**old, "error": out["error"], "error_at": out["updated"], "stale": True})
         print(out["error"])
+        errs = [x for x in str(e).split(" | ") if "HTTP 404" not in x]
+        if errs and all(BUSY in x for x in errs):
+            # Google-side capacity problem only: keep the last good view and let the next run retry,
+            # without a "Run failed" email
+            print("::warning::Gemini busy (503/429) on every model; last good AI view kept, next run will retry")
+            return
         raise SystemExit(1)
     removed: list[str] = []
     allowed = allowed_numbers(inp)
