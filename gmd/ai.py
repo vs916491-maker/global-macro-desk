@@ -23,7 +23,8 @@ from . import sources, store
 from .run import get_doc, recently
 
 API = "https://generativelanguage.googleapis.com/v1beta"
-FALLBACK_MODELS = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-flash-lite"]
+# Only used if the model list cannot be read. gemini-2.0-flash and 2.5-flash-lite are retired for new keys (404).
+FALLBACK_MODELS = ["gemini-flash-latest", "gemini-2.5-flash"]
 SKIP_WORDS = ("image", "tts", "audio", "live", "embedding", "aqa", "learnlm", "gemma", "robotics", "computer")
 ASSETS = {"us_eq": "US equity", "in_eq": "Indian equity", "us_bond": "US bonds", "gold": "Gold", "silver": "Silver",
           "copper": "Copper", "crypto": "Crypto"}
@@ -46,35 +47,55 @@ def pick_model(key: str) -> list[str]:
         unstable = any(w in n for w in ("preview", "exp"))
         return (not unstable, "lite" not in n, ver, -len(n))
     flash.sort(key=rank, reverse=True)
-    return (flash[:3] or []) + [m for m in FALLBACK_MODELS if m not in flash[:3]]
+    picked = (flash[:4] or []) + [m for m in FALLBACK_MODELS if m not in flash[:4]]
+    print("Gemini models to try:", ", ".join(picked))
+    return picked
 
 
 def gemini(key: str, models: list[str], prompt: str, system: str) -> tuple[dict, str]:
     body = {"systemInstruction": {"parts": [{"text": system}]},
             "contents": [{"role": "user", "parts": [{"text": prompt}]}],
             "generationConfig": {"temperature": 0.3, "responseMimeType": "application/json", "maxOutputTokens": 8192}}
-    last = None
+    errors: list[str] = []
     for m in models:
-        for attempt in range(2):
+        for attempt in range(3):
             try:
                 r = requests.post(f"{API}/models/{m}:generateContent", headers={"x-goog-api-key": key},
                                   json=body, timeout=180)
-                if r.status_code == 429:
-                    last = f"{m}: rate limit (429)"
-                    time.sleep(20)
+                if r.status_code in (429, 500, 502, 503, 504):
+                    # busy or rate-limited: wait and try the same model again
+                    err = f"{m}: HTTP {r.status_code} (busy/rate limit, try {attempt + 1})"
+                    errors.append(err)
+                    print("  " + err)
+                    time.sleep(20 * (attempt + 1))
                     continue
                 if r.status_code != 200:
-                    last = f"{m}: HTTP {r.status_code} {r.text[:160]}"
+                    err = f"{m}: HTTP {r.status_code} {short_error(r)}"
+                    errors.append(err)
+                    print("  " + err)
                     break
                 j = r.json()
-                parts = j["candidates"][0]["content"]["parts"]
+                cand = (j.get("candidates") or [{}])[0]
+                parts = (cand.get("content") or {}).get("parts") or []
                 text = "".join(p.get("text", "") for p in parts if not p.get("thought"))
                 text = re.sub(r"^```(?:json)?|```$", "", text.strip()).strip()
+                if not text:
+                    raise ValueError(f"empty answer (finishReason {cand.get('finishReason')})")
                 return json.loads(text), m
             except Exception as e:  # noqa: BLE001
-                last = f"{m}: {type(e).__name__} {str(e)[:120]}"
+                err = f"{m}: {type(e).__name__} {str(e)[:160]}"
+                errors.append(err)
+                print("  " + err)
                 break
-    raise RuntimeError(last or "no model answered")
+    # show every model's problem, not just the last one (a retired fallback model used to hide the real cause)
+    raise RuntimeError(" | ".join(errors) or "no model answered")
+
+
+def short_error(r) -> str:
+    try:
+        return str(r.json().get("error", {}).get("message", ""))[:200]
+    except Exception:  # noqa: BLE001
+        return r.text[:200]
 
 
 # ---------------------------------------------------------------- what we send
@@ -257,7 +278,8 @@ def main():
         res, model = gemini(key, pick_model(key), prompt, SYSTEM)
     except Exception as e:  # noqa: BLE001
         out["error"] = f"Gemini did not answer: {e}"
-        db.put_doc("gm_ai", {**old, **out, "stale": True})
+        # keep the old 'updated' time so the next scheduled run tries again instead of skipping for 3 hours
+        db.put_doc("gm_ai", {**old, "error": out["error"], "error_at": out["updated"], "stale": True})
         print(out["error"])
         raise SystemExit(1)
     removed: list[str] = []
