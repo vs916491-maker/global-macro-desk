@@ -1,0 +1,22 @@
+PROBLEM: Yahoo: no 1d candles for 7 of 50 symbols (CC-USD, RAIN-USD, VVV-USD, BTW-USD, ASTER-USD, MORPHO-USD, PUMP-USD)
+PROBLEM: Yahoo: no 1h candles for 8 of 50 symbols (CC-USD, RAIN-USD, VVV-USD, WLFI-USD, BTW-USD, ASTER-USD, MORPHO-USD, PUMP-USD)
+## Hourly job
+
+Started 2026-11-26T10:31:28+00:00, finished 2026-11-26T10:32:11+00:00
+
+- **record_crypto**: `{"open": 0, "closed_now": 0, "filled_now": 0, "logged_now": 2, "at": "2026-11-26T10:32:11+00:00"}`
+- **record_commod**: `{"open": 0, "closed_now": 0, "filled_now": 0, "logged_now": 1, "at": "2026-11-26T10:32:11+00:00"}`
+- **my_trades**: `{"open": 0, "closed_now": 0}`
+- **counts**: `{"quotes": 26, "news": 250, "coins": 41, "ideas_crypto": {"swing": 1, "positional": 1}, "ideas_commod": {"swing": 0, "positional": 1}}`
+
+### Problems
+- Yahoo: no 1d candles for 7 of 50 symbols (CC-USD, RAIN-USD, VVV-USD, BTW-USD, ASTER-USD, MORPHO-USD, PUMP-USD)
+- Yahoo: no 1h candles for 8 of 50 symbols (CC-USD, RAIN-USD, VVV-USD, WLFI-USD, BTW-USD, ASTER-USD, MORPHO-USD, PUMP-USD)
+## US equity scan
+
+Started 2026-11-26T10:32:11+00:00, finished 2026-11-26T10:32:39+00:00
+
+- **record_us**: `{"open": 0, "closed_now": 0, "filled_now": 0, "logged_now": 20, "at": "2026-11-26T10:32:39+00:00"}`
+- **counts**: `{"universe": 503, "scanned": 498, "ideas": {"swing": 110, "positional": 54}}`
+
+No problems.
