@@ -23,6 +23,8 @@ Built 22 Nov 2026. Sister sites: F&O Desk (`fno-desk`), Sector Strength, NSE Fun
 | Euphoria meter (on Global macro; tags on Money flow, Crypto, Commodities) | `gm_euphoria` | hourly |
 | (status) | `gm_status` (per job: time, problems, counts), `gm_hist` (daily scores, FII days, BTC dominance; 400 days) | |
 
+- Idea cards (US equity, Crypto, Commodities): **Chart** button next to the symbol opens TradingView at the card's interval (4-hour for crypto/commodity swing, daily otherwise); his request, 26 Nov 2026. US class shares are converted BRK-B → BRK.B (`tvSym()` in site/app.js).
+
 ## Rules in brief (all numbers in `gmd/config.py`; site Readme tab has the full text — **update `viewReadme` in site/app.js when a rule changes**)
 - Global score: VIX 20, HY credit 15, S&P trend 15, DXY 1m 15, US10Y 1m 10, curve 5, copper/gold 10, news 10. India: Nifty trend 25, India VIX 15, USDINR 15, Brent 15, FII 5-session 15, India news 15. Zones ±20 / ±60.
 - Money flow (INR terms): score = 55% momentum (risk-adjusted 1/3/6m return, trend, CMF) + 45% macro fit (factor weights in `flows.FIT`). FD uses `FD_RATE` and `INDIA_CPI` — edit when they change. Suggested mix = `BASE_MIX` tilted ±50% max.
