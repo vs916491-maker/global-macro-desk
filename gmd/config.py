@@ -102,7 +102,12 @@ YAHOO_COIN = {"sui": "SUI20947-USD", "uni": "UNI7083-USD", "ton": "TON11419-USD"
 
 # ---------------------------------------------------------------- commodities (COMEX, USD)
 COMMODS = {"gold": ("GC=F", "Gold", "COMEX:GC1!"), "silver": ("SI=F", "Silver", "COMEX:SI1!"),
-           "copper": ("HG=F", "Copper", "COMEX:HG1!")}
+           "copper": ("HG=F", "Copper", "COMEX:HG1!"),
+           # added 26 Nov 2026 (his request): long + short ideas, no Euphoria meter yet (not backtested)
+           "brent": ("BZ=F", "Brent crude", "TVC:UKOIL"), "aluminium": ("ALI=F", "Aluminium", "COMEX:ALI1!")}
+# exchange and price unit shown on the Commodities cards
+COMMOD_INFO = {"gold": ("COMEX", "$/oz"), "silver": ("COMEX", "$/oz"), "copper": ("COMEX", "$/lb"),
+               "brent": ("Brent futures", "$/bbl"), "aluminium": ("COMEX", "$/t")}
 
 # ---------------------------------------------------------------- US equity
 US_SECTORS = {"XLK": "Technology", "XLF": "Financials", "XLE": "Energy", "XLV": "Health Care",

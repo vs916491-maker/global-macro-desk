@@ -1,4 +1,4 @@
-"""Commodities tab: Gold, Silver, Copper (COMEX futures, USD). Direction score per metal from
+"""Commodities tab: Gold, Silver, Copper, Aluminium (COMEX futures) and Brent crude, USD. Direction score per metal from
 price trend + macro drivers, ratios, and Swing (4-hour) / Positional (daily) ideas, long and short."""
 
 from __future__ import annotations
@@ -15,16 +15,25 @@ DRIVERS = {
                (0.25, "growth", 1, "Industrial demand (copper/gold)"), (0.25, "news_silver", 1, "Silver headlines")],
     "copper": [(0.35, "growth", 1, "Growth (copper/gold ratio)"), (0.25, "risk_g", 1, "Global risk appetite"),
                (0.2, "weak_dollar", 1, "Weaker dollar"), (0.2, "news_copper", 1, "Copper headlines")],
+    # added 26 Nov 2026: untested starting weights, judge them in the Track record
+    "brent": [(0.3, "growth", 1, "Global growth (copper/gold ratio)"), (0.2, "risk_g", 1, "Global risk appetite"),
+              (0.15, "weak_dollar", 1, "Weaker dollar"), (0.35, "news_oil_px", 1, "Oil headlines (supply, OPEC, war)")],
+    "aluminium": [(0.35, "growth", 1, "Growth (copper/gold ratio)"), (0.25, "risk_g", 1, "Global risk appetite"),
+                  (0.2, "weak_dollar", 1, "Weaker dollar"), (0.2, "news_aluminium", 1, "Aluminium headlines")],
 }
 
 
 def analyse(macro: dict, daily_cache: dict) -> tuple[dict, dict]:
     f = flows.factors(macro)
-    s = (macro.get("_news") or {}).get("copper", {}).get("score")
-    if s is not None:
-        f["news_copper"] = ta.clamp(s / 60)
+    for k in ("copper", "aluminium", "oil_px"):
+        s = (macro.get("_news") or {}).get(k, {}).get("score")
+        if s is not None:
+            f[f"news_{k}"] = ta.clamp(s / 60)
     syms = [v[0] for v in C.COMMODS.values()]
-    daily = {k: daily_cache[k] for k in syms if k in daily_cache} or sources.yahoo_many(syms, "1d", "2y")
+    daily = {k: daily_cache[k] for k in syms if k in daily_cache}
+    need = [k for k in syms if k not in daily]
+    if need:
+        daily.update(sources.yahoo_many(need, "1d", "2y"))
     hourly = sources.yahoo_many(syms, "1h", "180d")
     out, frames, views = {}, {}, {"swing": [], "positional": []}
     for key, (sym, label, tv) in C.COMMODS.items():
@@ -55,7 +64,8 @@ def analyse(macro: dict, daily_cache: dict) -> tuple[dict, dict]:
         direction = round(100 * (0.4 * tr(t_d) + 0.15 * tr(t_4) + 0.45 * drv))
         price = float(dd.attrs.get("price") or dd.Close.iloc[-1])
         c = dd.Close
-        out[key] = {"label": label, "symbol": sym, "tv": tv, "price": round(price, 4),
+        exch, unit = C.COMMOD_INFO.get(key, ("COMEX", "$"))
+        out[key] = {"label": label, "symbol": sym, "tv": tv, "exchange": exch, "unit": unit, "price": round(price, 4),
                     "d1": round((float(raw.Close.iloc[-1]) / float(raw.Close.iloc[-2]) - 1) * 100, 2),
                     "w1": round(ta.ret(c, 7) or 0, 2), "m1": round(ta.ret(c, 30) or 0, 2), "m3": round(ta.ret(c, 91) or 0, 2),
                     "y1": round(ta.ret(c, 365) or 0, 2), "trend_w": t_w["state"], "trend_d": t_d["state"],
