@@ -15,6 +15,7 @@ from . import config as C, sources
 
 COMMOD_YAHOO = {k: v[0] for k, v in C.COMMODS.items()}            # gold -> GC=F, brent -> BZ=F
 COMMOD_YAHOO["aluminum"] = COMMOD_YAHOO.get("aluminium")
+COMMOD_YAHOO["hrc"] = COMMOD_YAHOO.get("steel")
 
 
 def yahoo_of(tr: dict) -> str | None:

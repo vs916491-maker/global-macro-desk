@@ -1,4 +1,4 @@
-"""Commodities tab: Gold, Silver, Copper, Aluminium (COMEX futures) and Brent crude, USD. Direction score per metal from
+"""Commodities tab: Gold, Silver, Copper, Aluminium, Steel HRC (COMEX futures) and Brent crude, USD. Direction score per metal from
 price trend + macro drivers, ratios, and Swing (4-hour) / Positional (daily) ideas, long and short."""
 
 from __future__ import annotations
@@ -20,12 +20,14 @@ DRIVERS = {
               (0.15, "weak_dollar", 1, "Weaker dollar"), (0.35, "news_oil_px", 1, "Oil headlines (supply, OPEC, war)")],
     "aluminium": [(0.35, "growth", 1, "Growth (copper/gold ratio)"), (0.25, "risk_g", 1, "Global risk appetite"),
                   (0.2, "weak_dollar", 1, "Weaker dollar"), (0.2, "news_aluminium", 1, "Aluminium headlines")],
+    "steel": [(0.35, "growth", 1, "Growth (copper/gold ratio)"), (0.25, "risk_g", 1, "Global risk appetite"),
+              (0.15, "weak_dollar", 1, "Weaker dollar"), (0.25, "news_steel", 1, "Steel headlines (tariffs, demand)")],
 }
 
 
 def analyse(macro: dict, daily_cache: dict) -> tuple[dict, dict]:
     f = flows.factors(macro)
-    for k in ("copper", "aluminium", "oil_px"):
+    for k in ("copper", "aluminium", "steel", "oil_px"):
         s = (macro.get("_news") or {}).get(k, {}).get("score")
         if s is not None:
             f[f"news_{k}"] = ta.clamp(s / 60)
