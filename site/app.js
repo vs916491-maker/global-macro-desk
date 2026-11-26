@@ -118,6 +118,29 @@ function tvLink(tv, interval = "D", label) {
   return h("a", { class: "tvlink", href: `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(tv)}&interval=${interval}`,
     target: "_blank", rel: "noopener", title: `Open ${tv} on TradingView` }, label || "Chart ↗");
 }
+// Chart button for idea cards (his request, 26 Nov 2026): opens TradingView at the card's candle interval
+function tvSym(tv) {
+  // Yahoo-style US class shares (BRK-B) are BRK.B on TradingView; exchange-prefixed symbols are left alone
+  return tv && !tv.includes(":") ? tv.replace(/-/g, ".") : tv;
+}
+function chartBtn(tv, interval = "D") {
+  const sym = tvSym(tv);
+  if (!sym) return null;
+  return h("a", { class: "chart-btn", href: `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(sym)}&interval=${interval}`,
+    target: "_blank", rel: "noopener", title: `Open ${sym} chart on TradingView (${interval === "240" ? "4-hour" : "daily"})`,
+    "aria-label": `Open ${sym} chart` }, CHART_ICON(), "Chart");
+}
+function CHART_ICON() {
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 16 16"); svg.setAttribute("width", "14"); svg.setAttribute("height", "14"); svg.setAttribute("aria-hidden", "true");
+  const path = document.createElementNS(ns, "path");
+  path.setAttribute("d", "M1.5 14.5h13M2.5 11.5l3.5-4 3 2.5 4.5-6M10.5 4h3v3");
+  path.setAttribute("fill", "none"); path.setAttribute("stroke", "currentColor"); path.setAttribute("stroke-width", "1.6");
+  path.setAttribute("stroke-linecap", "round"); path.setAttribute("stroke-linejoin", "round");
+  svg.appendChild(path);
+  return svg;
+}
 function seg(key, cur, opts, onPick) {
   return h("div", { class: "seg", role: "group" }, opts.map(([v, l]) =>
     h("button", { type: "button", "aria-pressed": String(cur === v), onclick: () => { state[key] = v; if (onPick) onPick(v); route(); } }, l)));
@@ -247,9 +270,10 @@ function aiIdea(tab, x) {
     c.supports ? h("p", null, h("b", null, "For: "), c.supports) : null, c.risks ? h("p", null, h("b", null, "Against: "), c.risks) : null);
 }
 function ideaCard(x, rank, interval, tab) {
+  const iv = interval || (x.tf === "4h" ? "240" : "D");
   return h("div", { class: `idea ${rank === 1 ? "top" : ""}` },
     h("h3", null, h("span", null, h("span", { class: "rank" }, `#${rank}`), " ", x.symbol, " ", h("small", null, x.name && x.name !== x.symbol ? x.name : "")),
-      h("span", null, sideTag(x.side))),
+      h("span", { class: "idea-head-r" }, chartBtn(x.tv, iv), sideTag(x.side))),
     h("div", { class: "meta" }, `${x.setup_name} · ${x.tf === "4h" ? "4-hour" : "daily"} candle ${when(x.candle)}${x.sector ? ` · ${x.sector}` : ""} · score `, h("b", null, x.score), "/100",
       x.logged ? null : h("span", { class: "flag" }, "watch only")),
     h("div", { class: "lv" },
@@ -262,7 +286,7 @@ function ideaCard(x, rank, interval, tab) {
     h("ul", { class: "reasons" }, (x.reasons || []).map((r) => h("li", null, r))),
     (x.warns || []).length ? h("ul", { class: "warns" }, x.warns.map((w) => h("li", null, w))) : null,
     tab ? aiIdea(tab, x) : null,
-    h("div", { class: "meta" }, `Trend ${x.trend}, RSI ${x.rsi}`, (x.parts || {}).vol_ratio ? `, volume ${x.parts.vol_ratio}× average` : "", " · ", tvLink(x.tv, interval || (x.tf === "4h" ? "240" : "D"))));
+    h("div", { class: "meta" }, `Trend ${x.trend}, RSI ${x.rsi}`, (x.parts || {}).vol_ratio ? `, volume ${x.parts.vol_ratio}× average` : "", " · ", tvLink(tvSym(x.tv), iv)));
 }
 function ideasBlock(v, interval, emptyText, tab) {
   const ideas = (v && v.ideas) || [];
