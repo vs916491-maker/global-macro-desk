@@ -1,5 +1,5 @@
 /* Global Macro Desk - static site on GitHub Pages, data in Supabase (docs gm_* and table gm_ideas).
-   Tabs (hash routes): #/macro  #/flows  #/crypto  #/commod  #/us  #/record  #/readme
+   Tabs (hash routes): #/macro  #/flows  #/crypto  #/commod  #/us  #/record  #/trades  #/readme
    Without Supabase settings in config.js it runs in preview mode on ./sample. */
 "use strict";
 
@@ -286,6 +286,7 @@ function ideaCard(x, rank, interval, tab) {
     h("ul", { class: "reasons" }, (x.reasons || []).map((r) => h("li", null, r))),
     (x.warns || []).length ? h("ul", { class: "warns" }, x.warns.map((w) => h("li", null, w))) : null,
     tab ? aiIdea(tab, x) : null,
+    tab ? h("div", { class: "btn-row took-row" }, h("button", { class: "btn small", type: "button", onclick: () => tookIdea(tab, x) }, "I took this trade")) : null,
     h("div", { class: "meta" }, `Trend ${x.trend}, RSI ${x.rsi}`, (x.parts || {}).vol_ratio ? `, volume ${x.parts.vol_ratio}× average` : "", " · ", tvLink(tvSym(x.tv), iv)));
 }
 function ideasBlock(v, interval, emptyText, tab) {
@@ -797,6 +798,11 @@ function viewReadme(app) {
       li("US equity: long only. Crypto and commodities: longs and the mirror shorts (base breakdown, rally into a falling EMA). Crypto shorts need perpetual futures: every crypto short carries a squeeze warning, positional ones a funding-fee warning; Euphoria alerts only add warnings to longs."),
       li("Score 0–100: trend 25 (trend points + ADX), momentum 20 (relative strength vs the group: crypto vs BTC, US vs the other stocks; RSI zone), setup quality 25, volume 10 (breakout volume vs 20-candle average), macro fit 20 (from Money flow; US stocks blend in their sector's flow score). Against the higher-timeframe trend: −5 and a warning."),
       li("Ideas scoring 50+ are logged in the Track record; lower ones show as \"watch only\".")),
+    blk("My trades",
+      li("Your own trades (table gm_trades): add one by hand, or press \"I took this trade\" on any idea card and enter your real fill and quantity."),
+      li("The hourly job checks every open trade on Yahoo hourly candles after its entry time and closes it at the stop only; a candle that opens past the stop fills at its open. Targets and other exits are closed by hand."),
+      li("Net % = (exit ÷ entry − 1) × 100, sign-flipped for shorts, minus the round-trip cost: US stocks 0.2%, crypto 0.2%, COMEX 0.05% (config.TRADE_COST_PCT). P&L $ = (sell − buy) × quantity − charges; ₹ = $ × USD/INR on the closing day."),
+      li("Totals cover the current financial year (April–March, IST) and start fresh each 1 April; completed years move to Year by year. A trade closed by hand can be edited or reopened until the next weekday 7:40 pm IST; trades closed by the job lock at once.")),
     blk("Euphoria meter (0-100, warning only)",
       li("Parts, each measured against the asset's own history: price stretch 40 (gap above the 200-day average and 30-day gain as 5-year percentiles: median = 0, top 5% = full; weekly RSI 60-80), crowd mood 20 (crypto Fear & Greed 7-day average 50-90; US VIX 20 down to 12; India VIX 16 down to 10), large speculators 20 (CFTC non-commercial net long % of open interest, 3-year percentile; gold, silver, copper, S&P; not Bitcoin), breadth 10 (crypto: alt season / coins above 200-day; US: stocks above 200-day), news flood 10 (positive share and headline count vs the last 60 days; starts after 20 days of stored headlines)."),
       li("Levels: Calm below 40, Warm 40-60, Hot 60-80, Euphoric 80+. It never changes scores, ideas or the Money flow mix."),
@@ -835,6 +841,322 @@ function viewSignIn(app, message) {
   render(app, form);
 }
 
+// ------------------------------------------------------------------ tab: my trades
+/* My Trades (his request, 26 Nov 2026; same as F&O Desk's My Stock Trades). Table gm_trades
+   (supabase/003_my_trades.sql). His choices: net % after a round-trip cost per asset class,
+   P&L in US $ and rupees (USD/INR at the close); the hourly job closes open trades at the stop only
+   (close at the target by hand); a trade closed by hand can be fixed until the next weekday 7:40 pm IST. */
+const ASSET = { us: "US stock", crypto: "Crypto", commodities: "COMEX" };
+const TRADE_COST = { us: 0.2, crypto: 0.2, commodities: 0.05 };   // keep in step with config.TRADE_COST_PCT
+const COMMOD_YF = { GOLD: "GC=F", SILVER: "SI=F", COPPER: "HG=F" };
+const COMMOD_TV = { GOLD: "COMEX:GC1!", SILVER: "COMEX:SI1!", COPPER: "COMEX:HG1!" };
+let previewTrades = null;   // preview mode only: kept in memory, not saved
+async function loadTrades() {
+  if (LIVE) {
+    const { data, error } = await sb.from("gm_trades").select("*").order("entry_time", { ascending: false }).limit(5000);
+    if (error) throw new Error(/gm_trades|does not exist|schema cache/i.test(error.message)
+      ? "the My Trades table is not set up yet (run supabase/003_my_trades.sql in Supabase)" : error.message);
+    return data;
+  }
+  if (!previewTrades) { const r = await fetch("sample/gm_trades.json", { cache: "no-cache" }).catch(() => null); previewTrades = r && r.ok ? await r.json() : []; }
+  return previewTrades;
+}
+async function saveTrade(id, row) {
+  if (LIVE) {
+    const q = id ? sb.from("gm_trades").update(row).eq("id", id).select("id") : sb.from("gm_trades").insert(row).select("id");
+    const { data, error } = await q;
+    if (error) throw new Error(error.message);
+    if (id && (!data || !data.length)) throw new Error("this trade is locked (closed trades can only be fixed until the 7:40 pm check)");
+    return;
+  }
+  const list = await loadTrades();
+  if (id) {
+    const t = list.find((x) => x.id === id);
+    const closedAt = row.status === "closed" && t.status !== "closed" ? new Date().toISOString() : row.status === "open" ? null : t.closed_at;
+    Object.assign(t, row, { closed_at: closedAt });   // live: set by the database trigger
+  }
+  else list.unshift({ id: Date.now(), ...row, closed_at: row.status === "closed" ? new Date().toISOString() : null });
+}
+async function deleteTradeRow(id) {
+  if (LIVE) { const { error } = await sb.from("gm_trades").delete().eq("id", id); if (error) throw new Error(error.message); return; }
+  previewTrades = (await loadTrades()).filter((t) => t.id !== id);
+}
+function tradeYahoo(asset, sym) {
+  const S = String(sym || "").trim().toUpperCase();
+  if (asset === "crypto") return `${S}-USD`;
+  if (asset === "commodities") return COMMOD_YF[S] || S;
+  return S.replace(/\./g, "-");
+}
+function tradeTv(asset, sym) {
+  const S = String(sym || "").trim().toUpperCase();
+  if (asset === "crypto") return `CRYPTO:${S}USD`;
+  if (asset === "commodities") return COMMOD_TV[S] || S;
+  return S.replace(/-/g, ".");
+}
+/* Same deadline as F&O Desk (supabase trade_fix_until): the first weekday 19:40 IST after it was closed by hand. */
+function fixUntil(t) {
+  if (t.status !== "closed" || !t.closed_at) return null;
+  const IST = 5.5 * 3600e3, c = new Date(Date.parse(t.closed_at) + IST);
+  for (let i = 0; i < 5; i++) {
+    const d = new Date(Date.UTC(c.getUTCFullYear(), c.getUTCMonth(), c.getUTCDate() + i, 19, 40));
+    if (d.getUTCDay() >= 1 && d.getUTCDay() <= 5 && d > c) return new Date(d.getTime() - IST);
+  }
+  return null;
+}
+const canFix = (t) => { const u = fixUntil(t); return !!u && Date.now() < u.getTime(); };
+const fixLabel = (t) => {
+  const u = fixUntil(t), sameDay = u && u.toDateString() === new Date().toDateString();
+  return u ? `until ${sameDay ? "" : `${u.toLocaleDateString("en-IN", { weekday: "short" })} `}7:40 pm` : "";
+};
+function costOf(t) { return isNum(t.cost_pct) ? t.cost_pct : TRADE_COST[t.asset] ?? 0.1; }
+/* Net %, $ and ₹ for a trade closed at `exit` (same sums as the hourly job, gmd/mytrades.py). */
+function tradeExitVals(t, exit, usdinr) {
+  const dir = t.side === "Long" ? 1 : -1, cost = costOf(t);
+  const v = { cost_pct: cost, net_pct: +(((exit / t.entry) - 1) * 100 * dir - cost).toFixed(3), pnl_usd: null, pnl_inr: null, usdinr: usdinr || null };
+  if (isNum(t.qty) && t.qty) {
+    v.pnl_usd = +((exit - t.entry) * dir * t.qty - (t.charges_usd || 0)).toFixed(2);
+    if (usdinr) v.pnl_inr = +(v.pnl_usd * usdinr).toFixed(2);
+  }
+  return v;
+}
+const usd = (v) => (isNum(v) ? `${v < 0 ? "−" : ""}$${Math.abs(v).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "–");
+const inr = (v) => (isNum(v) ? `${v < 0 ? "−" : ""}₹${Math.abs(v).toLocaleString("en-IN", { maximumFractionDigits: 0 })}` : "–");
+const localDT = (ts) => { const d = ts ? new Date(ts) : new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16); };
+const readForm = (form) => Object.fromEntries(new FormData(form).entries());
+async function latestUsdInr() {
+  const tp = await doc("gm_trade_prices").catch(() => null);
+  if (tp && isNum(tp.usdinr)) return tp.usdinr;
+  const m = await doc("gm_macro").catch(() => null);
+  const q = (((m || {}).quotes || {}).usdinr || {});
+  return isNum(q.last) ? q.last : isNum(q.price) ? q.price : null;
+}
+
+function tradeDialog(prefill, onSaved) {
+  if (prefill.id && prefill.status === "closed" && !canFix(prefill)) return;
+  const isClosed = !!(prefill.id && prefill.status === "closed");
+  const dlg = document.getElementById("dlg");
+  const t = { asset: "us", side: "Long", source: "manual", ...prefill };
+  const field = (label, name, attrs = {}, wide = false) =>
+    h("label", { class: wide ? "wide" : null }, label, h("input", { name, value: t[name] ?? "", ...attrs }));
+  const unit = t.asset === "crypto" ? "coins" : t.asset === "commodities" ? "oz / lb" : "shares";
+  const err = h("p", { class: "err", role: "alert" });
+  const fromIdea = !!prefill.view && !prefill.id;
+  const form = h("form", { method: "dialog" },
+    h("h2", null, prefill.id ? `Edit ${t.symbol} trade` : fromIdea ? `I took this trade: ${t.symbol}` : "Add a trade"),
+    h("p", { class: "note" }, `Prices in US $. P&L $ = (sell − buy) × quantity − charges; rupees at USD/INR on the closing day. Net % is after ${costOf(t)}% round-trip costs (${ASSET[t.asset]}). The hourly check closes the trade at the stop; close at the target by hand.`),
+    h("div", { class: "form-grid" },
+      h("label", null, "Asset", h("select", { name: "asset", disabled: fromIdea || prefill.id ? true : null },
+        Object.entries(ASSET).map(([k, l]) => h("option", { value: k, selected: t.asset === k || null }, l)))),
+      field(t.asset === "commodities" ? "Symbol (GOLD, SILVER, COPPER)" : "Symbol", "symbol", { required: true, autocapitalize: "characters", readonly: fromIdea || null }),
+      h("label", null, "Side", h("select", { name: "side" }, ["Long", "Short"].map((k) => h("option", { selected: t.side === k || null }, k)))),
+      field("Entry time", "entry_time", { type: "datetime-local", value: localDT(t.entry_time), required: true }),
+      field("Entry $", "entry", { type: "number", step: "any", required: true }),
+      field("Stop $", "stop", { type: "number", step: "any" }),
+      field("Target $", "target", { type: "number", step: "any" }),
+      field(`Quantity (${unit})`, "qty", { type: "number", step: "any", min: "0", placeholder: t.asset === "commodities" ? "1 GC contract = 100 oz" : "" }),
+      field("Charges $ (optional)", "charges_usd", { type: "number", step: "any" }),
+      h("label", { class: "wide" }, "Notes", h("textarea", { name: "notes" }, t.notes || "")),
+      ...(isClosed ? [
+        field("Exit $", "exit", { type: "number", step: "any", required: true }),
+        field("Exit time", "exit_time", { type: "datetime-local", value: localDT(t.exit_time), required: true }),
+        field("USD/INR", "usdinr", { type: "number", step: "any" }),
+        field("Reason", "exit_reason")] : [])),
+    isClosed ? h("p", { class: "note" }, `This trade is closed. You can fix it ${fixLabel(t)}; after that it is locked.`) : null,
+    err,
+    h("div", { class: "btn-row" },
+      h("button", { class: "btn primary", type: "submit" }, "Save trade"),
+      h("button", { class: "btn", type: "button", onclick: () => dlg.close() }, "Cancel")));
+  const assetSel = form.querySelector("select[name=asset]");
+  assetSel.addEventListener("change", (e) => tradeDialog({ ...prefill, ...readForm(form), asset: e.target.value }, onSaved));
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const v = readForm(form);
+    const asset = t.asset, sym = (v.symbol || t.symbol).trim().toUpperCase();
+    const num = (x) => (x === "" || x == null ? null : +x);
+    const row = {
+      asset, symbol: sym, side: v.side, entry_time: new Date(v.entry_time).toISOString(), entry: +v.entry,
+      stop: num(v.stop), target: num(v.target), qty: num(v.qty), charges_usd: num(v.charges_usd) || 0, notes: v.notes || null,
+      name: t.name || null, view: t.view || null, setup: t.setup || null, source: t.source || "manual",
+      yahoo: (fromIdea || prefill.id) && t.yahoo ? t.yahoo : tradeYahoo(asset, sym), tv: (fromIdea || prefill.id) && t.tv ? t.tv : tradeTv(asset, sym),
+      cost_pct: isNum(t.cost_pct) ? t.cost_pct : TRADE_COST[asset],
+    };
+    if (row.stop != null && ((row.side === "Long" && row.stop >= row.entry) || (row.side === "Short" && row.stop <= row.entry))) {
+      err.textContent = `The stop must be ${row.side === "Long" ? "below" : "above"} the entry for a ${row.side.toLowerCase()} trade.`; return;
+    }
+    if (isClosed) {
+      Object.assign(row, { exit: +v.exit, exit_time: new Date(v.exit_time).toISOString(), exit_reason: v.exit_reason || null });
+      Object.assign(row, tradeExitVals({ ...t, ...row }, row.exit, num(v.usdinr)));
+    } else if (!prefill.id) row.status = "open";
+    try { await saveTrade(prefill.id, row); dlg.close(); onSaved && onSaved(); } catch (ex) { err.textContent = `Could not save: ${ex.message}`; }
+  });
+  dlg.replaceChildren(form);
+  if (!dlg.open) dlg.showModal();
+}
+async function closeTradeDialog(t, nowPx, onSaved) {
+  const dlg = document.getElementById("dlg");
+  const rate = await latestUsdInr();
+  const err = h("p", { class: "err", role: "alert" });
+  const out = h("p", { class: "note" });
+  const form = h("form", { method: "dialog" },
+    h("h2", null, `Close ${t.symbol} ${t.side.toLowerCase()}`),
+    h("p", { class: "note" }, `Entry $${px(t.entry)} on ${when(t.entry_time)}${isNum(t.qty) ? ` · ${t.qty} ${t.asset === "crypto" ? "coins" : t.asset === "commodities" ? "oz / lb" : "shares"}` : ""}. You can fix it until the next 7:40 pm check, then it locks.`),
+    h("div", { class: "form-grid" },
+      h("label", null, "Exit $", h("input", { name: "exit", type: "number", step: "any", required: true, value: isNum(nowPx) ? nowPx : "" })),
+      h("label", null, "Exit time", h("input", { name: "exit_time", type: "datetime-local", required: true, value: localDT() })),
+      h("label", null, "USD/INR", h("input", { name: "usdinr", type: "number", step: "any", value: isNum(rate) ? +rate.toFixed(4) : "" })),
+      h("label", null, "Reason", h("select", { name: "exit_reason" }, ["target hit", "manual exit", "stop hit", "time exit", "trailing stop"].map((r) => h("option", null, r))))),
+    out, err,
+    h("div", { class: "btn-row" },
+      h("button", { class: "btn primary", type: "submit" }, "Close trade"),
+      h("button", { class: "btn", type: "button", onclick: () => dlg.close() }, "Cancel")));
+  const preview = () => {
+    const v = readForm(form);
+    if (!v.exit) { out.textContent = ""; return; }
+    const r = tradeExitVals(t, +v.exit, v.usdinr ? +v.usdinr : null);
+    out.textContent = `Net ${pct(r.net_pct, 2)} after ${r.cost_pct}% costs${isNum(r.pnl_usd) ? ` · ${usd(r.pnl_usd)}` : ""}${isNum(r.pnl_inr) ? ` · ${inr(r.pnl_inr)}` : ""}`;
+  };
+  form.addEventListener("input", preview);
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const v = readForm(form);
+    const row = { status: "closed", exit: +v.exit, exit_time: new Date(v.exit_time).toISOString(), exit_reason: v.exit_reason,
+      ...tradeExitVals(t, +v.exit, v.usdinr ? +v.usdinr : null) };
+    try { await saveTrade(t.id, row); dlg.close(); onSaved && onSaved(); } catch (ex) { err.textContent = `Could not close: ${ex.message}`; }
+  });
+  dlg.replaceChildren(form);
+  dlg.showModal();
+  preview();
+}
+async function reopenTrade(t, onSaved) {
+  if (!confirm(`Reopen ${t.symbol}? The exit ($${px(t.exit)}, ${t.exit_reason || "closed"}) is removed and the trade goes back to Open.`)) return;
+  try {
+    await saveTrade(t.id, { status: "open", exit: null, exit_time: null, exit_reason: null, net_pct: null, pnl_usd: null, pnl_inr: null, usdinr: null });
+    onSaved && onSaved();
+  } catch (ex) { alert(`Could not reopen: ${ex.message}`); }
+}
+/* "I took this trade" on an idea card: the form opens with the idea's levels; enter your real fill. */
+function tookIdea(tab, x) {
+  const r = (v) => (isNum(v) ? +v.toFixed(Math.abs(v) >= 1 ? 2 : 6) : null);   // tidy prices for the form
+  tradeDialog({ asset: tab, symbol: x.symbol, name: x.name || null, side: x.side, view: x.view, setup: x.setup_name || x.setup,
+    entry: r(x.entry), stop: r(x.stop), target: r(x.target), yahoo: x.yahoo || null, tv: x.tv || null,
+    source: `${x.view === "positional" ? "Positional" : "Swing"} idea` }, () => { location.hash = "#/trades"; });
+}
+function tradesLive(t, tp) {
+  const p = tp && tp.prices && tp.prices[String(t.id)];
+  if (!p || !isNum(p.px) || !isNum(t.entry)) return null;
+  const v = tradeExitVals(t, p.px, tp.usdinr);
+  return { px: p.px, t: p.t, pct: v.net_pct, usd: v.pnl_usd, inr: v.pnl_inr };
+}
+
+async function viewTrades(app) {
+  const all = await loadTrades();
+  const tp = await doc("gm_trade_prices").catch(() => null);
+  const rerender = () => route();
+  state.trAsset = state.trAsset || "all";
+  const trades = all.filter((t) => state.trAsset === "all" || t.asset === state.trAsset);
+  const open = trades.filter((t) => t.status === "open"), closed = trades.filter((t) => t.status === "closed");
+  const blank = () => ({ n: 0, w: 0, sum: 0, gain: 0, loss: 0, usdN: 0, usd: 0, inrN: 0, inr: 0 });
+  const add = (g, t) => {
+    g.n += 1;
+    const v = t.net_pct;
+    if (isNum(v)) { g.sum += v; if (v > 0) { g.w += 1; g.gain += v; } else g.loss += v; }
+    if (isNum(t.pnl_usd)) { g.usdN += 1; g.usd += t.pnl_usd; }
+    if (isNum(t.pnl_inr)) { g.inrN += 1; g.inr += t.pnl_inr; }
+  };
+  // months and financial years (April–March) in IST, by the date a trade was closed
+  const istMonth = (ts) => (ts ? new Date(Date.parse(ts) + 5.5 * 3600e3).toISOString().slice(0, 7) : "");
+  const closeMonth = (t) => istMonth(t.exit_time || t.entry_time);
+  const fyOf = (m) => { const y = +m.slice(0, 4), mo = +m.slice(5, 7); return mo >= 4 ? y : y - 1; };
+  const fyLabel = (y) => `FY ${y}-${String((y + 1) % 100).padStart(2, "0")}`;
+  const nowM = istMonth(new Date().toISOString()), curFy = fyOf(nowM);
+  const tot = blank();
+  closed.forEach((t) => { const m = closeMonth(t); if (m && fyOf(m) === curFy) add(tot, t); });
+  const pf = tot.loss < 0 ? tot.gain / Math.abs(tot.loss) : null;
+  const stats = h("div", { class: "stats" },
+    stat("Closed trades", tot.n, `${open.length} open`),
+    stat("Win rate", tot.n ? `${Math.round((tot.w / tot.n) * 100)}%` : "–", `${tot.w} won, ${tot.n - tot.w} lost`),
+    stat("Average per trade", tot.n ? pct(tot.sum / tot.n, 2) : "–", "Net % after costs", sign(tot.sum)),
+    stat("Profit factor", isNum(pf) ? pf.toFixed(2) : "–", "Total % won ÷ total % lost"),
+    stat("Net P&L in %", tot.n ? pct(tot.sum, 2) : "–", "Sum of net % of closed trades", sign(tot.sum)),
+    stat("Net P&L in $", tot.usdN ? usd(tot.usd) : "–", "Closed trades with a quantity", sign(tot.usd)),
+    stat("Net P&L in ₹", tot.inrN ? inr(tot.inr) : "–", "At USD/INR on each closing day", sign(tot.inr)));
+  const months = {};
+  for (const t of closed) { const m = closeMonth(t); if (m) add(months[m] ||= blank(), t); }
+  const sumRow = (label, g) => h("tr", { style: "cursor:default" }, h("td", { class: "l name" }, label), h("td", null, g.n),
+    h("td", null, `${g.w} / ${g.n - g.w}`), h("td", null, g.n ? `${Math.round((g.w / g.n) * 100)}%` : "–"),
+    h("td", { class: sign(g.sum) }, pct(g.sum, 2)), h("td", { class: sign(g.sum) }, g.n ? pct(g.sum / g.n, 2) : "–"),
+    h("td", null, g.loss < 0 ? (g.gain / Math.abs(g.loss)).toFixed(2) : g.n ? "∞" : "–"),
+    h("td", { class: sign(g.usd) }, g.usdN ? usd(g.usd) : "–"), h("td", { class: sign(g.inr) }, g.inrN ? inr(g.inr) : "–"));
+  const sumTable = (first, rows) => h("table", null,
+    h("thead", null, h("tr", null, [first, "Trades", "Won / lost", "Win rate", "Net %", "Avg per trade", "Profit factor", "Net $", "Net ₹"].map((c, i) => h("th", { class: i === 0 ? "l" : null }, c)))),
+    h("tbody", null, rows));
+  const monthRows = Object.keys(months).sort().reverse().map((m) =>
+    sumRow(new Date(`${m}-01T00:00:00`).toLocaleDateString("en-IN", { month: "short", year: "numeric" }), months[m]));
+  const years = {};
+  for (const m of Object.keys(months)) {
+    const y = fyOf(m);
+    if (y >= curFy) continue;
+    const g = years[y] ||= blank();
+    for (const k of Object.keys(g)) g[k] += months[m][k];
+  }
+  const yearRows = Object.keys(years).map(Number).sort((a, b) => b - a).map((y) =>
+    sumRow([fyLabel(y), h("small", null, `Apr ${y} – Mar ${y + 1}`)], years[y]));
+  const unitOf = (t) => (t.asset === "crypto" ? "coins" : t.asset === "commodities" ? "oz/lb" : "sh");
+  const row = (t, isOpen) => {
+    const L = isOpen ? tradesLive(t, tp) : null;
+    return h("tr", { style: "cursor:default" },
+      h("td", { class: "l" }, when(t.entry_time)),
+      h("td", { class: "l name" }, t.symbol, " ", chartBtn(t.tv || tradeTv(t.asset, t.symbol), t.view === "swing" && t.asset !== "us" ? "240" : "D"),
+        h("small", null, [ASSET[t.asset], t.source && t.source !== "manual" ? t.source : null, isNum(t.qty) ? `${t.qty} ${unitOf(t)}` : null].filter(Boolean).join(" · "))),
+      h("td", { class: "l" }, sideTag(t.side)),
+      h("td", null, px(t.entry)), h("td", null, px(t.stop)), h("td", null, px(t.target)),
+      ...(isOpen ? [
+        h("td", { class: "live-cell", title: L ? `Price at ${when(L.t)}` : "Updated by the next hourly check" }, L ? [px(L.px), h("small", null, when(L.t))] : h("span", { class: "muted" }, "–")),
+        h("td", { class: L ? sign(L.pct) : null }, L ? pct(L.pct, 2) : "–"),
+        h("td", { class: `live-cell ${L && isNum(L.usd) ? sign(L.usd) : ""}`, title: isNum(t.qty) ? "" : "Add a quantity to see $ and ₹" },
+          L && isNum(L.usd) ? [usd(L.usd), isNum(L.inr) ? h("small", null, inr(L.inr)) : null] : "–"),
+      ] : [
+        h("td", null, px(t.exit)), h("td", { class: "l" }, t.exit_reason || "–"),
+        h("td", { class: sign(t.net_pct) }, pct(t.net_pct, 2)),
+        h("td", { class: `live-cell ${sign(t.pnl_usd)}` }, isNum(t.pnl_usd) ? [usd(t.pnl_usd), isNum(t.pnl_inr) ? h("small", null, inr(t.pnl_inr)) : null] : "–"),
+      ]),
+      h("td", { class: "l" }, h("div", { class: "btn-row nowrap" },
+        isOpen ? h("button", { class: "btn small", type: "button", onclick: () => closeTradeDialog(t, L && L.px, rerender) }, "Close") : null,
+        isOpen || canFix(t) ? h("button", { class: "btn small", type: "button", onclick: () => tradeDialog(t, rerender) }, "Edit") : h("span", { class: "muted", title: "Closed trades are locked" }, "Locked"),
+        !isOpen && canFix(t) ? h("button", { class: "btn small", type: "button", onclick: () => reopenTrade(t, rerender) }, "Reopen") : null,
+        !isOpen && canFix(t) ? h("small", { class: "muted" }, fixLabel(t)) : null,
+        isOpen ? h("button", { class: "btn small", type: "button", onclick: async () => {
+          if (!confirm(`Delete the ${t.symbol} trade? This cannot be undone.`)) return;
+          try { await deleteTradeRow(t.id); rerender(); } catch (ex) { alert(`Could not delete: ${ex.message}`); } } }, "Delete") : null)));
+  };
+  const table = (rows, isOpen) => h("table", null,
+    h("thead", null, h("tr", null, ["Entry time", "Symbol", "Side", "Entry $", "Stop", "Target", ...(isOpen ? ["Now", "P&L %", "P&L $ / ₹"] : ["Exit $", "Reason", "Net %", "P&L $ / ₹"]), ""].map((c, i) =>
+      h("th", { class: [0, 1, 2].includes(i) || c === "Reason" || c === "" ? "l" : null }, c)))),
+    h("tbody", null, rows.map((t) => row(t, isOpen))));
+  render(app,
+    pageHead("My trades", LIVE ? "Your own US stock, crypto and COMEX trades, saved to your private database" : "Preview: changes are not saved"),
+    h("div", { class: "filters" },
+      h("button", { class: "btn primary", type: "button", onclick: () => tradeDialog({ asset: state.trAsset === "all" ? "us" : state.trAsset }, rerender) }, "Add a trade"),
+      h("button", { class: "btn", type: "button", onclick: () => exportTradesCsv(trades) }, "Export CSV"),
+      seg("trAsset", state.trAsset, [["all", "All"], ["us", "US stocks"], ["crypto", "Crypto"], ["commodities", "Commodities"]])),
+    h("p", { class: "note" }, `Open trades close automatically at the stop only (checked every hour on hourly candles; a gap past the stop fills at the candle's open); close at the target or anywhere else by hand. "Now" is the price at the latest hourly check${tp && tp.updated ? ` (${when(tp.updated)})` : ""}. P&L $ = (sell − buy) × quantity − charges; ₹ at USD/INR on the closing day. Net % is after round-trip costs: US stocks ${TRADE_COST.us}%, crypto ${TRADE_COST.crypto}%, COMEX ${TRADE_COST.commodities}%. "I took this trade" on any idea card fills the form.`),
+    h("div", { class: "section-head" }, h("h2", null, `This financial year · ${fyLabel(curFy)}`),
+      h("p", null, `Closed trades from 1 Apr ${curFy} to 31 Mar ${curFy + 1}. On 1 April the totals start fresh and this year moves to “Year by year”.`)),
+    stats,
+    yearRows.length ? section("Year by year", "Completed financial years (April–March), by the date trades were closed.", panel(h("div", { class: "table-scroll" }, sumTable("Financial year", yearRows)))) : null,
+    monthRows.length ? section("Month by month", "Closed trades, by the month they were closed (IST).", panel(h("div", { class: "table-scroll" }, sumTable("Month", monthRows)))) : null,
+    section(`Open (${open.length})`, null, open.length ? panel(h("div", { class: "table-scroll" }, table(open, true))) : h("p", { class: "empty" }, "No open trades.")),
+    section(`Closed (${closed.length})`, null, closed.length ? panel(h("div", { class: "table-scroll" }, table(closed, false))) : h("p", { class: "empty" }, "No closed trades yet.")));
+}
+function exportTradesCsv(rows) {
+  const cols = ["entry_time", "asset", "symbol", "side", "view", "setup", "entry", "stop", "target", "qty", "charges_usd", "exit_time", "exit",
+    "exit_reason", "status", "cost_pct", "net_pct", "pnl_usd", "usdinr", "pnl_inr", "source", "notes"];
+  const esc = (v) => (v == null ? "" : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
+  const csv = [cols.join(","), ...rows.map((r) => cols.map((c) => esc(r[c])).join(","))].join("\n");
+  const a = h("a", { href: URL.createObjectURL(new Blob([csv], { type: "text/csv" })), download: "global_macro_trades.csv" });
+  document.body.append(a); a.click(); a.remove();
+}
+
 async function route() {
   const app = document.getElementById("app");
   const tab = (location.hash.match(/^#\/(\w+)/) || [])[1] || "macro";
@@ -856,6 +1178,7 @@ async function route() {
     else if (tab === "commod") await viewCommod(app);
     else if (tab === "us") await viewUS(app);
     else if (tab === "record") await viewRecord(app);
+    else if (tab === "trades") await viewTrades(app);
     else if (tab === "readme") viewReadme(app);
     else await viewMacro(app);
   } catch (err) {

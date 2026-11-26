@@ -15,7 +15,7 @@ import traceback
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from . import commodities, config as C, crypto, euphoria, flows, macro, news, record, sources, store, usequity
+from . import commodities, config as C, crypto, euphoria, flows, macro, mytrades, news, record, sources, store, usequity
 
 IST = timezone(timedelta(hours=5, minutes=30))
 
@@ -85,6 +85,10 @@ def hourly(db, force=False):
     if cm:
         st["record_commod"] = step("commodity record", lambda: record.update(
             db, "commodities", cm[0]["views"]["swing"]["ideas"] + cm[0]["views"]["positional"]["ideas"], cm[1]), st)
+
+    inr_df = candles.get("INR=X")
+    usdinr = (inr_df.attrs.get("price") or float(inr_df.Close.iloc[-1])) if inr_df is not None and not inr_df.empty else None
+    st["my_trades"] = step("my trades", lambda: mytrades.check(db, usdinr), st)
 
     today = datetime.now(IST).strftime("%Y-%m-%d")
     day = hist["days"].setdefault(today, {})
@@ -182,7 +186,7 @@ def us(db, force=False):
 def report(title, st):
     lines = [f"## {title}", "", f"Started {st['at']}, finished {st.get('finished')}", ""]
     for k, v in st.items():
-        if k.startswith("record") or k == "counts":
+        if k.startswith("record") or k in ("counts", "my_trades"):
             lines.append(f"- **{k}**: `{json.dumps(v)}`")
     if st.get("failed"):
         lines.append(f"- **failed steps**: {', '.join(st['failed'])}")

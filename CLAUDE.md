@@ -20,10 +20,16 @@ Built 22 Nov 2026. Sister sites: F&O Desk (`fno-desk`), Sector Strength, NSE Fun
 | Commodities | `gm_commod` | hourly |
 | US equity | `gm_us` (+ `gm_us_universe` cached stock list) | daily after US close |
 | Track record | table `gm_ideas` | both |
+| My trades (`#/trades`) | table `gm_trades` (`supabase/003_my_trades.sql`), live prices doc `gm_trade_prices` | hourly |
 | Euphoria meter (on Global macro; tags on Money flow, Crypto, Commodities) | `gm_euphoria` | hourly |
 | (status) | `gm_status` (per job: time, problems, counts), `gm_hist` (daily scores, FII days, BTC dominance; 400 days) | |
 
 - Idea cards (US equity, Crypto, Commodities): **Chart** button next to the symbol opens TradingView at the card's interval (4-hour for crypto/commodity swing, daily otherwise); his request, 26 Nov 2026. US class shares are converted BRK-B → BRK.B (`tvSym()` in site/app.js).
+
+## My trades (his request, 26 Nov 2026: "same as F&O Desk's stock trades section")
+- His choices: P&L as net % + US $ + ₹ (USD/INR on the closing day, `gm_trades.usdinr`); **auto-close at the stop only** (target by hand); round-trip cost per asset class (`config.TRADE_COST_PCT` us 0.2, crypto 0.2, commodities 0.05; keep `TRADE_COST` in site/app.js in step); lock rule same as F&O Desk (closed by hand → fixable until next weekday 19:40 IST via shared `trade_fix_until()` / `trade_set_closed_at()` trigger; job-closed lock at once).
+- `gmd/mytrades.py` runs inside the hourly job (all assets, US stocks too): Yahoo 1h candles that start at/after the entry time; gap past the stop fills at the open. Yahoo symbol from the trade's `yahoo` column, else derived (crypto `SYM-USD` / `config.YAHOO_COIN`, GOLD/SILVER/COPPER → GC=F/SI=F/HG=F, US BRK.B → BRK-B).
+- Site: "I took this trade" on every idea card (prefills levels, source "Swing idea"/"Positional idea"); FY (Apr–Mar, IST) totals, Year by year, Month by month, Open (Now, P&L %, $/₹) and Closed tables, asset filter, Export CSV. No 3-month archive (details kept).
 
 ## Rules in brief (all numbers in `gmd/config.py`; site Readme tab has the full text — **update `viewReadme` in site/app.js when a rule changes**)
 - Global score: VIX 20, HY credit 15, S&P trend 15, DXY 1m 15, US10Y 1m 10, curve 5, copper/gold 10, news 10. India: Nifty trend 25, India VIX 15, USDINR 15, Brent 15, FII 5-session 15, India news 15. Zones ±20 / ±60.
