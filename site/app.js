@@ -618,10 +618,10 @@ async function viewCommod(app) {
     if (!x) return null;
     const rngPos = isNum(x.hi52) && x.hi52 > x.lo52 ? ((x.price - x.lo52) / (x.hi52 - x.lo52)) * 100 : null;
     return h("div", { class: "panel metal" },
-      h("h3", null, x.label, " ", h("small", null, `${x.symbol} · COMEX, USD`), " ", tvLink(x.tv, "D")),
+      h("h3", null, x.label, " ", h("small", null, `${x.symbol} · ${x.exchange || "COMEX"}, ${x.unit || "USD"}`), " ", tvLink(x.tv, "D")),
       h("div", { class: "zone" }, `$${px(x.price)} `, h("span", { class: sign(x.d1) }, pct(x.d1)), " ", h("span", { class: `tag ${x.bias === "Bullish" ? "pos" : x.bias === "Bearish" ? "neg" : "muted"}` }, `${x.bias} ${x.direction > 0 ? "+" : ""}${x.direction}`)),
       gscale(x.direction, ["Bearish", "Neutral", "Bullish"]),
-      x.euphoria ? h("p", { class: "note" }, "Euphoria meter ", euTag(x.euphoria)) : null,
+      x.euphoria ? h("p", { class: "note" }, "Euphoria meter ", euTag(x.euphoria)) : ["brent", "aluminium"].includes(k) ? h("p", { class: "note" }, "Euphoria meter: not tracked yet (not backtested)") : null,
       euBanner(x.euphoria),
       h("div", { class: "lv" }, h("div", null, h("span", null, "1 week"), h("b", { class: sign(x.w1) }, pct(x.w1))), h("div", null, h("span", null, "1 month"), h("b", { class: sign(x.m1) }, pct(x.m1))), h("div", null, h("span", null, "1 year"), h("b", { class: sign(x.y1) }, pct(x.y1)))),
       h("p", { class: "note" }, "Trend: weekly ", trendTag(x.trend_w), " daily ", trendTag(x.trend_d), " 4-hour ", trendTag(x.trend_4h), ` · RSI ${x.rsi_d} · daily range ${x.atr_pct}%`),
@@ -630,9 +630,9 @@ async function viewCommod(app) {
       spark(x.spark, 300, 40));
   };
   render(app,
-    pageHead("Commodities", "Gold, silver and copper futures (COMEX, USD). Direction score −100..+100 = 40% daily trend + 15% 4-hour trend + 45% macro drivers.", d.updated),
+    pageHead("Commodities", "Gold, silver, copper and aluminium (COMEX futures) and Brent crude, in USD. Direction score −100..+100 = 40% daily trend + 15% 4-hour trend + 45% macro drivers.", d.updated),
     await problemsBanner("hourly"),
-    h("div", { class: "grid3" }, ["gold", "silver", "copper"].map(card)),
+    h("div", { class: "grid3" }, ["gold", "silver", "copper", "brent", "aluminium"].map(card)),
     section("Backdrop", null, h("div", { class: "stats" },
       stat("Gold / silver ratio", r.gold_silver ? fmt(r.gold_silver.now, 1) : "–", r.gold_silver ? `1-year range ${r.gold_silver.lo}–${r.gold_silver.hi} (${r.gold_silver.pctile}th percentile; high = silver cheap)` : null),
       stat("Copper / gold", r.copper_gold ? pct(r.copper_gold.m1) : "–", r.copper_gold ? `1 month (3 months ${pct(r.copper_gold.m3)}); rising = growth optimism` : null, r.copper_gold ? sign(r.copper_gold.m1) : ""),
@@ -640,7 +640,7 @@ async function viewCommod(app) {
       stat("Real 10Y yield", isNum(c.real10) ? `${fmt(c.real10, 2)}%` : "–", isNum(c.real10_m1) ? `${c.real10_m1 > 0 ? "+" : ""}${Math.round(c.real10_m1 * 100)} bp in 1 month` : null, sign(-c.real10_m1)),
       stat("Global regime", c.regime || "–", isNum(c.vix) ? `US VIX ${fmt(c.vix, 1)}` : null))),
     section("Trading ideas", state.view === "swing" ? "4-hour candles, long and short; higher timeframe = daily. Target 1:2, exit after 14 days." : "Daily candles, long and short; higher timeframe = weekly. Target 1:3, exit after 90 days.",
-      h("div", { class: "filters" }, viewSeg()), ideasBlock(v, state.view === "swing" ? "240" : "D", "No setup on the latest completed candles for gold, silver or copper. Use the direction score and trends above until one forms.", "commodities")));
+      h("div", { class: "filters" }, viewSeg()), ideasBlock(v, state.view === "swing" ? "240" : "D", "No setup on the latest completed candles for gold, silver, copper, Brent or aluminium. Use the direction score and trends above until one forms.", "commodities")));
 }
 
 // ------------------------------------------------------------------ tab: US equity
@@ -809,7 +809,8 @@ function viewReadme(app) {
       li("Alerts follow the backtest (22 Nov 2026, history 2000-2026): Crypto - Hot (60+) = \"don't chase\"; Hot in the last 60 days and then a close below the 50-day average = red \"first crack\" (BTC was lower 90 days later 70% of the time). Silver and copper - red at 80+. Gold, US equity, India - information only: high readings there meant strong trends, not tops."),
       li("Euphoria is momentum: prices often rose 10-40% more after the first high reading. Use it to stop chasing, size down and tighten stops, not as a short signal.")),
     blk("Commodities direction score (−100..+100)",
-      li("40% daily trend + 15% 4-hour trend + 45% drivers. Gold: falling real yields, weaker dollar, risk-off, gold news. Silver: real yields, dollar, industrial demand (copper/gold), silver news. Copper: growth (copper/gold), global risk, dollar, copper news. ±25 = bullish/bearish.")),
+      li("40% daily trend + 15% 4-hour trend + 45% drivers. Gold: falling real yields, weaker dollar, risk-off, gold news. Silver: real yields, dollar, industrial demand (copper/gold), silver news. Copper: growth (copper/gold), global risk, dollar, copper news. Brent crude: growth (copper/gold) 30%, global risk 20%, weaker dollar 15%, oil-price headlines 35% (\"oil jumps\" = +; supply, OPEC, war). Aluminium: growth 35%, global risk 25%, weaker dollar 20%, aluminium headlines 20%. ±25 = bullish/bearish."),
+      li("Brent (BZ=F) and aluminium (COMEX ALI=F, thinly traded: volume readings are rough) were added 26 Nov 2026 with long and short ideas; their driver weights are untested starting values and they have no Euphoria meter yet.")),
     blk("US equity scores",
       li("Trend score per index (S&P 500 via SPY, Nasdaq 100 via QQQ, Russell 2000 via IWM): 50 + 30 × trend points + 10 for the 3-month move + 10 for distance from the 1-year high."),
       li("Sentiment 0–100: S&P trend 20, Nasdaq trend 10, % of stocks above the 50-day 15 and 200-day 10, new highs vs lows 10, VIX 15, credit spreads 10, US news 10. Below 20 extreme fear … above 80 extreme greed."),
@@ -848,8 +849,8 @@ function viewSignIn(app, message) {
    (close at the target by hand); a trade closed by hand can be fixed until the next weekday 7:40 pm IST. */
 const ASSET = { us: "US stock", crypto: "Crypto", commodities: "COMEX" };
 const TRADE_COST = { us: 0.2, crypto: 0.2, commodities: 0.05 };   // keep in step with config.TRADE_COST_PCT
-const COMMOD_YF = { GOLD: "GC=F", SILVER: "SI=F", COPPER: "HG=F" };
-const COMMOD_TV = { GOLD: "COMEX:GC1!", SILVER: "COMEX:SI1!", COPPER: "COMEX:HG1!" };
+const COMMOD_YF = { GOLD: "GC=F", SILVER: "SI=F", COPPER: "HG=F", BRENT: "BZ=F", ALUMINIUM: "ALI=F", ALUMINUM: "ALI=F" };
+const COMMOD_TV = { GOLD: "COMEX:GC1!", SILVER: "COMEX:SI1!", COPPER: "COMEX:HG1!", BRENT: "TVC:UKOIL", ALUMINIUM: "COMEX:ALI1!", ALUMINUM: "COMEX:ALI1!" };
 let previewTrades = null;   // preview mode only: kept in memory, not saved
 async function loadTrades() {
   if (LIVE) {
@@ -938,7 +939,7 @@ function tradeDialog(prefill, onSaved) {
   const t = { asset: "us", side: "Long", source: "manual", ...prefill };
   const field = (label, name, attrs = {}, wide = false) =>
     h("label", { class: wide ? "wide" : null }, label, h("input", { name, value: t[name] ?? "", ...attrs }));
-  const unit = t.asset === "crypto" ? "coins" : t.asset === "commodities" ? "oz / lb" : "shares";
+  const unit = t.asset === "crypto" ? "coins" : t.asset === "commodities" ? "oz / lb / bbl / t" : "shares";
   const err = h("p", { class: "err", role: "alert" });
   const fromIdea = !!prefill.view && !prefill.id;
   const form = h("form", { method: "dialog" },
@@ -947,13 +948,13 @@ function tradeDialog(prefill, onSaved) {
     h("div", { class: "form-grid" },
       h("label", null, "Asset", h("select", { name: "asset", disabled: fromIdea || prefill.id ? true : null },
         Object.entries(ASSET).map(([k, l]) => h("option", { value: k, selected: t.asset === k || null }, l)))),
-      field(t.asset === "commodities" ? "Symbol (GOLD, SILVER, COPPER)" : "Symbol", "symbol", { required: true, autocapitalize: "characters", readonly: fromIdea || null }),
+      field(t.asset === "commodities" ? "Symbol (GOLD, SILVER, COPPER, BRENT, ALUMINIUM)" : "Symbol", "symbol", { required: true, autocapitalize: "characters", readonly: fromIdea || null }),
       h("label", null, "Side", h("select", { name: "side" }, ["Long", "Short"].map((k) => h("option", { selected: t.side === k || null }, k)))),
       field("Entry time", "entry_time", { type: "datetime-local", value: localDT(t.entry_time), required: true }),
       field("Entry $", "entry", { type: "number", step: "any", required: true }),
       field("Stop $", "stop", { type: "number", step: "any" }),
       field("Target $", "target", { type: "number", step: "any" }),
-      field(`Quantity (${unit})`, "qty", { type: "number", step: "any", min: "0", placeholder: t.asset === "commodities" ? "1 GC contract = 100 oz" : "" }),
+      field(`Quantity (${unit})`, "qty", { type: "number", step: "any", min: "0", placeholder: t.asset === "commodities" ? "GC 100 oz · BZ 1,000 bbl · ALI 25 t" : "" }),
       field("Charges $ (optional)", "charges_usd", { type: "number", step: "any" }),
       h("label", { class: "wide" }, "Notes", h("textarea", { name: "notes" }, t.notes || "")),
       ...(isClosed ? [
@@ -999,7 +1000,7 @@ async function closeTradeDialog(t, nowPx, onSaved) {
   const out = h("p", { class: "note" });
   const form = h("form", { method: "dialog" },
     h("h2", null, `Close ${t.symbol} ${t.side.toLowerCase()}`),
-    h("p", { class: "note" }, `Entry $${px(t.entry)} on ${when(t.entry_time)}${isNum(t.qty) ? ` · ${t.qty} ${t.asset === "crypto" ? "coins" : t.asset === "commodities" ? "oz / lb" : "shares"}` : ""}. You can fix it until the next 7:40 pm check, then it locks.`),
+    h("p", { class: "note" }, `Entry $${px(t.entry)} on ${when(t.entry_time)}${isNum(t.qty) ? ` · ${t.qty} ${t.asset === "crypto" ? "coins" : t.asset === "commodities" ? "units" : "shares"}` : ""}. You can fix it until the next 7:40 pm check, then it locks.`),
     h("div", { class: "form-grid" },
       h("label", null, "Exit $", h("input", { name: "exit", type: "number", step: "any", required: true, value: isNum(nowPx) ? nowPx : "" })),
       h("label", null, "Exit time", h("input", { name: "exit_time", type: "datetime-local", required: true, value: localDT() })),
@@ -1101,7 +1102,7 @@ async function viewTrades(app) {
   }
   const yearRows = Object.keys(years).map(Number).sort((a, b) => b - a).map((y) =>
     sumRow([fyLabel(y), h("small", null, `Apr ${y} – Mar ${y + 1}`)], years[y]));
-  const unitOf = (t) => (t.asset === "crypto" ? "coins" : t.asset === "commodities" ? "oz/lb" : "sh");
+  const unitOf = (t) => (t.asset === "crypto" ? "coins" : t.asset === "commodities" ? "units" : "sh");
   const row = (t, isOpen) => {
     const L = isOpen ? tradesLive(t, tp) : null;
     return h("tr", { style: "cursor:default" },

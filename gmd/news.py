@@ -30,6 +30,8 @@ FEEDS = [
     ("Google News: gold", GN + "gold+price+when:2d"),
     ("Google News: silver", GN + "silver+price+when:2d"),
     ("Google News: copper", GN + "copper+price+when:3d"),
+    ("Google News: Brent", GN + "brent+crude+oil+price+when:2d"),
+    ("Google News: aluminium", GN + "aluminium+price+when:3d"),
     ("Google News: Fed", GN + "Federal+Reserve+rates+when:2d"),
     ("Google News: Wall Street", GN + "Wall+Street+stocks+when:1d"),
     ("Google News: India markets", GNI + "Sensex+Nifty+when:1d"),
@@ -47,6 +49,7 @@ TAGS = {
     "gold": ["gold", "bullion", "precious metals", "precious metal"],
     "silver": ["silver"],
     "copper": ["copper", "base metals", "industrial metals"],
+    "aluminium": ["aluminium", "aluminum", "alumina", "bauxite"],
     "oil": ["oil", "crude", "opec", "brent", "wti"],
     "crypto": ["bitcoin", "btc", "crypto", "cryptocurrency", "ether", "ethereum", "solana", "xrp", "stablecoin",
                "stablecoins", "altcoin", "altcoins", "binance", "coinbase", "defi", "token", "tokens", "memecoin"],
@@ -54,7 +57,7 @@ TAGS = {
               "trade war", "war", "geopolitical", "shutdown", "deficit", "economy", "pmi", "retail sales"],
 }
 TAG_NAME = {"fed": "Fed / rates", "us_eq": "US equity", "in_eq": "India", "bonds": "Bonds", "dollar": "Dollar / FX",
-            "gold": "Gold", "silver": "Silver", "copper": "Copper", "oil": "Oil", "crypto": "Crypto", "macro": "Macro"}
+            "gold": "Gold", "silver": "Silver", "copper": "Copper", "aluminium": "Aluminium", "oil": "Oil", "crypto": "Crypto", "macro": "Macro"}
 
 UP = set("rally rallies rallied surge surges surged soar soars soared jump jumps jumped gain gains gained rise rises "
          "rose risen climb climbs climbed rebound rebounds rebounded higher advance advances advanced spike spikes "
@@ -75,6 +78,7 @@ NEG = {"no", "not", "without", "unlikely", "rules out", "hold off"}
 # who is moving: subject word -> (asset key, sign for risk tone)
 SUBJECT = {
     "gold": ("gold", 0), "bullion": ("gold", 0), "silver": ("silver", 0), "copper": ("copper", 1),
+    "aluminium": ("aluminium", 1), "aluminum": ("aluminium", 1),
     "bitcoin": ("crypto", 1), "btc": ("crypto", 1), "crypto": ("crypto", 1), "ether": ("crypto", 1),
     "ethereum": ("crypto", 1), "solana": ("crypto", 1), "xrp": ("crypto", 1), "tokens": ("crypto", 1),
     "nifty": ("in_eq", 1), "sensex": ("in_eq", 1), "rupee": ("inr", 1),
@@ -140,7 +144,7 @@ def score_headline(title: str, desc: str = "") -> dict:
             s = -sgn if any(n in before.split() or n in before for n in NEG) else sgn
             risk += 0.8 * s
             for k in tags:
-                if k in ("us_eq", "in_eq", "crypto", "copper"):
+                if k in ("us_eq", "in_eq", "crypto", "copper", "aluminium"):
                     asset[k] = asset.get(k, 0) + 0.6 * s
                 elif k in SAFE:
                     asset[k] = asset.get(k, 0) - 0.4 * s
@@ -192,5 +196,13 @@ def summarize(items: list[dict]) -> dict:
             n_neg += v < -0.15
         # shrink towards 0 when there are few headlines
         out[k] = {"score": round(100 * num / (den + 3), 1) if den else None, "n": len(lst), "pos": n_pos, "neg": n_neg}
+    # oil price direction from headlines ("oil jumps" = +), for the Brent card; "oil" above is the market mood
+    num = den = 0.0
+    lst = [i for i in items if "oil" in i["tags"] or "oil" in i["asset"]]
+    for it in lst:
+        num += w(it) * it["asset"].get("oil", 0)
+        den += w(it)
+    out["oil_px"] = {"score": round(100 * num / (den + 3), 1) if den else None, "n": len(lst),
+                     "pos": sum(i["asset"].get("oil", 0) > 0.15 for i in lst), "neg": sum(i["asset"].get("oil", 0) < -0.15 for i in lst)}
     return {"items": items[:250], "sentiment": out, "feeds": len(FEEDS), "count": len(items),
             "tag_names": TAG_NAME}
