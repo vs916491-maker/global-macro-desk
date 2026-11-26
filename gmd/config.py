@@ -137,3 +137,7 @@ ML_NEAR_HIGH = 0.05         # momentum leader: within 5% of the 1-year high
 STOP_BUFFER_ATR = 0.2
 SCORE_W = {"trend": 25, "momentum": 20, "setup": 25, "volume": 10, "macro": 20}
 MIN_SCORE = 50              # ideas below this are listed as "watch" only, not logged
+
+# My Trades (his choices, 26 Nov 2026): round-trip cost deducted from net % per asset class
+# (edit to match your broker / exchange), auto-close at the stop only.
+TRADE_COST_PCT = {"us": 0.2, "crypto": 0.2, "commodities": 0.05}
